@@ -1,0 +1,136 @@
+
+nav {
+    background:  #df78f9;
+    height: 140px;
+    width: 100%;
+    display: flex; /* Added for flexbox layout */
+    justify-content: space-between; /* Align items horizontally */
+    margin-bottom: 30px;
+  }
+  
+  .navbarLogos {
+    padding-top: 18px;
+    padding-left: 20px;
+    display: flex; /* Added for logo and label alignment */
+  }
+  
+  .navbarLogo {
+    color: white;
+    font-size: 35px;
+    line-height: 90px;
+    font-weight: bold;
+  }
+  
+  .navbarLogoImg {
+    width: 90px;
+    border-radius: 50%;
+  }
+  
+  .navbarUl {
+    padding-top: 20px;
+    margin-right: 20px;
+  }
+  .navbarShow{
+    margin-right: 10px;
+  }
+  .navbarLink {
+    padding-top: 20px;
+    display: inline-block;
+    line-height: 80px;
+    margin: 0 3px;
+  }
+  
+  .fa-user {
+    font-size: 2em;
+    color: white;
+  }
+  
+  .navbarProfile {
+    cursor: pointer;
+    border-radius: 10px;
+    display: inline-block;
+    line-height: 50px;
+    padding: 0px 5px;
+    margin-right: 20px;
+    margin-left: 10px;
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+  
+  .navbarAnc {
+    text-decoration: none;
+    color: white;
+    font-size: 17px;
+    padding: 7px 13px;
+    border-radius: 3px;
+    text-transform: uppercase;
+  }
+  
+  .navbarAnc.active,
+  .navbarAnc:hover {
+    background: rgba(212, 56, 251, 0.5); 
+    transition: 0.5s;
+  }
+  
+  .checkbtn {
+    font-size: 30px;
+    color: white;
+    line-height: 80px;
+    margin-right: 40px;
+    cursor: pointer;
+    display: none;
+  }
+  
+  #check {
+    display: none;
+  }
+  
+  /* Media Queries */
+  
+  @media (max-width: 952px) {
+    .navbarLogo {
+      font-size: 30px;
+      padding-left: 50px;
+    }
+  
+    .navbarUl li a {
+      font-size: 16px;
+    }
+  }
+  
+  @media (max-width: 858px) {
+    .checkbtn {
+      display: block;
+    }
+  
+    .navbarUl {
+      position: fixed;
+      width: 100%;
+      height: 100vh;
+      background: #2c3e50;
+      top: 80px;
+      left: -100%;
+      text-align: center;
+      transition: all 0.5s;
+    }
+  
+    .navbarUl li {
+      display: block;
+      margin: 50px 0;
+      line-height: 30px;
+    }
+  
+    .navbarAnc {
+      font-size: 20px;
+    }
+  
+    .navbarAnc:hover,
+    .navbarAnc.active {
+      background: none;
+      color:  #d644fb
+    }
+  
+    #check:checked ~ .navbarUl {
+      left: 0;
+    }
+  }
+  

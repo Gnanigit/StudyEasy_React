@@ -5,7 +5,8 @@ import Banner from "../components/banner";
 function Dashboard(){
     return(
         <div>
-        <Banner></Banner>
+            <Navbar></Navbar>
+            <Banner></Banner>
         </div>
     )
 }
