@@ -45,32 +45,32 @@ form {
 }
 
 input[type="text"], textarea {
-  width: 100%; /* Full width */
-  padding: 0.8rem; /* Padding inside the field */
-  border: 2px solid #ced4da; /* Border style */
-  border-radius: 8px; /* Rounded corners */
-  font-size: 1rem; /* Font size */
-  color: #495057; /* Text color */
-  outline: none; /* Removes focus outline */
-  background-color: #f8f9fa; /* Light background */
-  transition: border-color 0.3s ease; /* Smooth transition */
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05); /* Inner shadow */
+  width: 100%; 
+  padding: 0.8rem; 
+  border: 2px solid #ced4da; 
+  border-radius: 8px; 
+  font-size: 1rem; 
+  color: #495057; 
+  outline: none; 
+  background-color: #f8f9fa; 
+  transition: border-color 0.3s ease; 
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 input[type="text"]:focus,
 textarea:focus {
-  border-color: #e16bff; /* Highlight on focus */
+  border-color: #e16bff;
 }
 
 input[type="text"]::placeholder,
 textarea::placeholder {
-  color: #6c757d; /* Placeholder text color */
-  font-style: italic; /* Placeholder font style */
+  color: #6c757d; 
+  font-style: italic; 
 }
 
 textarea {
-  resize: vertical; /* Allow vertical resize only */
-  min-height: 120px; /* Minimum height */
+  resize: vertical; 
+  min-height: 120px; 
 }
 input[type="submit"] {
   background-color: #e16bff;

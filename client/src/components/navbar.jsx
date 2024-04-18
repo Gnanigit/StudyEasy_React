@@ -37,7 +37,7 @@ function Navbar({ profile }) {
         </li>
         <li className="navbarLink">
           <Link className="navbarAnc" to="/myCourse">
-            ADD EVENT
+            ADD COURSE
           </Link>
         </li>
         <li className="navbarLink">

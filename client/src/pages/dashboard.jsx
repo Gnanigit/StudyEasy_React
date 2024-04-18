@@ -6,6 +6,8 @@ import AddCourse from "../components/addcourse";
 import Mycourses from "../components/mycourses";
 import Allcourses from "../components/allcouorses";
 import About from "../components/about";
+import AddTopic from "../components/addtopic";
+
 function Dashboard({loc}){
     return(
         <div>
@@ -25,10 +27,12 @@ function Dashboard({loc}){
             {loc === "allcourses" && (
                 <Allcourses></Allcourses>
             )}
-            {loc == "about" && (
+            {loc === "about" && (
                 <About></About>
             )}
-            
+            {loc === "addtopic" && (
+                <AddTopic></AddTopic>
+            )}
         </div>
     )
 }

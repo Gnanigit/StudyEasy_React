@@ -25,7 +25,7 @@ function AddCourse() {
       <div className="addcourseContainer">  
         <div className="addcourseTitleWrapper">  
           <h2 className="addcourseH2 addcourseSectionTitle">  
-            Add a <strong className="Strong">Course</strong>
+            Add a <strong className="Strong">COURSE</strong>
           </h2>
         </div>
         <ul className="addcourseGridList">  

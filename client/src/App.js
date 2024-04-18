@@ -46,8 +46,11 @@ const router = createBrowserRouter([
    {
     path:'/allcourses',
     element:<Dashboard loc="allcourses"></Dashboard>
+   },
+   {
+    path:'/addtopic',
+    element:<Dashboard loc="addtopic"></Dashboard>
    }
-
 ])
 
 
