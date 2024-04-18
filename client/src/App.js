@@ -32,9 +32,21 @@ const router = createBrowserRouter([
     element:<Signup></Signup>
    },
    {
-    path:'dashboard',
-    element:<Dashboard></Dashboard>
+    path:'/dashboard',
+    element:<Dashboard loc=""></Dashboard>
    },
+   {
+    path:'/addcourse',
+    element:<Dashboard loc="addcourse"></Dashboard>
+   },
+   {
+    path:'/mycourses',
+    element:<Dashboard loc="mycourses"></Dashboard>
+   },
+   {
+    path:'/allcourses',
+    element:<Dashboard loc="allcourses"></Dashboard>
+   }
 
 ])
 

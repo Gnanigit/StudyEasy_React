@@ -36,6 +36,11 @@ function Navbar({ profile }) {
           </Link>
         </li>
         <li className="navbarLink">
+          <Link className="navbarAnc" to="/myCourse">
+            ADD EVENT
+          </Link>
+        </li>
+        <li className="navbarLink">
           <a className="navbarAnc" href="#">
             About
           </a>
