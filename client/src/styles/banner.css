@@ -1,0 +1,118 @@
+.bannerBanner {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  }
+  
+  h1 {
+    text-align: center;
+    margin: 20px 0; 
+  }
+  
+  .bannerSlideshow-container {
+    max-width: 95%; 
+    height: 400px; 
+    position: relative;
+    margin: 0 auto; 
+    border-radius: 20px;
+  }
+  
+  .bannerAllSlides {
+    display: none; 
+    opacity: 0; 
+    transition: opacity 0.5s ease;
+  }
+  
+  .bannerAllSlides.bannerActive {
+    display: block;
+    opacity: 1; 
+  }
+  
+  .bannerAllSlides img {
+    height: 400px; 
+    vertical-align: middle;
+    border-radius: 20px;
+  }
+  
+  .bannerDots {
+    position: relative; /* Positions dots container on top of the slides */
+    bottom: 20px; /* Adjust spacing between dots and bottom */
+    left: 50%; /* Centers dots horizontally */
+    transform: translateX(-50%); /* Aligns dots with the center of the slides */
+    display: flex; /* Arranges dots in a horizontal line */
+    justify-content: center; /* Centers dots within the container */
+  }
+  
+  
+  .bannerPrev,
+  .bannerNext {
+    cursor: pointer;
+    position: absolute;
+    background-color: #e16bff;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0; 
+    user-select: none;
+  }
+  
+  .bannerNext {
+    right: 5px;
+    height: 25px;
+    border-radius: 5px; 
+  }
+  .bannerPrev {
+    left: 5px;
+    height: 25px;
+    border-radius: 5px; 
+  }
+  
+  .bannerPrev:hover,
+  .bannerNext:hover {
+    background-color: rgba(0, 0, 0, 0.659);
+  }
+  
+  .bannerText {
+    color: white;
+    font-size: 25px;
+    padding-bottom: 15px;
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    font-family: sans-serif;
+  }
+  
+  .bannerNumbertext {
+    color: white;
+    position: absolute;
+    padding: 10px;
+    font-size: 18px; 
+    top: 10px;
+    left: 10px; 
+    background-color: #e16bff;
+    border-radius: 5px;
+  }
+  
+  .bannerDot {
+    cursor: pointer;
+    width: 13px; 
+    height: 13px;
+    margin: 0 5px;
+    background-color: #ccc;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+  }
+  
+  .bannerActive + .bannerDot,
+  .bannerDot:hover {
+    background-color: #fff;
+  }
+  
