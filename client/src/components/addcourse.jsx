@@ -32,6 +32,7 @@ function AddCourse() {
           <form action="#" method="POST" onSubmit={handleSubmit}>
             <input
               type="text"
+              className='addcourseInput'
               value={courseImage}
               onChange={(e) => setCourseImage(e.target.value)}
               name="courseImage"
@@ -39,6 +40,7 @@ function AddCourse() {
             />
             <input
               type="text"
+              className='addcourseInput'
               name="courseTitle"
               value={courseTitle}
               onChange={(e) => setCourseTitle(e.target.value)}

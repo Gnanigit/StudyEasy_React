@@ -51,6 +51,7 @@ const AddTopic = ({ courseTitle }) => {
             <input type="hidden" name="courseTitle" value={courseTitle} />
             <input
               type="text"
+              className='addtopicInput'
               value={topicTitle}
               name="topicTitle"
               placeholder="Topic Title"
@@ -58,6 +59,7 @@ const AddTopic = ({ courseTitle }) => {
             />
             <input
               type="text"
+              className='addtopicInput'
               name="link1"
               value={link1}
               placeholder="Geek For Geeks Link"
@@ -65,6 +67,7 @@ const AddTopic = ({ courseTitle }) => {
             />
             <input
               type="text"
+              className='addtopicInput'
               name="link2"
               value={link2}
               placeholder="Java Point Link"
@@ -72,6 +75,7 @@ const AddTopic = ({ courseTitle }) => {
             />
             <input
               type="text"
+              className='addtopicInput'
               name="link3"
               value={link3}
               placeholder="W3 Schools link"
@@ -79,6 +83,7 @@ const AddTopic = ({ courseTitle }) => {
             />
             <input
               type="text"
+              className='addtopicInput'
               name="link4"
               value={link4}
               placeholder="You Tube link"

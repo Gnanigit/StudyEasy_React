@@ -1,14 +1,55 @@
 import React from "react";
+import { Link, useNavigate } from 'react-router-dom'
+import { useFormik } from 'formik';
+import toast, { Toaster } from 'react-hot-toast';
 import "../styles/signup.css";
+import { registerUser } from '../helper/helper'
 
 function Signup() {
+  const navigate = useNavigate();
+  const formik = useFormik({
+    initialValues : {
+      email: '',
+      first_name: '',
+      last_name:'',
+      password : '',
+      re_enter_password:'',
+    },
+    onSubmit: async values => {
+      console.log(values);
+      try {
+        values = await Object.assign(values);
+        console.log(values);
+        let registerPromise = registerUser(values);
+        
+        // Loading toast
+        toast.promise(registerPromise, {
+          loading: 'Creating...',
+          success: (response)=>{
+            registerPromise.then(function(){ navigate('/')});
+              return "Register Successfully...!"
+          } ,// No success toast here
+          error: (error)=>{
+            return "Could not Register."
+          }, // No error toast here
+        });
+        
+      } catch (error) {
+        // Error toast if registration fails
+        toast.error("Could not Register.");
+      }
+    }
+  })
+
+
   return (
     <div className="signupContainer">
+      <Toaster position='top-center' reverseOrder={false}></Toaster>
       <div className="signupForm signupSignup">
         <header>Signup</header>
-        <form method="POST" action="/loginsubmit">
+        <form onSubmit={formik.handleSubmit}>
           <div className="signupField signupInput-field">
-            <input
+            <input {...formik.getFieldProps('email')}
               type="email"
               placeholder="Email"
               name="email"
@@ -16,7 +57,7 @@ function Signup() {
             />
           </div>
           <div className="signupField signupInput-field">
-            <input
+            <input {...formik.getFieldProps('first_name')}
               type="text"
               placeholder="First Name"
               name="first_name"
@@ -24,7 +65,7 @@ function Signup() {
             />
           </div>
           <div className="signupField signupInput-field">
-            <input
+            <input {...formik.getFieldProps('last_name')}
               type="text"
               placeholder="Last Name"
               name="last_name"
@@ -32,7 +73,7 @@ function Signup() {
             />
           </div>
           <div className="signupField signupInput-field">
-            <input
+            <input {...formik.getFieldProps('password')}
               type="password"
               placeholder="Password"
               name="password"
@@ -40,23 +81,23 @@ function Signup() {
             />
           </div>
           <div className="signupField signupInput-field">
-            <input
+            <input {...formik.getFieldProps('re_enter_password')}
               type="password"
               placeholder="Re-Enter Password"
-              name="password"
+              name="re_enter_password"
               className="signupRe_enter_Password"
             />
             </div>
           <div className="signupField signupButton-field">
-            <button>Signup</button>
+            <button type='submit'>Signup</button>
           </div>
         </form>
         <div className="signupForm-link">
           <span>
             Do have an account?
-            <a href="studentSignUp" className="signupLink signupSignup-link">
+            <Link to="/login" className="signupLink signupSignup-link" >
               Login
-            </a>
+            </Link>
           </span>
         </div>
       </div>

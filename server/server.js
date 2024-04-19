@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import connect from "./database/conn.js";
-// import router from "./router/route.js";
+import router from "./router/route.js";
 
 
 const app=express();
@@ -17,7 +17,7 @@ app.use(morgan('tiny'))
 app.disable('x-powered-by')    // less hackers know about our stack
 
 
-
+app.use(router)
 // routes
 app.get('/',(req,res)=>{
     res.status(201).json("Home GET Request");
