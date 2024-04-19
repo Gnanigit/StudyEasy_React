@@ -13,6 +13,7 @@ export const UserSchema = new mongoose.Schema({
     },
     firstName: { type: String},
     lastName: { type: String},
+    role:{type:Number},
 });
 
 export default mongoose.model.Users || mongoose.model('User', UserSchema);

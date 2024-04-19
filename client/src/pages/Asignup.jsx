@@ -18,11 +18,12 @@ function Signup() {
       re_enter_password: "",
     },
     onSubmit: async (values) => {
+      console.log(values);
       try {
         values = await Object.assign({}, values); // Ensure values is an object
         console.log(values);
 
-        let registerPromise = registerUser(values, 0); // Pass flag to registerUser
+        let registerPromise = registerUser(values, 1); // Pass flag to registerUser
 
         // Loading toast
         toast.promise(registerPromise, {
@@ -46,7 +47,7 @@ function Signup() {
     <div className="signupContainer">
       <Toaster position="top-center" reverseOrder={false} />
       <div className="signupForm signupSignup">
-        <header>Student Signup</header>
+        <header>Admin Signup</header>
         <form onSubmit={formik.handleSubmit}>
           <div className="signupField signupInput-field">
             <input

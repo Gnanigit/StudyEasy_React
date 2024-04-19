@@ -17,7 +17,7 @@ app.use(morgan('tiny'))
 app.disable('x-powered-by')    // less hackers know about our stack
 
 
-app.use(router)
+app.use('/api',router)
 // routes
 app.get('/',(req,res)=>{
     res.status(201).json("Home GET Request");

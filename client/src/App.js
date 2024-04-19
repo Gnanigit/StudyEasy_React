@@ -1,64 +1,30 @@
 import React from "react";
-import {createBrowserRouter,RouterProvider} from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-// // auth middleware
-
-// import { AuthorizeUser ,ProtectRoute} from "./middleware/auth";
-
-
-// import all components
+// Import all components
 import Home from "./pages/home";
 import First from "./pages/first";
 import Login from "./pages/login";
 import Signup from "./pages/signup";
 import Dashboard from "./pages/dashboard";
+import Asignup from "./pages/Asignup.jsx";
+// Root routes
+export default function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<First />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/Asignup" element={<Asignup />} />
+        <Route path="/dashboard" element={<Dashboard loc="" />} />
+        <Route path="/addcourse" element={<Dashboard loc="addcourse" />} />
+        <Route path="/mycourses" element={<Dashboard loc="mycourses" />} />
+        <Route path="/allcourses" element={<Dashboard loc="allcourses" />} />
+        <Route path="/addtopic" element={<Dashboard loc="addtopic" />} />
 
-// root routes
-const router = createBrowserRouter([
-   {
-    path:'/home',
-    element:<Home></Home>
-   },
-   {
-    path:'',
-    element:<First></First>
-   },
-   {
-    path:'/login',
-    element:<Login></Login>
-   },
-   {
-    path:'/signup',
-    element:<Signup></Signup>
-   },
-   {
-    path:'/dashboard',
-    element:<Dashboard loc=""></Dashboard>
-   },
-   {
-    path:'/addcourse',
-    element:<Dashboard loc="addcourse"></Dashboard>
-   },
-   {
-    path:'/mycourses',
-    element:<Dashboard loc="mycourses"></Dashboard>
-   },
-   {
-    path:'/allcourses',
-    element:<Dashboard loc="allcourses"></Dashboard>
-   },
-   {
-    path:'/addtopic',
-    element:<Dashboard loc="addtopic"></Dashboard>
-   }
-])
-
-
-
-export default function App(){
-    return(
-        <main>
-            <RouterProvider router={router}></RouterProvider>
-        </main>
-    )
+      </Routes>
+    </Router>
+  );
 }

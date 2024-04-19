@@ -1,29 +1,66 @@
 import React from "react";
 import "../styles/login.css"
-
+import { Link, useNavigate } from 'react-router-dom';
+import toast ,{ Toaster } from 'react-hot-toast';
+import { useFormik } from 'formik';
+import { verifyPassword } from "../helper/helper";
 function Login(){
+  const navigate = useNavigate()
+  const formik = useFormik({
+    initialValues : {
+      email:'',
+      password : ''
+    },
+
+    onSubmit: async values => {
+      try {
+        let loginPromise = verifyPassword({ email:values.email, password: values.password });
+        toast.promise(
+          loginPromise,
+          {
+            loading: 'Logging in...', 
+            success: (response) => {
+              let { token } = response.data;
+              localStorage.setItem('token', token);
+              navigate('/dashboard');
+              return "Login Successful!"; 
+            },
+            error: (error) => {
+
+              return "Password Not Match"; 
+            }
+          }
+        );
+      } catch (error) {
+        toast.error("Password Not Match"); 
+      }
+    }
+    
+    
+  })
+
     return(
         <div className="loginContainer">
+          <Toaster position='top-center' reverseOrder={false}></Toaster>
         <div className="loginForm loginLogin">
-          
             <header>Login</header>
-            <form method="POST" action="/loginsubmit">
+            <form onSubmit={formik.handleSubmit}>
               <div className="loginField loginInput-field">
-                <input type="email" placeholder="Email" name="email" className="loginInput" />
+                <input {...formik.getFieldProps('email')} type="email" placeholder="Email" name="email" className="loginInput" />
               </div>
               <div className="loginField loginInput-field">
-                <input type="password" placeholder="Password" name="password" className="loginPassword" />
+                <input {...formik.getFieldProps('password')} type="password" placeholder="Password" name="password" className="loginPassword" />
                 <i className="bx bx-hide eye-icon"></i> 
               </div>
               <div className="loginForm-link">
                 <a href="#" className="loginForgot-pass">Forgot password?</a>
               </div>
               <div className="loginField loginButton-field">
-                <button>Login</button>
+                <button type="submit">Login</button>
               </div>
             </form>
             <div className="loginForm-link">
-              <span>Don't have an account? <a href="studentSignUp" className="loginLink loginSignup-link">Signup</a></span>
+              <span>Don't have an account? <Link to="/signup" className="loginLink loginSignup-link">Signup</Link></span>
             </div>
           </div>
         </div>
