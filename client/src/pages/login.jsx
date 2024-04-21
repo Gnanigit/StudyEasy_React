@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../styles/login.css"
 import { Link, useNavigate } from 'react-router-dom';
 import toast ,{ Toaster } from 'react-hot-toast';
 import { useFormik } from 'formik';
 import { verifyPassword } from "../helper/helper";
+import { useAuthStore } from '../store/store';
+
 function Login(){
+  const setEmail = useAuthStore(state=>state.setEmail);
   const navigate = useNavigate()
   const formik = useFormik({
     initialValues : {
@@ -15,6 +18,7 @@ function Login(){
     onSubmit: async values => {
       try {
         let loginPromise = verifyPassword({ email:values.email, password: values.password });
+        
         toast.promise(
           loginPromise,
           {
@@ -31,6 +35,7 @@ function Login(){
             }
           }
         );
+        setEmail(values.email)
       } catch (error) {
         toast.error("Password Not Match"); 
       }

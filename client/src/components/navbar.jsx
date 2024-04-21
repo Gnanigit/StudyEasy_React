@@ -1,7 +1,9 @@
 import React ,{ useState } from 'react';
 import { Link } from 'react-router-dom';
 import "../styles/navbar.css"
+// import useFetch from '../hooks/fetch.hook';
 import img1 from "../assets/logo.avif"
+
 
 function Navbar({ profile }) {
   const [isChecked, setIsChecked] = useState(false);
@@ -47,7 +49,7 @@ function Navbar({ profile }) {
         </li>
         <li className="navbarProfile">
           <i className="fa-regular fa-user"></i>
-          <p className="navbarProLink">Gnani</p>
+          <p className="navbarProLink"></p>
           {/* <p className="navbarProLink">{profile.name}</p> */}
         </li>
       </ul>
