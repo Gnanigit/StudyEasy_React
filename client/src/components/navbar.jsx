@@ -1,17 +1,20 @@
-import React ,{ useState } from 'react';
+import React  from 'react';
 import { Link } from 'react-router-dom';
 import "../styles/navbar.css"
-// import useFetch from '../hooks/fetch.hook';
+import useFetch from '../hooks/fetch.hook';
 import img1 from "../assets/logo.avif"
+// import { useAuthStore } from '../store/store';
 
+function Navbar() {
 
-function Navbar({ profile }) {
-  const [isChecked, setIsChecked] = useState(false);
+  // const { email } = useAuthStore(state => state.auth)
+  const [{ isLoading, apiData, serverError }] = useFetch()
 
-  const handleToggle = () => {
-    setIsChecked(!isChecked);
-  };
-
+  if(isLoading) return <h1 className='text-2xl font-bold'>isLoading</h1>;
+  if(serverError) {
+    console.log(serverError+"hello")
+    return <h1 className='text-xl text-red-500'>{serverError.message}</h1>
+  }
   return (
     <div>
     <nav>
@@ -21,36 +24,48 @@ function Navbar({ profile }) {
         </Link>
         <label className="navbarLogo">StudyEasy</label>
       </div>
-      <ul className={isChecked ? 'navbarShow' : ''}>
+      <ul className='navbarShow'>
         <li className="navbarLink">
-          <Link className="navbarAnc" to="/studentMain">
+          <Link className="navbarAnc" to="/dashboard">
             Home
           </Link>
         </li>
         <li className="navbarLink">
-          <Link className="navbarAnc" to="/studentAllCourses">
+          <Link className="navbarAnc" to="/allcourses">
             ALL COURSES
           </Link>
         </li>
-        <li className="navbarLink">
-          <Link className="navbarAnc" to="/myCourse">
-            MY COURSES
-          </Link>
-        </li>
-        <li className="navbarLink">
-          <Link className="navbarAnc" to="/myCourse">
+        {apiData?.role ===0 &&
+            <li className="navbarLink">
+              <Link className="navbarAnc" to="/mycourse">
+                MY COURSES
+              </Link>
+            </li>
+        }
+
+        {apiData?.role === 1 &&
+          <li className="navbarLink">
+          <Link className="navbarAnc" to="/addcourse">
             ADD COURSE
           </Link>
         </li>
+        }
+        {apiData?.role === 1 &&
+          <li className="navbarLink">
+          <Link className="navbarAnc" to="/myuploads">
+            ADD COURSE
+          </Link>
+        </li>
+        }
         <li className="navbarLink">
-          <a className="navbarAnc" href="#">
+          <a className="navbarAnc" href="/about">
             About
           </a>
         </li>
         <li className="navbarProfile">
           <i className="fa-regular fa-user"></i>
           <p className="navbarProLink"></p>
-          {/* <p className="navbarProLink">{profile.name}</p> */}
+          <p className="navbarProLink">{apiData?.firstName || apiData?.email}</p>
         </li>
       </ul>
     </nav>

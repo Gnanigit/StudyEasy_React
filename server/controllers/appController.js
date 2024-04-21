@@ -93,7 +93,7 @@ export async function login(req,res){
                 return res.status(200).send({
                     msg:"Login successful",
                     email:user.email,
-                    // token
+                    token
                 })
             
 
@@ -108,5 +108,35 @@ export async function login(req,res){
     }
     catch(error){
         res.status(500).send({error})
+    }
+}
+
+
+export async function getEmail(req,res){
+    const {email}=req.params;
+    console.log(email)
+    try{
+        if(!email){
+            return res.status(501).send({error:"Invalid email"})
+        }
+        UserModel.findOne({email}).
+        exec()
+        .then(user=>{
+            if(!user){
+                return res.status(501).send({error:"Couldn't find the user hello"})
+            }
+            else{
+                // remove password from user
+                // mongoose return unnecesaary data with object to convert it into json
+                const {password,...rest}=Object.assign({},user.toJSON())
+                return res.status(201).send(rest)
+            }
+        })
+        .catch(err=>{
+            res.status(500).send({err});
+        })
+    }
+    catch(error){
+        return res.status(404).send({error:"cannot find user data"})
     }
 }

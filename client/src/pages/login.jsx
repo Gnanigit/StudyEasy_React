@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "../styles/login.css"
 import { Link, useNavigate } from 'react-router-dom';
 import toast ,{ Toaster } from 'react-hot-toast';
@@ -26,6 +26,7 @@ function Login(){
             success: (response) => {
               let { token } = response.data;
               localStorage.setItem('token', token);
+              setEmail(values.email);
               navigate('/dashboard');
               return "Login Successful!"; 
             },
@@ -35,7 +36,6 @@ function Login(){
             }
           }
         );
-        setEmail(values.email)
       } catch (error) {
         toast.error("Password Not Match"); 
       }
