@@ -1,27 +1,50 @@
-import React, { useState } from 'react';
+import React from 'react';
 import "../styles/addcourse.css"
+import { useNavigate } from 'react-router-dom';
+import toast ,{ Toaster } from 'react-hot-toast';
+import { addCourse } from "../helper/helper";
+import { useFormik } from 'formik';
+import useFetch from '../hooks/fetch.hook';
 
 function AddCourse() {
-  const [courseImage, setCourseImage] = useState('');
-  const [courseTitle, setCourseTitle] = useState('');
-  const [courseDescription, setCourseDescription] = useState('');
+  const navigate = useNavigate()
+  const [{apiData}] = useFetch()
+  const formik = useFormik({
+    initialValues : {
+      courseImage:'',
+      courseTitle:'',
+      content : ''
+    },
 
-  const handleSubmit = (event) => {
-    event.preventDefault(); 
-    console.log('Course details:', {
-      courseImage,
-      courseTitle,
-      courseDescription,
-    });
+    onSubmit: async values => {
+      try {
+        let addCoursePromise = addCourse({email:apiData?.email, courseImage:values.courseImage, courseTitle: values.courseTitle,content:values.content });
+        
+        toast.promise(
+          addCoursePromise,
+          {
+            loading:"Updating....",
+            success: (response) => {
+              navigate('/addcourse');
+              return "Course added Successful!"; 
+            },
+            error: (error) => {
+              return "Course not added"; 
+            }
 
-
-    setCourseImage('');
-    setCourseTitle('');
-    setCourseDescription('');
-  };
+          }
+        );
+      } catch (error) {
+        toast.error("Invalid Input"); 
+      }
+    }
+    
+    
+  })
 
   return (
     <section className="addcourseSectionCourse" aria-label="recent post">
+      <Toaster position='top-center' reverseOrder={false}></Toaster>
       <div className="addcourseContainer">  
         <div className="addcourseTitleWrapper">  
           <h2 className="addcourseH2 addcourseSectionTitle">  
@@ -29,29 +52,25 @@ function AddCourse() {
           </h2>
         </div>
         <ul className="addcourseGridList">  
-          <form action="#" method="POST" onSubmit={handleSubmit}>
-            <input
+          <form onSubmit={formik.handleSubmit}>
+            <input {...formik.getFieldProps('courseImage')}
               type="text"
               className='addcourseInput'
-              value={courseImage}
-              onChange={(e) => setCourseImage(e.target.value)}
               name="courseImage"
               placeholder="Course Image URL"
             />
             <input
+            {...formik.getFieldProps('courseTitle')}
               type="text"
               className='addcourseInput'
               name="courseTitle"
-              value={courseTitle}
-              onChange={(e) => setCourseTitle(e.target.value)}
               placeholder="Course Title"
             />
             <textarea
+            {...formik.getFieldProps('content')}
               name="content"
               placeholder="Course Description"
               minLength="10"
-              value={courseDescription}
-              onChange={(e) => setCourseDescription(e.target.value)}
             />
             <div className="addcourseCardContent">  
               <input type="submit" value="ADD COURSE" />

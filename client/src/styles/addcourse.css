@@ -70,18 +70,16 @@ textarea {
   resize: vertical; 
   min-height: 120px; 
 }
-.addcourseInput {
-  background-color: #e16bff;
-  color: #ffffff;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1rem;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
+.addcourseCardContent input[type="submit"] {
+  background-color: #e16bff; 
+  color: #fff;
+  padding: 10px 20px; 
+  border: none; 
+  border-radius: 5px; 
+  cursor: pointer; 
+  transition: background-color 0.3s ease; 
 }
 
-input[type="submit"]:hover {
-  background-color: #e16bff;
+.addcourseCardContent input[type="submit"]:hover {
+   background-color: #d44dff;
 }

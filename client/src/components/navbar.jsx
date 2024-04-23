@@ -53,7 +53,7 @@ function Navbar() {
         {apiData?.role === 1 &&
           <li className="navbarLink">
           <Link className="navbarAnc" to="/myuploads">
-            ADD COURSE
+            MY UPLOADS
           </Link>
         </li>
         }

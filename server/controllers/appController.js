@@ -2,7 +2,8 @@ import bcrypt from 'bcrypt'
 import UserModel from '../models/User.js'
 import jwt from "jsonwebtoken"
 import ENV from "../config.js"
-
+import allCoursesModel from '../models/allCourses.js'
+import allCourses from '../../client/src/helper/helper.js'
 export async function register(req,res){
     try {
         const { email, first_name,last_name,password } = req.body.credentials;  
@@ -114,7 +115,6 @@ export async function login(req,res){
 
 export async function getEmail(req,res){
     const {email}=req.params;
-    console.log(email)
     try{
         if(!email){
             return res.status(501).send({error:"Invalid email"})
@@ -139,4 +139,40 @@ export async function getEmail(req,res){
     catch(error){
         return res.status(404).send({error:"cannot find user data"})
     }
+}
+
+
+
+export async function addCourse(req, res) {
+    try {
+        const { email, courseImage, courseTitle, content } = req.body;
+        // Check if the course already exists
+        const courseExists = await allCoursesModel.findOne({ courseTitle }).exec();
+        if (courseExists) {
+            return res.status(400).send({ error: "Course already exists" });
+        }
+        // Create a new course
+        const newCourse = new allCoursesModel({
+            email: email,
+            courseImg: courseImage,
+            courseTitle: courseTitle,
+            content: content
+        });
+        // Save the new course
+        const savedCourse = await newCourse.save();
+        return res.status(201).send({ msg: "Course added successfully" });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send({ error: "Server error" });
+    }
+}
+
+export async function retrieveCourses(req,res){
+    try {
+   
+        const courses = await allCoursesModel.find({});
+        return res.status(201).send(courses)
+    } catch (error) {
+        res.status(500).send('Error retrieving courses');
+    } 
 }

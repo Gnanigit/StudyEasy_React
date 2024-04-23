@@ -6,7 +6,7 @@ axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
 export async function registerUser(credentials,flag){
     console.log(flag)
     try{
-        const {data:{msg},status} = await axios.post(`/api/register`,{credentials,flag});
+        const {data:{msg}} = await axios.post(`/api/register`,{credentials,flag});
         // if(status === 201){
         //     await axios.post('/registerMail', { userEmail : email, text : msg});
         // }
@@ -45,4 +45,29 @@ export async function getEmail(){
     let decode = jwtDecode(token);
     console.log(decode)
     return decode;
+}
+
+export async function addCourse(values){
+    try {
+        console.log(values)
+        const { data : { msg }} = await axios.post(`/api/addcourse`, values);
+        // let { username, email } = credentials;
+        /** send email */
+        // if(status === 201){
+        //     await axios.post('/api/registerMail', { username, userEmail : email, text : msg})
+        // }
+        return Promise.resolve(msg)
+    } catch (error) {
+        return Promise.reject({ error })
+    }
+}
+
+export async function allCourses(){
+    try{
+        const { data } = await axios.post('/api/allcourses')
+        return data;
+    }
+    catch(error){
+        return error;
+    }
 }

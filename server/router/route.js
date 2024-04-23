@@ -12,5 +12,7 @@ router.route('/authenticate').post(controller.verifyUser,(req,res)=>res.end());
 
 router.route('/user/:email').get(controller.getEmail);
 
+router.route('/addcourse').post((controller.addCourse));
 
+router.route('/allcourses').post((controller.retrieveCourses))
 export default router;
