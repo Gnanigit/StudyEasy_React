@@ -3,7 +3,6 @@ import UserModel from '../models/User.js'
 import jwt from "jsonwebtoken"
 import ENV from "../config.js"
 import allCoursesModel from '../models/allCourses.js'
-import allCourses from '../../client/src/helper/helper.js'
 export async function register(req,res){
     try {
         const { email, first_name,last_name,password } = req.body.credentials;  
@@ -171,6 +170,7 @@ export async function retrieveCourses(req,res){
     try {
    
         const courses = await allCoursesModel.find({});
+        console.log(courses)
         return res.status(201).send(courses)
     } catch (error) {
         res.status(500).send('Error retrieving courses');

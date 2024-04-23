@@ -1,0 +1,40 @@
+.course-item {
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 250px;
+    overflow: auto;  /* Add overflow control */
+  }
+
+  .course-image {
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .course-title {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+  }
+  
+  .course-content {
+    margin-bottom: 10px;
+    overflow: visible;
+    height: auto;
+  }
+  
+  .add-topic {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 16px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .add-topic:hover {
+    background-color: #0056b3;
+  }
