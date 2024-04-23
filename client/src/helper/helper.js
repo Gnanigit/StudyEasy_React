@@ -62,12 +62,3 @@ export async function addCourse(values){
     }
 }
 
-export async function allCourses(){
-    try{
-        const { data } = await axios.post('/api/allcourses')
-        return data;
-    }
-    catch(error){
-        return error;
-    }
-}
