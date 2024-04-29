@@ -72,3 +72,18 @@ export async function allCourses(){
         return error;
     }
 }
+
+export async function addTopic(values){
+    try {
+        console.log(values)
+        const { data : { msg }} = await axios.post(`/api/addtopic`, values);
+        // let { username, email } = credentials;
+        /** send email */
+        // if(status === 201){
+        //     await axios.post('/api/registerMail', { username, userEmail : email, text : msg})
+        // }
+        return Promise.resolve(msg)
+    } catch (error) {
+        return Promise.reject({ error })
+    }
+}

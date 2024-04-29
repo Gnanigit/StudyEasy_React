@@ -39,6 +39,7 @@ nav {
     display: inline-block;
     line-height: 80px;
     margin: 0 3px;
+  
   }
   
   .fa-user {
@@ -65,7 +66,11 @@ nav {
     border-radius: 3px;
     text-transform: uppercase;
   }
-  
+  .navbarProLink{
+    color: aliceblue;
+    font-weight: bold;
+    font-size: 20px;
+  }
   .navbarAnc.active,
   .navbarAnc:hover {
     background: rgba(212, 56, 251, 0.5); 

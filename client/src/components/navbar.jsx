@@ -17,6 +17,7 @@ function Navbar() {
   }
   return (
     <div>
+      <script src="https://kit.fontawesome.com/9d595d1bf3.js" crossorigin="anonymous"></script>
     <nav>
       <div className="navbarLogos">
         <Link to="/">
@@ -64,7 +65,6 @@ function Navbar() {
         </li>
         <li className="navbarProfile">
           <i className="fa-regular fa-user"></i>
-          <p className="navbarProLink"></p>
           <p className="navbarProLink">{apiData?.firstName || apiData?.email}</p>
         </li>
       </ul>
