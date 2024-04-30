@@ -7,6 +7,7 @@ import Mycourses from "../components/mycourses";
 import Allcourses from "../components/allcouorses";
 import About from "../components/about";
 import AddTopic from "../components/addtopic";
+import ViewCourse from "../components/viewcourse";
 
 function Dashboard({loc}){
     return(
@@ -22,16 +23,25 @@ function Dashboard({loc}){
                 <AddCourse></AddCourse>
             )}
             {loc === "mycourses" && (
-                <Mycourses></Mycourses>
+                <Allcourses loc="mycourses"></Allcourses>
             )}
             {loc === "allcourses" && (
-                <Allcourses></Allcourses>
+                <Allcourses loc="allcourses"></Allcourses>
             )}
             {loc === "about" && (
                 <About></About>
             )}
             {loc === "addtopic" && (
                 <AddTopic></AddTopic>
+            )}
+            {loc === "myuploads" && (
+                <Allcourses loc="myuploads"></Allcourses>
+            )}
+            {loc === "viewcourse" && (
+                <ViewCourse loc="myuploads"></ViewCourse>
+            )}
+            {loc === "mycourses" && (
+                <Mycourses loc="myuploads"></Mycourses>
             )}
         </div>
     )

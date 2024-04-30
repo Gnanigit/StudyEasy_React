@@ -3,8 +3,7 @@ import mongoose from "mongoose";
 export const allCoursesSchema = new mongoose.Schema({
     email: {
         type: String,
-        required : [true, "Please provide a unique email"],
-        unique: true,
+        required : [true, "Please provide a unique email"]
     },
     courseImg: {
         type: String,

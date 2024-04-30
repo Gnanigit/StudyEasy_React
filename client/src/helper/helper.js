@@ -65,7 +65,6 @@ export async function addCourse(values){
 export async function allCourses(){
     try{
         const { data } = await axios.post('/api/allcourses')
-        console.log(data[0]);
         return data;
     }
     catch(error){
@@ -85,5 +84,45 @@ export async function addTopic(values){
         return Promise.resolve(msg)
     } catch (error) {
         return Promise.reject({ error })
+    }
+}
+export async function myUploads(values){
+    try{
+        const { data } = await axios.post('/api/myuploads',{values})
+        return data;
+    }
+    catch(error){
+        return error;
+    }
+}
+export async function myCourses(){
+    try{
+        const { data } = await axios.post('/api/mycourses')
+        console.log(data[0]);
+        return data;
+    }
+    catch(error){
+        return error;
+    }
+}
+export async function viewCourse(values){
+    console.log(values)
+    const title = values.title
+    try{
+        const { data } = await axios.post('/api/course',{title})
+        console.log(data[0]);
+        return data;
+    }
+    catch(error){
+        return error;
+    }
+}
+export async function deleteCourse(title){
+    try{
+        const { data : { msg }} =await axios.delete(`/api/deletecourse/${encodeURIComponent(title)}`);
+        return msg;
+    }
+    catch(error){
+        return error;
     }
 }

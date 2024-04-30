@@ -16,8 +16,6 @@ export default function useFetch(query){
                 setData(prev => ({ ...prev, isLoading: true}));
 
                 const { email } = !query ? await getEmail() : '';
-                console.log('fdjlfjsf',email);
-                console.log('query',query);
                 const { data, status } = !query ? await axios.get(`/api/user/${email}`) : await axios.get(`/api/${query}`);
 
                 if(status === 201){

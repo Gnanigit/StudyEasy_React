@@ -15,4 +15,13 @@ router.route('/user/:email').get(controller.getEmail);
 router.route('/addcourse').post((controller.addCourse));
 
 router.route('/allcourses').post((controller.retrieveCourses))
+
+router.route('/myuploads').post((controller.myUploads))
+
+router.route('/addtopic').post((controller.addTopic))
+
+router.route('/course').post(controller.viewCourse)
+
+router.route('/deletecourse/:title').delete(controller.deleteCourse)
+
 export default router;

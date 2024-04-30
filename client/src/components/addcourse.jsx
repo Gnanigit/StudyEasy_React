@@ -26,6 +26,7 @@ function AddCourse() {
             loading:"Updating....",
             success: (response) => {
               navigate('/addcourse');
+              formik.resetForm();
               return "Course added Successful!"; 
             },
             error: (error) => {

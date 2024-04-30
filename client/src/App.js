@@ -23,7 +23,8 @@ export default function App() {
         <Route path="/mycourses" element={<Dashboard loc="mycourses" />} />
         <Route path="/allcourses" element={<Dashboard loc="allcourses" />} />
         <Route path="/addtopic" element={<Dashboard loc="addtopic" />} />
-
+        <Route path="/myuploads" element={<Dashboard loc="myuploads" />} />
+        <Route path="/viewcourse" element={<Dashboard loc="viewcourse" />} />
       </Routes>
     </Router>
   );

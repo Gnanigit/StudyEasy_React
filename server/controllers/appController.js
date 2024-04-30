@@ -3,6 +3,7 @@ import UserModel from '../models/User.js'
 import jwt from "jsonwebtoken"
 import ENV from "../config.js"
 import allCoursesModel from '../models/allCourses.js'
+import addTopicsModel from '../models/addtopic.js'
 export async function register(req,res){
     try {
         const { email, first_name,last_name,password } = req.body.credentials;  
@@ -170,9 +171,67 @@ export async function retrieveCourses(req,res){
     try {
    
         const courses = await allCoursesModel.find({});
-        console.log(courses)
+   
         return res.status(201).send(courses)
     } catch (error) {
         res.status(500).send('Error retrieving courses');
     } 
+}
+export async function myUploads(req,res){
+    try {
+        const email=req.body;
+        const courses = await allCoursesModel.find({email:email.values.email});
+        return res.status(201).send(courses)
+    } catch (error) {
+        res.status(500).send('Error retrieving courses');
+    } 
+}
+
+
+export async function addTopic(req, res) {
+    try {
+        const {  courseTitle, topicTitle, link1, link2,link3,link4 } = req.body;
+
+        // Create a new course
+        const newTopic = new addTopicsModel({
+            courseTitle: courseTitle,
+            topicTitle: topicTitle,
+            link1: link1,
+            link2: link2,
+            link3: link3,
+            link4: link4
+        });
+        // Save the new course
+        const savedTopic = await newTopic.save();
+        return res.status(201).send({ msg: "Course added successfully" });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send({ error: "Server error" });
+    }
+}
+
+export async function viewCourse(req,res){
+    try{
+    console.log(req.body)
+    const {title } = req.body;
+    const topics = await addTopicsModel.find({courseTitle:title});
+    return res.status(201).send(topics)
+    }
+     catch (error) {
+    res.status(500).send('Error retrieving topics');
+    } 
+}
+export async function deleteCourse(req,res){
+    try{
+        const title=req.params.title;
+        const result = await allCoursesModel.deleteOne({ courseTitle:title});
+        if (result.deletedCount === 1) {
+            res.status(200).json({ message: 'Course deleted successfully' });
+          } else {
+            res.status(404).json({ error: 'Course not found' });
+          }
+        } catch (error) {
+          console.error('Error deleting course:', error);
+          res.status(500).json({ error: 'Internal server error' });
+        }
 }
