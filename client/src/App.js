@@ -9,6 +9,8 @@ import Signup from "./pages/signup";
 import Dashboard from "./pages/dashboard";
 import Asignup from "./pages/Asignup.jsx";
 // Root routes
+import { AuthorizeUser ,ProtectRoute} from "./middleware/auth";
+
 export default function App() {
   return (
     <Router>
@@ -18,7 +20,7 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/Asignup" element={<Asignup />} />
-        <Route path="/dashboard" element={<Dashboard loc="" />} />
+        <Route path="/dashboard" element={<ProtectRoute><Dashboard loc="" /></ProtectRoute>} />
         <Route path="/addcourse" element={<Dashboard loc="addcourse" />} />
         <Route path="/mycourses" element={<Dashboard loc="mycourses" />} />
         <Route path="/allcourses" element={<Dashboard loc="allcourses" />} />
