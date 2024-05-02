@@ -1,76 +1,95 @@
-import React  from 'react';
-import { Link } from 'react-router-dom';
+import {React,useState} from 'react';
+import { NavLink ,useNavigate} from 'react-router-dom';
 import "../styles/navbar.css"
 import useFetch from '../hooks/fetch.hook';
 import img1 from "../assets/logo.avif"
-// import { useAuthStore } from '../store/store';
+
 
 function Navbar() {
-
-  // const { email } = useAuthStore(state => state.auth)
   const [{ isLoading, apiData, serverError }] = useFetch()
+  const navigate =useNavigate();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  function userLogout(){
+    localStorage.removeItem('token');
+    navigate('/');
+  }
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
 
-  if(isLoading) return <h1 className='text-2xl font-bold'>isLoading</h1>;
-  if(serverError) {
-    console.log(serverError+"hello")
+  const closeDropdown = () => {
+    setIsDropdownOpen(false);
+  };
+  if (isLoading) return <h1 className='text-2xl font-bold'>isLoading</h1>;
+  if (serverError) {
+    console.log(serverError + "hello")
     return <h1 className='text-xl text-red-500'>{serverError.message}</h1>
   }
+
   return (
     <div>
       <script src="https://kit.fontawesome.com/9d595d1bf3.js" crossOrigin="anonymous"></script>
-    <nav>
-      <div className="navbarLogos">
-        <Link to="/">
-          <img className="navbarLogoImg" src={img1} alt="StudyEasy Logo" />
-        </Link>
-        <label className="navbarLogo">StudyEasy</label>
-      </div>
-      <ul className='navbarShow'>
-        <li className="navbarLink">
-          <Link className="navbarAnc" to="/dashboard">
-            Home
-          </Link>
-        </li>
-        <li className="navbarLink">
-          <Link className="navbarAnc" to="/allcourses">
-            ALL COURSES
-          </Link>
-        </li>
-        {apiData?.role ===0 &&
+      <nav>
+        <div className="navbarLogos">
+          <NavLink to="/" className="navbarAnc">
+            <img className="navbarLogoImg" src={img1} alt="StudyEasy Logo" />
+            <label className="navbarLogo">StudyEasy</label>
+          </NavLink>
+        </div>
+        <ul className='navbarShow'>
+          <li className="navbarLink">
+            <NavLink className="navbarAnc" activeClassName="active" to="/dashboard">
+              Home
+            </NavLink>
+          </li>
+          <li className="navbarLink">
+            <NavLink className="navbarAnc" activeClassName="active" to="/allcourses">
+              ALL COURSES
+            </NavLink>
+          </li>
+          {apiData?.role === 0 &&
             <li className="navbarLink">
-              <Link className="navbarAnc" to="/mycourses">
+              <NavLink className="navbarAnc" activeClassName="active" to="/mycourses">
                 MY COURSES
-              </Link>
+              </NavLink>
             </li>
-        }
-
-        {apiData?.role === 1 &&
+          }
+          {apiData?.role === 1 &&
+            <li className="navbarLink">
+              <NavLink className="navbarAnc" activeClassName="active" to="/addcourse">
+                ADD COURSE
+              </NavLink>
+            </li>
+          }
+          {apiData?.role === 1 &&
+            <li className="navbarLink">
+              <NavLink className="navbarAnc" activeClassName="active" to="/myuploads">
+                MY UPLOADS
+              </NavLink>
+            </li>
+          }
           <li className="navbarLink">
-          <Link className="navbarAnc" to="/addcourse">
-            ADD COURSE
-          </Link>
-        </li>
-        }
-        {apiData?.role === 1 &&
-          <li className="navbarLink">
-          <Link className="navbarAnc" to="/myuploads">
-            MY UPLOADS
-          </Link>
-        </li>
-        }
-        <li className="navbarLink">
-          <a className="navbarAnc" href="/about">
-            About
-          </a>
-        </li>
-        <li className="navbarProfile">
-          <i className="fa-regular fa-user"></i>
-          <p className="navbarProLink">{apiData?.firstName || apiData?.email}</p>
-        </li>
-      </ul>
-    </nav>
+            <NavLink className="navbarAnc" activeClassName="active" to="/about">
+              About
+            </NavLink>
+          </li>
+          <li className="navbarProfile" onMouseEnter={toggleDropdown} onMouseLeave={closeDropdown}>
+            <i className="fa-regular fa-user"></i>
+            <p className="navbarProLink">{apiData?.firstName || apiData?.email}</p>
+            {isDropdownOpen && (
+              <ul className="dropdownMenu">
+                <li className="dropdownMenuItem">
+                  <NavLink to="/profile">Profile</NavLink>
+                </li>
+                <li className="dropdownMenuItem">
+                  <button onClick={userLogout} to="/">Logout</button>
+                </li>
+              </ul>
+            )}
+          </li>
+        </ul>
+      </nav>
     </div>
   );
 }
-
-export default Navbar;
+export default Navbar

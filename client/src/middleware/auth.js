@@ -14,8 +14,9 @@ export const AuthorizeUser = ({ children }) => {
 
 
 export const ProtectRoute = ({ children }) => {
+    const token = localStorage.getItem('token');
     const email = useAuthStore.getState().auth.email;
-    if(!email){
+    if(!email && !token){
         return <Navigate to={'/'} replace={true}></Navigate>
     }
     return children;

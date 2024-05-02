@@ -48,6 +48,7 @@ nav {
   }
   
   .navbarProfile {
+    position: relative;
     cursor: pointer;
     border-radius: 10px;
     display: inline-block;
@@ -71,9 +72,9 @@ nav {
     font-weight: bold;
     font-size: 20px;
   }
-  .navbarAnc.active,
+  
   .navbarAnc:hover {
-    background: rgba(212, 56, 251, 0.5); 
+    background: rgba(212, 56, 251, 0.2); 
     box-shadow: 1px 2px 2px rgba(209, 26, 255, 0.405); 
     transition: 0.5s;
   }
@@ -86,10 +87,62 @@ nav {
     cursor: pointer;
     display: none;
   }
+
+  .dropdownMenuItem button {
+    background-color: transparent; /* Set background color to transparent */
+    border: none; /* Remove button border */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    padding: 0; /* Remove button padding */
+    font-size: inherit; /* Inherit font size from parent */
+  }
+
+  .dropdownMenuItem button:hover {
+    text-decoration: underline; /* Underline text on hover */
+    color: #ff0000; /* Change text color on hover */
+    cursor: pointer;
+  }
   
   #check {
     display: none;
   }
+
+  .active {
+    font-weight: bold;
+    color: #7eeacd; /* Change this to your desired color */
+    background: rgba(255, 255, 255, 0.4); /* Adjust the alpha value (opacity) as needed */
+  }
+  
+  .dropdownMenu {
+    position: absolute;
+    top: calc(100% + 0px);
+    left: -12px;
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 0.3);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    border-top: none;
+    padding: 5px 0;
+    width: calc(100% + 30px); /* Fixed width for the dropdown menu */
+  }
+  
+  .dropdownMenuItem {
+    padding: 8px 15px;
+    list-style: none;
+  }
+  
+  .dropdownMenuItem a {
+    text-decoration: none;
+    color: black;
+
+
+  }
+  
+  .dropdownMenuItem a:hover {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  
   
   /* Media Queries */
   
