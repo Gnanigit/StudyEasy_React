@@ -1,29 +1,57 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import toast ,{ Toaster } from 'react-hot-toast';
 import "../styles/coursecard.css"
 import { deleteCourse } from '../helper/helper';
+import { enrollCourse } from '../helper/helper';
+import { useAuthStore } from '../store/store'
 
 function CourseCard({ role, loc, course }) {
   const navigate = useNavigate();
-  const [isDeleted, setIsDeleted] = useState(false); // State to track if course is deleted
+  const [isDeleted, setIsDeleted] = useState(false); 
+  const { email } = useAuthStore(state => state.auth)
+ 
+  const handleEnrollCourse = async () => {
+    try {
+        const title = course.courseTitle;
+        const response = await enrollCourse({ title, email });
+      if(response){
+        toast.success("Course Enrolled Successfully");
+      }
+      else{
+        toast.error("Course Already Enrolled!");
+      }
+       // Course enrolle
+    
+    } catch (error) {
+        console.error("Error enrolling course:", error);
+    }
+};
 
   const handleDeleteCourse = async () => {
     try {
       const title = course.courseTitle;
       await deleteCourse(title);
-      setIsDeleted(true); // Update state after course deletion
+      setIsDeleted(true); 
     } catch (error) {
       console.error("Error deleting course:", error);
     }
   };
 
-  // If course is deleted, navigate to the specified location
-  if (isDeleted) {
-    navigate("/myuploads", { replace: true }); // Replace the current URL in history
-  }
+  useEffect(() => {
+    
+    if (isDeleted && loc === "myuploads") {
+      navigate("/myuploads", { replace: true }); 
+    }
+  }, [isDeleted, loc, navigate]);
 
+ 
+  if (isDeleted) {
+    return null;
+  }
   return (
     <li className="course-item">
+      <Toaster position='top-center' reverseOrder={false}></Toaster>
       <div className='course-block'>
         <img src={course.courseImg} alt="Course Image" className="course-image" />
         <h2 className="course-title">{course.courseTitle}</h2>
@@ -36,10 +64,14 @@ function CourseCard({ role, loc, course }) {
                 <button className="add-topic">Add Topic</button>
               </Link>
             )}
+            {role === 0 && (
+              <button className="enroll-course" onClick={handleEnrollCourse}>Enroll Course</button>
+            )}
             <Link to={`/viewcourse?courseTitle=${encodeURIComponent(course.courseTitle)}`}>
               <button className="view-course">View Course</button>
             </Link>
           </div>
+          
         )}
 
         {loc=== "myuploads" && (
@@ -60,9 +92,6 @@ function CourseCard({ role, loc, course }) {
 
         {loc === "mycourses" && (
           <div className="button-container course-button">
-            <Link to={`/courseDetails?courseTitle=${encodeURIComponent(course.courseTitle)}`}>
-              <button className="view-course">Enroll Course</button>
-            </Link>
             <Link to={`/viewcourse?courseTitle=${encodeURIComponent(course.courseTitle)}`}>
               <button className="view-course course-button" type="submit">View Course</button>
             </Link>

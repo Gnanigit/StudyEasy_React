@@ -12,12 +12,23 @@
   
   .viewCourse {
     border-radius: 10px;
-    background-color: #007BFF; /* Change the background color as desired */
-    color: #fff; /* Text color */
+    animation: gradientAnimation 10s linear infinite alternate;
+    color: #a94bc1;
     text-align: center;
     padding: 20px;
   }
-  
+  @keyframes gradientAnimation {
+    0% {
+      background: linear-gradient(45deg, #ff6b6b, #ffa5b3, #ffd3b6, #64b5f6, #2bcbba);
+      background-size: 400% 400%;
+      background-position: 0 50%;
+    }
+    100% {
+      background: linear-gradient(45deg, #2bcbba, #64b5f6, #ffd3b6, #ffa5b3, #ff6b6b);
+      background-size: 400% 400%;
+      background-position: 100% 50%;
+    }
+  }
 
 .courseTopics {
     list-style: none;

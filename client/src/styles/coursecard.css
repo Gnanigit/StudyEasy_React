@@ -36,7 +36,7 @@
 .add-topic,
 .delete-course,
 .update-course,
-.view-course {
+.view-course, .enroll-course{
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -64,7 +64,7 @@
   background-position: right bottom;
   
 }
-.add-topic{
+.add-topic,.enroll-course{
   background: linear-gradient(to left, #df78f9 0%, #df78f9 50%, #3a7196 50%, #853a96 100%);
   transition: background-position 0.5s ease, color 0.3s ease; 
   background-size: 200% 100%;
@@ -74,13 +74,17 @@
 .add-topic:hover,
 .update-course:hover,
 .delete-course:hover,
-.view-course:hover {
+.view-course:hover ,.enroll-course:hover{
   background-position: left bottom;
   color: #fff; /* Change the color on hover */
 }
 
 
 .delete-course {
+  margin-right: 10px;
+}
+
+.enroll-course {
   margin-right: 10px;
 }
 

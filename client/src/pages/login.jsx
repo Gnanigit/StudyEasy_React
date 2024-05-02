@@ -18,27 +18,21 @@ function Login(){
     onSubmit: async values => {
       try {
         let loginPromise = verifyPassword({ email:values.email, password: values.password });
+    
+        const response = await loginPromise; 
         
-        toast.promise(
-          loginPromise,
-          {
-            loading: 'Logging in...', 
-            success: (response) => {
-              let { token } = response.data;
-              localStorage.setItem('token', token);
-              setEmail(values.email);
-              navigate('/dashboard');
-              return "Login Successful!"; 
-            },
-            error: (error) => {
-              return "Password Not Match"; 
-            }
-          }
-        );
+        toast.success("Login Successful!"); 
+    
+        let { token } = response.data;
+        localStorage.setItem('token', token);
+        setEmail(values.email);
+        console.log(values);
+        navigate('/dashboard');
       } catch (error) {
-        toast.error("Password Not Match"); 
+        toast.error("Password Not Match");
       }
     }
+    
     
     
   })

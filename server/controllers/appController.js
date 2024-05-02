@@ -4,6 +4,8 @@ import jwt from "jsonwebtoken"
 import ENV from "../config.js"
 import allCoursesModel from '../models/allCourses.js'
 import addTopicsModel from '../models/addtopic.js'
+import myCoursesModel from '../models/mycourses.js'
+
 export async function register(req,res){
     try {
         const { email, first_name,last_name,password } = req.body.credentials;  
@@ -104,7 +106,7 @@ export async function login(req,res){
             })
         })
         .catch(error=>{
-            return res.status(404).send({error:"Username not found"})
+            return res.status(201).send({error:"Username not found"})
         })
     }
     catch(error){
@@ -149,7 +151,7 @@ export async function addCourse(req, res) {
         // Check if the course already exists
         const courseExists = await allCoursesModel.findOne({ courseTitle }).exec();
         if (courseExists) {
-            return res.status(400).send({ error: "Course already exists" });
+            return res.status(201).send({ error: "Course already exists" });
         }
         // Create a new course
         const newCourse = new allCoursesModel({
@@ -177,6 +179,24 @@ export async function retrieveCourses(req,res){
         res.status(500).send('Error retrieving courses');
     } 
 }
+export async function myCourses(req,res){
+    try {
+        console.log(req.body)
+        const email=req.body.values.email;
+        const courses = await myCoursesModel.find({email:email});
+        const data = await Promise.all(
+            courses.map(async course => {
+                const courseData = await allCoursesModel.findOne({ courseTitle: course.courseTitle });
+                return courseData;
+            })
+        );
+        
+        return res.status(200).send(data);
+    } catch (error) {
+        res.status(500).send('Error retrieving courses');
+    } 
+}
+
 export async function myUploads(req,res){
     try {
         const email=req.body;
@@ -186,6 +206,7 @@ export async function myUploads(req,res){
         res.status(500).send('Error retrieving courses');
     } 
 }
+
 
 
 export async function addTopic(req, res) {
@@ -234,4 +255,25 @@ export async function deleteCourse(req,res){
           console.error('Error deleting course:', error);
           res.status(500).json({ error: 'Internal server error' });
         }
+}
+
+export async function enrollCourse(req, res) {
+    try {
+        
+        const { title, email} = req.body;
+        const enrollExists = await myCoursesModel.findOne({ courseTitle:title, email:email }).exec();
+        if (enrollExists) {
+            return res.status(201).send({ error: "Course already Enrolled" });
+        }
+        const newTopic = new myCoursesModel({
+            courseTitle: title,
+            email:email
+        });
+
+        const savedTopic = await newTopic.save();
+        return res.status(201).send({ msg: "Course enrolled successfully" });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send({ error: "Server error" });
+    }
 }

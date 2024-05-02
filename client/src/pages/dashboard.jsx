@@ -3,7 +3,7 @@ import Navbar from "../components/navbar";
 import Banner from "../components/banner";
 import Content from "../components/content";
 import AddCourse from "../components/addcourse";
-import Mycourses from "../components/mycourses";
+
 import Allcourses from "../components/allcouorses";
 import About from "../components/about";
 import AddTopic from "../components/addtopic";
@@ -22,9 +22,6 @@ function Dashboard({loc}){
             {loc === "addcourse" && (
                 <AddCourse></AddCourse>
             )}
-            {loc === "mycourses" && (
-                <Allcourses loc="mycourses"></Allcourses>
-            )}
             {loc === "allcourses" && (
                 <Allcourses loc="allcourses"></Allcourses>
             )}
@@ -38,10 +35,10 @@ function Dashboard({loc}){
                 <Allcourses loc="myuploads"></Allcourses>
             )}
             {loc === "viewcourse" && (
-                <ViewCourse loc="myuploads"></ViewCourse>
+                <ViewCourse loc="viewcourse"></ViewCourse>
             )}
             {loc === "mycourses" && (
-                <Mycourses loc="myuploads"></Mycourses>
+                <Allcourses loc="mycourses"></Allcourses>
             )}
         </div>
     )

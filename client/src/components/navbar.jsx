@@ -38,7 +38,7 @@ function Navbar() {
         </li>
         {apiData?.role ===0 &&
             <li className="navbarLink">
-              <Link className="navbarAnc" to="/mycourse">
+              <Link className="navbarAnc" to="/mycourses">
                 MY COURSES
               </Link>
             </li>

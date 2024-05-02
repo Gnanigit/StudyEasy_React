@@ -24,4 +24,8 @@ router.route('/course').post(controller.viewCourse)
 
 router.route('/deletecourse/:title').delete(controller.deleteCourse)
 
+router.route('/mycourses').post((controller.myCourses))
+
+router.route('/enrollcourse').post((controller.enrollCourse))
+
 export default router;

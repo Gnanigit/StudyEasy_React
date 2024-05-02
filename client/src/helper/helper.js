@@ -38,19 +38,18 @@ export async function authenticate(email){
 
 export async function getEmail(){
     const token = localStorage.getItem('token');
-    console.log(token)
     if(!token){
         return Promise.resolve("cannot find token");
     }
     let decode = jwtDecode(token);
-    console.log(decode)
+  
     return decode;
 }
 
 export async function addCourse(values){
     try {
         console.log(values)
-        const { data : { msg }} = await axios.post(`/api/addcourse`, values);
+        const { data : { msg }, status } = await axios.post(`/api/addcourse`, values);
         // let { username, email } = credentials;
         /** send email */
         // if(status === 201){
@@ -95,16 +94,17 @@ export async function myUploads(values){
         return error;
     }
 }
-export async function myCourses(){
+export async function myCourses(values){
     try{
-        const { data } = await axios.post('/api/mycourses')
-        console.log(data[0]);
+        console.log("helll")
+        const { data } = await axios.post('/api/mycourses',{values})
         return data;
     }
     catch(error){
         return error;
     }
 }
+
 export async function viewCourse(values){
     console.log(values)
     const title = values.title
@@ -126,3 +126,14 @@ export async function deleteCourse(title){
         return error;
     }
 }
+
+export async function enrollCourse(values){
+    try{
+        const { data : { msg }, status } =await axios.post('/api/enrollcourse',values);
+        return msg;
+    }
+    catch(error){
+        return error;
+    }
+}
+

@@ -9,3 +9,14 @@
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 20px;
   }
+  .error-message {
+    color: #ff6347; /* Tomato */
+    font-style: italic;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px; /* Set a fixed height if needed */
+  }
+  
+  
