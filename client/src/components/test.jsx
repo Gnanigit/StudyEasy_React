@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import "../styles/viewcourse.css";
-import { updateTopicLinks } from '../helper/helper';
+
 import { viewCourse } from '../helper/helper';
 import img1 from "../assets/gfg.png"
 import img2 from "../assets/jPoint.png"
 import img3 from "../assets/w3Schools.png"
 import img4 from "../assets/youtube.png"
-import toast ,{ Toaster } from 'react-hot-toast';
 
 function ViewCourse() {
-  const navigate=useNavigate()
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const courseTitle = queryParams.get('courseTitle');
@@ -35,42 +33,20 @@ function ViewCourse() {
     };
 
     const handleLinkChange = (e, linkName, topicId) => {
-      console.log(updatedLinks)
-      const { value } = e.target;
-      setUpdatedLinks(prevState => ({
-          ...prevState,
-          [topicId]: {
-              ...prevState[topicId],
-              [linkName]: value === "" ? null : value // Set to null if value is empty
-          }
-      }));
-  };
-  
-
-    const handleUpdateLinks = async (topicId)=> {
-      try {
-        const updatedData = updatedLinks[topicId];
-        console.log(updatedData)
-        if (updatedData) {
-            const response = await updateTopicLinks({topicId, updatedData});
-            if(response){
-              toast.success("Topic Updated Successfully!");
-              setUpdatingTopicId(null);
-              navigate(`/viewcourse?courseTitle=${encodeURIComponent(courseTitle)}&role=1`);
+        const { value } = e.target;
+        setUpdatedLinks(prevState => ({
+            ...prevState,
+            [topicId]: {
+                ...prevState[topicId],
+                [linkName]: value
             }
-            else{
-              toast.error("Topic Updation Failed!");
-            } 
-            console.log('Links updated successfully:', updatedData);
-        } else {
-          toast.error('No updated links found');
-            setUpdatingTopicId(null);
-            navigate(`/viewcourse?courseTitle=${encodeURIComponent(courseTitle)}&role=1`);
-        }
-    } catch (error) {
-        console.error('Error updating links:', error);
-    }
-    
+        }));
+    };
+
+    const handleUpdateLinks = (topicId) => {
+        // Logic to update links for the topic with topicId
+        console.log('Updated links:', updatedLinks[topicId]);
+        // You can send the updated links to your backend API for updating
     };
 
     if (!courseData) {
@@ -79,7 +55,6 @@ function ViewCourse() {
 
     return (
         <div className="viewCoursecontainer">
-           <Toaster position='top-center' reverseOrder={false}></Toaster>
             {courseData.length !== 0 ? (
                 <>
                     <h1 className="viewCourse">{courseData[0].courseTitle}</h1>
@@ -88,51 +63,37 @@ function ViewCourse() {
                             <li key={topic.id} className="topics">
                                 <h2 className="topic">{topic.topicTitle}</h2>
                                 <div className="links">
-                                    {updatingTopicId === topic._id ? (
+                                    {updatingTopicId === topic.id ? (
                                         <>
-                  
                                             <p className="link">
-                                              <div className="icon-link">
-                                                <span className="link-icon"><img src={img1} alt="GeeksForGeeks" /></span>
                                                 <input
                                                     type="text"
-                                                    defaultValue={updatedLinks[topic.id]?.link1 || topic.link1}
-                                                    onChange={(e) => handleLinkChange(e, 'link1', topic._id)}
+                                                    value={updatedLinks[topic.id]?.link1 || topic.link1}
+                                                    onChange={(e) => handleLinkChange(e, 'link1', topic.id)}
                                                 />
-                                                </div>
                                             </p>
                                             <p className="link">
-                                              <div className="icon-link">
-                                            <span className="link-icon"><img src={img2} alt="Java Point" /></span>
                                                 <input
                                                     type="text"
-                                                    defaultValue={updatedLinks[topic.id]?.link2 || topic.link2}
-                                                    onChange={(e) => handleLinkChange(e, 'link2', topic._id)}
+                                                    value={updatedLinks[topic.id]?.link2 || topic.link2}
+                                                    onChange={(e) => handleLinkChange(e, 'link2', topic.id)}
                                                 />
-                                                </div>
                                             </p>
                                             <p className="link">
-                                              <div className="icon-link">
-                                            <span className="link-icon"><img src={img3} alt="W3 Schools" /></span>
                                                 <input
                                                     type="text"
-                                                    defaultValue={updatedLinks[topic.id]?.link3 || topic.link3}
-                                                    onChange={(e) => handleLinkChange(e, 'link3', topic._id)}
+                                                    value={updatedLinks[topic.id]?.link3 || topic.link3}
+                                                    onChange={(e) => handleLinkChange(e, 'link3', topic.id)}
                                                 />
-                                                </div>
                                             </p>
                                             <p className="link">
-                                              <div className="icon-link">
-                                            <span className="link-icon"><img src={img4} alt="You Tube" /></span>
                                                 <input
                                                     type="text"
-                                                    defaultValue={updatedLinks[topic.id]?.link4|| topic.link4}
-                                                    onChange={(e) => handleLinkChange(e, 'link4', topic._id)}
+                                                    value={updatedLinks[topic.id]?.link4 || topic.link4}
+                                                    onChange={(e) => handleLinkChange(e, 'link4', topic.id)}
                                                 />
-                                                </div>
                                             </p>
-                                        
-                                            <button className="saveButton" onClick={() => handleUpdateLinks(topic._id)}>Save Links</button>
+                                            <button onClick={() => handleUpdateLinks(topic.id)}>Save Links</button>
                                         </>
                                     ) : (
                                         <>
@@ -161,7 +122,7 @@ function ViewCourse() {
                                                 </a>
                                             </p>
                                             {role === '1' && (
-                                                <button className="updateButton" onClick={() => setUpdatingTopicId(topic._id)}>Update Topic</button>
+                                                <button onClick={() => setUpdatingTopicId(topic.id)}>Update Topic</button>
                                             )}
                                         </>
                                     )}

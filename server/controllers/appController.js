@@ -300,3 +300,37 @@ export async function updateUser(req, res) {
         return res.status(401).send({ error: error.message });
     }
 }
+
+export async function updateTopic(req, res) {
+    try {
+        const { topicId } = req.body; // Extract topicId directly from req.body.values
+        if (topicId) {
+            const {updatedData} = req.body;
+            const updateObj = {};
+            if (updatedData.link1) {
+                updateObj.link1 = updatedData.link1;
+            }
+            if (updatedData.link2) {
+                updateObj.link2 = updatedData.link2;
+            }
+            if (updatedData.link3) {
+                updateObj.link3 = updatedData.link3;
+            }
+            if (updatedData.link4) {
+                updateObj.link4 = updatedData.link4;
+            }
+            addTopicsModel.updateOne({ _id: topicId }, updateObj)
+                .then(() => {
+                    return res.status(201).send({ msg: "Record Updated...!" });
+                })
+                .catch(err => {
+                    throw err;
+                });
+        } else {
+            return res.status(401).send({ error: "Topic Not Found...!" });
+        }
+    } catch (error) {
+        return res.status(401).send({ error: error.message });
+    }
+}
+

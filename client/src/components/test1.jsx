@@ -35,17 +35,33 @@ function ViewCourse() {
     };
 
     const handleLinkChange = (e, linkName, topicId) => {
-      console.log(updatedLinks)
-      const { value } = e.target;
+      const { name, value } = e.target;
+      console.log(e.target.value.link3)
       setUpdatedLinks(prevState => ({
           ...prevState,
           [topicId]: {
               ...prevState[topicId],
-              [linkName]: value === "" ? null : value // Set to null if value is empty
+              [name]: value
           }
       }));
   };
-  
+
+  const handleKeyDown = (e, linkName, topicId,topic) => {
+    console.log(e.key)
+    console.log(topic)
+    if (e.key === 'Backspace') {
+      e.preventDefault(); // Prevent the browser default action
+      const currentValue = updatedLinks[topicId]?.[linkName] || topic[linkName];
+      const newValue = currentValue.slice(0, -1); // Remove the last character
+      setUpdatedLinks(prevState => ({
+          ...prevState,
+          [topicId]: {
+              ...prevState[topicId],
+              [linkName]: newValue
+          }
+      }));
+  }
+};
 
     const handleUpdateLinks = async (topicId)=> {
       try {
@@ -63,9 +79,7 @@ function ViewCourse() {
             } 
             console.log('Links updated successfully:', updatedData);
         } else {
-          toast.error('No updated links found');
-            setUpdatingTopicId(null);
-            navigate(`/viewcourse?courseTitle=${encodeURIComponent(courseTitle)}&role=1`);
+            console.error('No updated links found for topicId:', topicId);
         }
     } catch (error) {
         console.error('Error updating links:', error);
@@ -90,49 +104,47 @@ function ViewCourse() {
                                 <div className="links">
                                     {updatingTopicId === topic._id ? (
                                         <>
-                  
                                             <p className="link">
-                                              <div className="icon-link">
                                                 <span className="link-icon"><img src={img1} alt="GeeksForGeeks" /></span>
                                                 <input
                                                     type="text"
-                                                    defaultValue={updatedLinks[topic.id]?.link1 || topic.link1}
+                                                    name="link1"
+                                                    value={updatedLinks[topic.id]?.link1 || topic.link1}
                                                     onChange={(e) => handleLinkChange(e, 'link1', topic._id)}
+                                                    onKeyDown={(e) => handleKeyDown(e, 'link1', topic._id,topic)}
                                                 />
-                                                </div>
                                             </p>
                                             <p className="link">
-                                              <div className="icon-link">
                                             <span className="link-icon"><img src={img2} alt="Java Point" /></span>
                                                 <input
                                                     type="text"
-                                                    defaultValue={updatedLinks[topic.id]?.link2 || topic.link2}
+                                                    name="link2"
+                                                    value={updatedLinks[topic.id]?.link2 || topic.link2}
                                                     onChange={(e) => handleLinkChange(e, 'link2', topic._id)}
+                                                    onKeyDown={(e) => handleKeyDown(e, 'link2', topic._id,topic)}
                                                 />
-                                                </div>
                                             </p>
                                             <p className="link">
-                                              <div className="icon-link">
                                             <span className="link-icon"><img src={img3} alt="W3 Schools" /></span>
                                                 <input
                                                     type="text"
-                                                    defaultValue={updatedLinks[topic.id]?.link3 || topic.link3}
+                                                    name="link3"
+                                                    value={updatedLinks[topic.id]?.link3 || topic.link3}
                                                     onChange={(e) => handleLinkChange(e, 'link3', topic._id)}
+                                                    onKeyDown={(e) => handleKeyDown(e, 'link3', topic._id,topic)}
                                                 />
-                                                </div>
                                             </p>
                                             <p className="link">
-                                              <div className="icon-link">
                                             <span className="link-icon"><img src={img4} alt="You Tube" /></span>
                                                 <input
                                                     type="text"
-                                                    defaultValue={updatedLinks[topic.id]?.link4|| topic.link4}
+                                                    name="link4"
+                                                    value={updatedLinks[topic.id]?.link4 || topic.link4}
                                                     onChange={(e) => handleLinkChange(e, 'link4', topic._id)}
+                                                    onKeyDown={(e) => handleKeyDown(e, 'link4', topic._id,topic)}
                                                 />
-                                                </div>
                                             </p>
-                                        
-                                            <button className="saveButton" onClick={() => handleUpdateLinks(topic._id)}>Save Links</button>
+                                            <button onClick={() => handleUpdateLinks(topic._id)}>Save Links</button>
                                         </>
                                     ) : (
                                         <>
@@ -161,7 +173,7 @@ function ViewCourse() {
                                                 </a>
                                             </p>
                                             {role === '1' && (
-                                                <button className="updateButton" onClick={() => setUpdatingTopicId(topic._id)}>Update Topic</button>
+                                                <button onClick={() => setUpdatingTopicId(topic._id)}>Update Topic</button>
                                             )}
                                         </>
                                     )}

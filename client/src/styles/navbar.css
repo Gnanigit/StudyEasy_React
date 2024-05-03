@@ -9,9 +9,11 @@ nav {
   }
   
   .navbarLogos {
-    padding-top: 18px;
+    padding-top: 5px;
     padding-left: 20px;
     display: flex; 
+    align-items:center ;
+    text-decoration: none;
   }
   
   .navbarLogo {
@@ -20,6 +22,7 @@ nav {
     line-height: 90px;
     font-weight: bold;
     padding-left: 7px;
+    
   }
   
   .navbarLogoImg {
@@ -66,6 +69,18 @@ nav {
   
   .navbarAnc {
     text-decoration: none;
+    color: white;
+    font-size: 17px;
+    padding: 7px 13px;
+    border-radius: 3px;
+    text-transform: uppercase;
+  }
+
+  .navBarTitle{
+    display: flex;
+    align-items: center; 
+    text-decoration: none; 
+ 
     color: white;
     font-size: 17px;
     padding: 7px 13px;
@@ -187,9 +202,7 @@ nav {
       line-height: 30px;
     }
   
-    .navbarAnc {
-      font-size: 20px;
-    }
+  
   
     .navbarAnc:hover,
     .navbarAnc.active {

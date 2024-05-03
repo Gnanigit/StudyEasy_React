@@ -31,7 +31,7 @@ function Navbar() {
     <div>
       <nav>
         <div className="navbarLogos">
-          <NavLink to="/" className="navbarAnc">
+          <NavLink to="/" className="navBarTitle">
             <img className="navbarLogoImg" src={img1} alt="StudyEasy Logo" />
             <label className="navbarLogo">StudyEasy</label>
           </NavLink>

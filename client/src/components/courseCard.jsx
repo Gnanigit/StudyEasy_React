@@ -71,7 +71,8 @@ function CourseCard({ role, loc, course }) {
             {role === 0 && (
               <button className="enroll-course" onClick={handleEnrollCourse}>Enroll Course</button>
             )}
-            <Link to={`/viewcourse?courseTitle=${encodeURIComponent(course.courseTitle)}`}>
+            <Link to={`/viewcourse?courseTitle=${encodeURIComponent(course.courseTitle)}&role=0`}>
+
               <button className="view-course">View Course</button>
             </Link>
           </div>
@@ -82,7 +83,8 @@ function CourseCard({ role, loc, course }) {
           <>
             <div className="button-container">
               <button className="delete-course" onClick={handleDeleteCourse}>Delete Course</button>
-              <Link to={`/viewcourse?courseTitle=${encodeURIComponent(course.courseTitle)}`}>
+              <Link to={`/viewcourse?courseTitle=${encodeURIComponent(course.courseTitle)}&role=0`}>
+
                 <button className="view-course">View Course</button>
               </Link>
             </div>
@@ -92,7 +94,7 @@ function CourseCard({ role, loc, course }) {
                 <button className="add-topic">Add Topic</button>
               </Link>
             )}
-              <Link to={`/courseDetails?courseTitle=${encodeURIComponent(course.courseTitle)}`}>
+              <Link to={`/viewcourse?courseTitle=${encodeURIComponent(course.courseTitle)}&role=1`}>
                 <button className="update-course course-button">Update Course</button>
               </Link>
             </div>

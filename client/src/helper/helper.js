@@ -110,7 +110,6 @@ export async function viewCourse(values){
     const title = values.title
     try{
         const { data } = await axios.post('/api/course',{title})
-        console.log(data[0]);
         return data;
     }
     catch(error){
@@ -141,7 +140,7 @@ export async function enrollCourse(values){
 export async function updateUser(values){
     try {
         const token = await localStorage.getItem('token');
-        console.log(token)
+      
         const data = await axios.put('/api/updateuser', values, { headers : { "Authorization" : `Bearer ${token}`}});
 
 
@@ -151,3 +150,11 @@ export async function updateUser(values){
     }
 }
 
+export async function updateTopicLinks(values){
+    try {
+        const data = await axios.put('/api/updatetopic', values);
+        return Promise.resolve({ data })
+    } catch (error) {
+        return Promise.reject({ error : "Couldn't Update Profile...!"})
+    }
+}

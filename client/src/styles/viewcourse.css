@@ -41,7 +41,9 @@
     padding: 10px;
     background-color: #f9f9f9;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+
   }
+
   
   .topic {
     margin: 0;
@@ -58,8 +60,8 @@
   }
   
   .link-icon {
-    font-size: 1.2em; /* Adjust the icon size as needed */
-    margin-right: 5px;
+    font-size: 0.3em; /* Adjust the icon size as needed */
+    margin-right: 7px;
   }
   
   .icon-link:hover {
@@ -78,6 +80,7 @@
   
   .links {
     display: flex;
+
     border-radius: 10px;
   }
   
@@ -102,3 +105,49 @@
     width: 20px;
   }
   
+
+  /* Styles for the update topic and save links buttons */
+  .updateButton {
+    background: linear-gradient(to left, #df78f9 0%, #df78f9 50%,#36923b 50%,#853a96 100%);
+    transition: background-position 0.5s ease, color 0.3s ease; 
+    background-size: 200% 100%;
+    background-position: right bottom;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+    margin-left: 10px;
+    border-radius: 8px;
+  }
+  
+  .updateButton:hover {
+    background-position: left bottom;
+    color: #fff; /* Darker green on hover */
+  }
+  
+  .saveButton {
+    background: linear-gradient(to left, #df78f9 0%, #df78f9 50%, #d3ba3b 50%, #853a96 100%);
+  transition: background-position 0.5s ease, color 0.3s ease;   
+  background-size: 200% 100%;
+  background-position: right bottom;/* Blue background */
+    border: none;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+    margin-left: 10px;
+  }
+  
+  .saveButton:hover {
+    background-position: left bottom;
+    color: #fff; /* Darker blue on hover */
+  }
