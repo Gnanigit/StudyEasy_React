@@ -3,7 +3,8 @@ import { NavLink ,useNavigate} from 'react-router-dom';
 import "../styles/navbar.css"
 import useFetch from '../hooks/fetch.hook';
 import img1 from "../assets/logo.avif"
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-regular-svg-icons';
 
 function Navbar() {
   const [{ isLoading, apiData, serverError }] = useFetch()
@@ -28,7 +29,6 @@ function Navbar() {
 
   return (
     <div>
-      <script src="https://kit.fontawesome.com/9d595d1bf3.js" crossOrigin="anonymous"></script>
       <nav>
         <div className="navbarLogos">
           <NavLink to="/" className="navbarAnc">
@@ -74,8 +74,10 @@ function Navbar() {
             </NavLink>
           </li>
           <li className="navbarProfile" onMouseEnter={toggleDropdown} onMouseLeave={closeDropdown}>
-            <i className="fa-regular fa-user"></i>
-            <p className="navbarProLink">{apiData?.firstName || apiData?.email}</p>
+            <div className="profileInfo">
+              <FontAwesomeIcon icon={faUser} className="fa-regular" />
+              <p className="navbarProLink">{apiData?.firstName || apiData?.email}</p>
+            </div>
             {isDropdownOpen && (
               <ul className="dropdownMenu">
                 <li className="dropdownMenuItem">

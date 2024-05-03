@@ -3,7 +3,7 @@ import Navbar from "../components/navbar";
 import Banner from "../components/banner";
 import Content from "../components/content";
 import AddCourse from "../components/addcourse";
-
+import Profile from "../components/profile";
 import Allcourses from "../components/allcouorses";
 import About from "../components/about";
 import AddTopic from "../components/addtopic";
@@ -35,11 +35,15 @@ function Dashboard({loc}){
                 <Allcourses loc="myuploads"></Allcourses>
             )}
             {loc === "viewcourse" && (
-                <ViewCourse loc="viewcourse"></ViewCourse>
+                <ViewCourse></ViewCourse>
             )}
             {loc === "mycourses" && (
                 <Allcourses loc="mycourses"></Allcourses>
             )}
+            {loc === "profile" && (
+                <Profile></Profile>
+            )}
+
         </div>
     )
 }

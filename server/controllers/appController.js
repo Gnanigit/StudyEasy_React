@@ -181,7 +181,6 @@ export async function retrieveCourses(req,res){
 }
 export async function myCourses(req,res){
     try {
-        console.log(req.body)
         const email=req.body.values.email;
         const courses = await myCoursesModel.find({email:email});
         const data = await Promise.all(
@@ -247,9 +246,10 @@ export async function deleteCourse(req,res){
         const title=req.params.title;
         const result = await allCoursesModel.deleteOne({ courseTitle:title});
         if (result.deletedCount === 1) {
-            res.status(200).json({ message: 'Course deleted successfully' });
+            console.log("hello")
+            res.status(201).json({ msg: 'Course deleted successfully' });
           } else {
-            res.status(404).json({ error: 'Course not found' });
+            res.status(201).json({ error: 'Course not found' });
           }
         } catch (error) {
           console.error('Error deleting course:', error);
@@ -275,5 +275,28 @@ export async function enrollCourse(req, res) {
     } catch (error) {
         console.error(error);
         return res.status(500).send({ error: "Server error" });
+    }
+}
+
+
+export async function updateUser(req, res) {
+    try {
+        const { userId } = req.user;
+        if (userId) {
+            const body = req.body;
+
+            // Update the data
+            UserModel.updateOne({ _id: userId }, body).exec()
+                .then(() => {
+                    return res.status(201).send({ msg: "Record Updated...!" });
+                })
+                .catch(err => {
+                    throw err;
+                });
+        } else {
+            return res.status(401).send({ error: "User Not Found...!" });
+        }
+    } catch (error) {
+        return res.status(401).send({ error: error.message });
     }
 }

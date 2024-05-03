@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 // Import all components
-import Home from "./pages/home";
 import First from "./pages/first";
 import Login from "./pages/login";
 import Signup from "./pages/signup";
@@ -15,18 +14,19 @@ export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/home" element={<Home />} />
         <Route path="/" element={<First />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/Asignup" element={<Asignup />} />
         <Route path="/dashboard" element={<ProtectRoute><Dashboard loc="" /></ProtectRoute>} />
-        <Route path="/addcourse" element={<Dashboard loc="addcourse" />} />
-        <Route path="/mycourses" element={<Dashboard loc="mycourses" />} />
-        <Route path="/allcourses" element={<Dashboard loc="allcourses" />} />
-        <Route path="/addtopic" element={<Dashboard loc="addtopic" />} />
-        <Route path="/myuploads" element={<Dashboard loc="myuploads" />} />
-        <Route path="/viewcourse" element={<Dashboard loc="viewcourse" />} />
+        <Route path="/addcourse" element={<ProtectRoute><Dashboard loc="addcourse" /></ProtectRoute>} />
+        <Route path="/mycourses" element={<ProtectRoute><Dashboard loc="mycourses" /></ProtectRoute>} />
+        <Route path="/allcourses" element={<ProtectRoute><Dashboard loc="allcourses" /></ProtectRoute>} />
+        <Route path="/addtopic" element={<ProtectRoute><Dashboard loc="addtopic" /></ProtectRoute>} />
+        <Route path="/myuploads" element={<ProtectRoute><Dashboard loc="myuploads" /></ProtectRoute>} />
+        <Route path="/viewcourse" element={<ProtectRoute><Dashboard loc="viewcourse" /></ProtectRoute>} />
+        <Route path="/about" element={<ProtectRoute><Dashboard loc="about" /></ProtectRoute>} />
+        <Route path="/profile" element={<ProtectRoute><Dashboard loc="profile" /></ProtectRoute>} />
       </Routes>
     </Router>
   );

@@ -3,15 +3,15 @@ nav {
     background:  #df78f9;
     height: 140px;
     width: 100%;
-    display: flex; /* Added for flexbox layout */
-    justify-content: space-between; /* Align items horizontally */
+    display: flex; 
+    justify-content: space-between; 
     margin-bottom: 30px;
   }
   
   .navbarLogos {
     padding-top: 18px;
     padding-left: 20px;
-    display: flex; /* Added for logo and label alignment */
+    display: flex; 
   }
   
   .navbarLogo {
@@ -55,8 +55,13 @@ nav {
     line-height: 50px;
     padding: 0px 5px;
     margin-right: 20px;
+    margin-top: 20px;
     margin-left: 10px;
     background-color: rgba(255, 255, 255, 0.3);
+  }
+  .profileInfo {
+    display: flex;
+    align-items: center;
   }
   
   .navbarAnc {
@@ -71,6 +76,7 @@ nav {
     color: aliceblue;
     font-weight: bold;
     font-size: 20px;
+  
   }
   
   .navbarAnc:hover {
@@ -89,16 +95,17 @@ nav {
   }
 
   .dropdownMenuItem button {
-    background-color: transparent; /* Set background color to transparent */
-    border: none; /* Remove button border */
-    cursor: pointer; /* Change cursor to pointer on hover */
-    padding: 0; /* Remove button padding */
-    font-size: inherit; /* Inherit font size from parent */
+    background-color: transparent; 
+    border: none; 
+    cursor: pointer;
+    padding: 0; 
+    font-size: inherit; 
   }
 
   .dropdownMenuItem button:hover {
-    text-decoration: underline; /* Underline text on hover */
-    color: #ff0000; /* Change text color on hover */
+    text-decoration: underline; 
+    color: #ff0000; 
+    font-weight: bold;
     cursor: pointer;
   }
   
@@ -108,8 +115,8 @@ nav {
 
   .active {
     font-weight: bold;
-    color: #7eeacd; /* Change this to your desired color */
-    background: rgba(255, 255, 255, 0.4); /* Adjust the alpha value (opacity) as needed */
+    color: #7eeacd; 
+    background: rgba(255, 255, 255, 0.4); 
   }
   
   .dropdownMenu {
@@ -122,7 +129,7 @@ nav {
     border-radius: 5px;
     border-top: none;
     padding: 5px 0;
-    width: calc(100% + 30px); /* Fixed width for the dropdown menu */
+    width: calc(100% + 30px); 
   }
   
   .dropdownMenuItem {
@@ -139,6 +146,7 @@ nav {
   
   .dropdownMenuItem a:hover {
     color: blue;
+    font-weight: bold;
     text-decoration: underline;
     cursor: pointer;
   }

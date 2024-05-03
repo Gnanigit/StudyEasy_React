@@ -137,3 +137,17 @@ export async function enrollCourse(values){
     }
 }
 
+
+export async function updateUser(values){
+    try {
+        const token = await localStorage.getItem('token');
+        console.log(token)
+        const data = await axios.put('/api/updateuser', values, { headers : { "Authorization" : `Bearer ${token}`}});
+
+
+        return Promise.resolve({ data })
+    } catch (error) {
+        return Promise.reject({ error : "Couldn't Update Profile...!"})
+    }
+}
+

@@ -9,6 +9,7 @@ import "../styles/allcourses.css";
 function Allcourses({ loc }) {
   const [{ isLoading, apiData, serverError }] = useFetch();
   const [courses, setCourses] = useState([]);
+  const [loadingCourses, setLoadingCourses] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,6 +25,8 @@ function Allcourses({ loc }) {
         setCourses(response);
       } catch (error) {
         console.error('Error fetching courses:', error);
+      } finally {
+        setLoadingCourses(false);
       }
     };
     if (apiData) {
@@ -36,20 +39,25 @@ function Allcourses({ loc }) {
       {loc === "myuploads" && <h1>My Uploads</h1>}
       {loc === "mycourses" && <h1>My Courses</h1>}
       {loc === "allcourses" && <h1>All Courses</h1>}
-      <ul className="course-list">
-        {Array.isArray(courses) && courses.length > 0 ? (
-          courses.map(course => (
-            <Coursecard role={apiData?.role} loc={loc} key={course._id} course={course} />
-          ))
-        ) : (
-        <p className="error-message">
-          {loc === "allcourses" && "No courses available"}
-          {loc === "mycourses" && "No enrolled courses available"}
-          {loc === "myuploads" && "No uploads available"}
-        </p>
-
-        )}
-      </ul>
+      {loadingCourses ? (
+        <p></p>
+      ) : (
+        <>
+          {Array.isArray(courses) && courses.length > 0 ? (
+            <ul className="course-list">
+              {courses.map(course => (
+                <Coursecard role={apiData?.role} loc={loc} key={course._id} course={course} />
+              ))}
+            </ul>
+          ) : (
+            <p className="error-message">
+              {loc === "allcourses" && "No courses available"}
+              {loc === "mycourses" && "No enrolled courses available"}
+              {loc === "myuploads" && "No uploads available"}
+            </p>
+          )}
+        </>
+      )}
     </section>
   );
 }

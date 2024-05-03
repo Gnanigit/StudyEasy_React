@@ -31,10 +31,18 @@ function CourseCard({ role, loc, course }) {
   const handleDeleteCourse = async () => {
     try {
       const title = course.courseTitle;
-      await deleteCourse(title);
-      setIsDeleted(true); 
+      const response=await deleteCourse(title);
+      console.log(response)
+      if(response){
+        toast.success(response);
+        setIsDeleted(true);
+      }
+      else{
+        toast.error("Course Deletion Failed!");
+      } 
     } catch (error) {
       console.error("Error deleting course:", error);
+      toast.error("An error occurred while deleting the course.");
     }
   };
 
@@ -59,11 +67,7 @@ function CourseCard({ role, loc, course }) {
         
         {loc === "allcourses" && (
           <div className="button-container">
-            {role === 1 && (
-              <Link to={`/addTopic?courseTitle=${encodeURIComponent(course.courseTitle)}`}>
-                <button className="add-topic">Add Topic</button>
-              </Link>
-            )}
+
             {role === 0 && (
               <button className="enroll-course" onClick={handleEnrollCourse}>Enroll Course</button>
             )}
@@ -83,6 +87,11 @@ function CourseCard({ role, loc, course }) {
               </Link>
             </div>
             <div className='down-button'>
+            {role === 1 && (
+              <Link to={`/addTopic?courseTitle=${encodeURIComponent(course.courseTitle)}`}>
+                <button className="add-topic">Add Topic</button>
+              </Link>
+            )}
               <Link to={`/courseDetails?courseTitle=${encodeURIComponent(course.courseTitle)}`}>
                 <button className="update-course course-button">Update Course</button>
               </Link>
