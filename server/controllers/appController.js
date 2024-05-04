@@ -303,7 +303,7 @@ export async function updateUser(req, res) {
 
 export async function updateTopic(req, res) {
     try {
-        const { topicId } = req.body; // Extract topicId directly from req.body.values
+        const { topicId } = req.body; 
         if (topicId) {
             const {updatedData} = req.body;
             const updateObj = {};
@@ -334,3 +334,28 @@ export async function updateTopic(req, res) {
     }
 }
 
+
+export async function changePassword(req, res) {
+    try {
+        const { email,oldPassword,newPassword} = req.body;
+
+        const user = await UserModel.findOne({ email:email });
+     
+        if (!user) {
+            return res.status(401).send({ error: "User Not Found...!" });
+        }
+        
+        const passwordMatch = await bcrypt.compare(oldPassword, user.password);
+
+        if (!passwordMatch) {
+            return res.status(401).send({ error: "Incorrect Old Password" });
+        }
+        const hashedNewPassword = await bcrypt.hash(newPassword, 10);
+        user.password = hashedNewPassword;
+        await user.save();
+        return res.status(200).send({ message: "Password Updated Successfully" });
+
+    } catch (error) {
+        return res.status(401).send({ error: error.message });
+    }
+}

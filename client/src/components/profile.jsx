@@ -8,9 +8,11 @@ import "../styles/profile.css"
 
 function Profile() {
   const [{ isLoading, apiData, serverError }] = useFetch();
-  console.log(apiData);
+  const navigate = useNavigate()
   const [file, setFile] = useState();
-  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate('/changepassword');
+  };
   const formik = useFormik({
     initialValues: {
       firstName: apiData?.firstName || '',
@@ -95,7 +97,7 @@ function Profile() {
           <span className="logout-text">Come back later?</span>
           <button onClick={userLogout} className="logout-button" to="/">Logout
           </button>
-          <button className="changePassword-button" type='button' to="/changepassword">Change Password</button>
+          <button className="changePassword-button" type='button' onClick={handleClick}>Change Password</button>
         </div>
       </form>
     </div>

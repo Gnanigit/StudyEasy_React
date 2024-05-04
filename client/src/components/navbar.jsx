@@ -38,38 +38,38 @@ function Navbar() {
         </div>
         <ul className='navbarShow'>
           <li className="navbarLink">
-            <NavLink className="navbarAnc" activeClassName="active" to="/dashboard">
+            <NavLink className="navbarAnc" activeclassname="active" to="/dashboard">
               Home
             </NavLink>
           </li>
           <li className="navbarLink">
-            <NavLink className="navbarAnc" activeClassName="active" to="/allcourses">
+            <NavLink className="navbarAnc" activeclassname="active" to="/allcourses">
               ALL COURSES
             </NavLink>
           </li>
           {apiData?.role === 0 &&
             <li className="navbarLink">
-              <NavLink className="navbarAnc" activeClassName="active" to="/mycourses">
+              <NavLink className="navbarAnc" activeclassname="active" to="/mycourses">
                 MY COURSES
               </NavLink>
             </li>
           }
           {apiData?.role === 1 &&
             <li className="navbarLink">
-              <NavLink className="navbarAnc" activeClassName="active" to="/addcourse">
+              <NavLink className="navbarAnc" activeclassname="active" to="/addcourse">
                 ADD COURSE
               </NavLink>
             </li>
           }
           {apiData?.role === 1 &&
             <li className="navbarLink">
-              <NavLink className="navbarAnc" activeClassName="active" to="/myuploads">
+              <NavLink className="navbarAnc" activeclassname="active" to="/myuploads">
                 MY UPLOADS
               </NavLink>
             </li>
           }
           <li className="navbarLink">
-            <NavLink className="navbarAnc" activeClassName="active" to="/about">
+            <NavLink className="navbarAnc" activeclassname="active" to="/about">
               About
             </NavLink>
           </li>

@@ -26,7 +26,6 @@ function Login(){
         let { token } = response.data;
         localStorage.setItem('token', token);
         setEmail(values.email);
-        console.log(values);
         navigate('/dashboard');
       } catch (error) {
         toast.error("Password Not Match");

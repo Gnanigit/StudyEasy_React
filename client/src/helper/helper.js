@@ -159,3 +159,13 @@ export async function updateTopicLinks(values){
         return Promise.reject({ error : "Couldn't Update Profile...!"})
     }
 }
+
+export async function changePassword(values){
+    try {
+        console.log(values)
+        const data = await axios.put('/api/changepassword', values);
+        return Promise.resolve({ data })
+    } catch (error) {
+        return Promise.reject({ error : "Couldn't Update Profile...!"})
+    }
+}

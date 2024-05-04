@@ -8,7 +8,8 @@ import Allcourses from "../components/allcouorses";
 import About from "../components/about";
 import AddTopic from "../components/addtopic";
 import ViewCourse from "../components/viewcourse";
-import UpdatePassword from "../components/updatePassword";
+import ChangePassword from "../components/changepassword";
+
 function Dashboard({loc}){
     return(
         <div>
@@ -43,8 +44,8 @@ function Dashboard({loc}){
             {loc === "profile" && (
                 <Profile></Profile>
             )}
-            {loc === "updatePassword" && (
-                <UpdatePassword></UpdatePassword>
+            {loc === "changepassword" && (
+                <ChangePassword></ChangePassword>
             )}
         </div>
     )

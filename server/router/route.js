@@ -34,4 +34,7 @@ router.route('/enrollcourse').post((controller.enrollCourse))
 router.route('/updateuser').put(Auth,controller.updateUser)
 
 router.route('/updatetopic').put(controller.updateTopic)
+
+router.route('/changepassword').put(controller.changePassword)
+
 export default router;
