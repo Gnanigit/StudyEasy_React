@@ -108,7 +108,7 @@
 
   /* Styles for the update topic and save links buttons */
   .updateButton {
-    background: linear-gradient(to left, #df78f9 0%, #df78f9 50%,#36923b 50%,#853a96 100%);
+    background: linear-gradient(to left, #df78f9 0%, #df78f9 50%,#36923b 50%,#b548c8 100%);
     transition: background-position 0.5s ease, color 0.3s ease; 
     background-size: 200% 100%;
     background-position: right bottom;
@@ -118,22 +118,24 @@
     text-decoration: none;
     display: inline-block;
     font-size: 14px;
-    margin: 4px 2px;
+    margin-bottom: 11px;
+    margin-top: 18px;
     cursor: pointer;
-    margin-left: 10px;
+    margin-left: 40px;
+    font-weight: bold;
     border-radius: 8px;
   }
   
   .updateButton:hover {
     background-position: left bottom;
-    color: #fff; /* Darker green on hover */
+    color: #fff; 
   }
   
   .saveButton {
     background: linear-gradient(to left, #df78f9 0%, #df78f9 50%, #d3ba3b 50%, #853a96 100%);
-  transition: background-position 0.5s ease, color 0.3s ease;   
-  background-size: 200% 100%;
-  background-position: right bottom;/* Blue background */
+    transition: background-position 0.5s ease, color 0.3s ease;   
+    background-size: 200% 100%;
+    background-position: right bottom;
     border: none;
     color: white;
     text-align: center;
@@ -141,10 +143,11 @@
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 4px 2px;
+    margin-bottom: 11px;
+    margin-top: 18px;
     cursor: pointer;
     border-radius: 8px;
-    margin-left: 10px;
+    margin-left: 40px;
   }
   
   .saveButton:hover {

@@ -27,6 +27,7 @@ export default function App() {
         <Route path="/viewcourse" element={<ProtectRoute><Dashboard loc="viewcourse" /></ProtectRoute>} />
         <Route path="/about" element={<ProtectRoute><Dashboard loc="about" /></ProtectRoute>} />
         <Route path="/profile" element={<ProtectRoute><Dashboard loc="profile" /></ProtectRoute>} />
+        <Route path="/updatepassword" element={<ProtectRoute><Dashboard loc="updatepassword" /></ProtectRoute>} />
       </Routes>
     </Router>
   );

@@ -13,21 +13,20 @@ function ViewCourse() {
   const navigate=useNavigate()
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
-    const courseTitle = queryParams.get('courseTitle');
+    const courseId = queryParams.get('courseId');
+    console.log(courseId)
     const role = queryParams.get('role');
-    console.log(role)
     const [courseData, setCourseData] = useState(null);
     const [updatedLinks, setUpdatedLinks] = useState({});
     const [updatingTopicId, setUpdatingTopicId] = useState(null);
 
     useEffect(() => {
-        // Fetch course data based on courseTitle
-        fetchCourseData(courseTitle);
-    }, [courseTitle]);
+        fetchCourseData(courseId);
+    }, [courseId]);
 
-    const fetchCourseData = async (title) => {
+    const fetchCourseData = async (Id) => {
         try {
-            const response = await viewCourse({ title });
+            const response = await viewCourse({ Id });
             setCourseData(response);
         } catch (error) {
             console.error('Error fetching course data:', error);
@@ -41,7 +40,7 @@ function ViewCourse() {
           ...prevState,
           [topicId]: {
               ...prevState[topicId],
-              [linkName]: value === "" ? null : value // Set to null if value is empty
+              [linkName]: value === "" ? null : value 
           }
       }));
   };
@@ -56,7 +55,7 @@ function ViewCourse() {
             if(response){
               toast.success("Topic Updated Successfully!");
               setUpdatingTopicId(null);
-              navigate(`/viewcourse?courseTitle=${encodeURIComponent(courseTitle)}&role=1`);
+              navigate(`/viewcourse?courseId=${encodeURIComponent(courseId)}&role=1`);
             }
             else{
               toast.error("Topic Updation Failed!");
@@ -65,7 +64,7 @@ function ViewCourse() {
         } else {
           toast.error('No updated links found');
             setUpdatingTopicId(null);
-            navigate(`/viewcourse?courseTitle=${encodeURIComponent(courseTitle)}&role=1`);
+            navigate(`/viewcourse?courseId=${encodeURIComponent(courseId)}&role=1`);
         }
     } catch (error) {
         console.error('Error updating links:', error);

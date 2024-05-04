@@ -125,7 +125,7 @@ export async function getEmail(req,res){
         exec()
         .then(user=>{
             if(!user){
-                return res.status(501).send({error:"Couldn't find the user hello"})
+                return res.status(501).send({error:"Couldn't find the user"})
             }
             else{
                 // remove password from user
@@ -210,10 +210,10 @@ export async function myUploads(req,res){
 
 export async function addTopic(req, res) {
     try {
-        const {  courseTitle, topicTitle, link1, link2,link3,link4 } = req.body;
-
+        const {courseId,courseTitle, topicTitle, link1, link2,link3,link4 } = req.body;
         // Create a new course
         const newTopic = new addTopicsModel({
+            courseId:courseId,
             courseTitle: courseTitle,
             topicTitle: topicTitle,
             link1: link1,
@@ -232,21 +232,21 @@ export async function addTopic(req, res) {
 
 export async function viewCourse(req,res){
     try{
-    console.log(req.body)
-    const {title } = req.body;
-    const topics = await addTopicsModel.find({courseTitle:title});
+    const { Id } = req.body;
+    const topics = await addTopicsModel.find({courseId:Id});
     return res.status(201).send(topics)
     }
+
      catch (error) {
     res.status(500).send('Error retrieving topics');
     } 
 }
 export async function deleteCourse(req,res){
     try{
-        const title=req.params.title;
-        const result = await allCoursesModel.deleteOne({ courseTitle:title});
+        const Id=req.params.Id;
+        await addTopicsModel.deleteMany({courseId:Id})
+        const result = await allCoursesModel.deleteOne({ courseId:Id});
         if (result.deletedCount === 1) {
-            console.log("hello")
             res.status(201).json({ msg: 'Course deleted successfully' });
           } else {
             res.status(201).json({ error: 'Course not found' });

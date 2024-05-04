@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
 export const addTopicsSchema = new mongoose.Schema({
+    courseId: {
+        type: String,
+        required : [true, "Please provide a course Title"]
+    },
     courseTitle: {
         type: String,
         required : [true, "Please provide a course Title"]

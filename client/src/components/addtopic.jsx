@@ -12,10 +12,12 @@ function AddTopic(){
   // Extracting the courseTitle from the query parameter
   const queryParams = new URLSearchParams(location.search);
   const courseTitle = queryParams.get('courseTitle');
-
+  const courseId = queryParams.get('courseId');
+  console.log(courseId)
   const formik = useFormik({
     initialValues: {
-      courseTitle: courseTitle || '', // Setting courseTitle as the initial value
+      courseId: courseId,
+      courseTitle: courseTitle || '', 
       topicTitle:'',
       link1:'',
       link2:'',
@@ -25,6 +27,7 @@ function AddTopic(){
     onSubmit: async values => {
       try {
         let addTopicPromise = addTopic({
+          courseId:courseId,
           courseTitle: values.courseTitle,
           topicTitle: values.topicTitle,
           link1: values.link1,

@@ -46,6 +46,7 @@ function Allcourses({ loc }) {
           {Array.isArray(courses) && courses.length > 0 ? (
             <ul className="course-list">
               {courses.map(course => (
+            
                 <Coursecard role={apiData?.role} loc={loc} key={course._id} course={course} />
               ))}
             </ul>

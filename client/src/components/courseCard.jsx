@@ -30,9 +30,8 @@ function CourseCard({ role, loc, course }) {
 
   const handleDeleteCourse = async () => {
     try {
-      const title = course.courseTitle;
-      const response=await deleteCourse(title);
-      console.log(response)
+      const Id = course._id;
+      const response=await deleteCourse(Id);
       if(response){
         toast.success(response);
         setIsDeleted(true);
@@ -71,7 +70,7 @@ function CourseCard({ role, loc, course }) {
             {role === 0 && (
               <button className="enroll-course" onClick={handleEnrollCourse}>Enroll Course</button>
             )}
-            <Link to={`/viewcourse?courseTitle=${encodeURIComponent(course.courseTitle)}&role=0`}>
+            <Link to={`/viewcourse?courseId=${encodeURIComponent(course._id)}&role=0`}>
 
               <button className="view-course">View Course</button>
             </Link>
@@ -83,18 +82,18 @@ function CourseCard({ role, loc, course }) {
           <>
             <div className="button-container">
               <button className="delete-course" onClick={handleDeleteCourse}>Delete Course</button>
-              <Link to={`/viewcourse?courseTitle=${encodeURIComponent(course.courseTitle)}&role=0`}>
 
+              <Link to={`/viewcourse?courseId=${encodeURIComponent(course._id)}&role=0`}>
                 <button className="view-course">View Course</button>
               </Link>
             </div>
             <div className='down-button'>
             {role === 1 && (
-              <Link to={`/addTopic?courseTitle=${encodeURIComponent(course.courseTitle)}`}>
+                 <Link to={`/addTopic?courseTitle=${encodeURIComponent(course.courseTitle)}&courseId=${encodeURIComponent(course._id)}`}>
                 <button className="add-topic">Add Topic</button>
               </Link>
             )}
-              <Link to={`/viewcourse?courseTitle=${encodeURIComponent(course.courseTitle)}&role=1`}>
+              <Link to={`/viewcourse?courseId=${encodeURIComponent(course._id)}&role=1`}>
                 <button className="update-course course-button">Update Course</button>
               </Link>
             </div>

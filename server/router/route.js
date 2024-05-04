@@ -25,7 +25,7 @@ router.route('/addtopic').post((controller.addTopic))
 
 router.route('/course').post(controller.viewCourse)
 
-router.route('/deletecourse/:title').delete(controller.deleteCourse)
+router.route('/deletecourse/:Id').delete(controller.deleteCourse)
 
 router.route('/mycourses').post((controller.myCourses))
 

@@ -20,7 +20,6 @@ function Profile() {
       address: apiData?.address || '',
     },
     enableReinitialize: true,
-    // ... validation logic (if needed)
     onSubmit: async (values) => {
       values = await Object.assign(values, {
         // profile: file || apiData?.profile || '',
@@ -94,9 +93,9 @@ function Profile() {
         </div>
         <div className="logout-section">
           <span className="logout-text">Come back later?</span>
-          <button onClick={userLogout} className="logout-button" to="/">
-            Logout
+          <button onClick={userLogout} className="logout-button" to="/">Logout
           </button>
+          <button className="changePassword-button" type='button' to="/changepassword">Change Password</button>
         </div>
       </form>
     </div>

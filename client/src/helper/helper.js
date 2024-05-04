@@ -4,7 +4,7 @@ axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
 
 
 export async function registerUser(credentials,flag){
-    console.log(flag)
+   
     try{
         const {data:{msg}} = await axios.post(`/api/register`,{credentials,flag});
         // if(status === 201){
@@ -48,7 +48,7 @@ export async function getEmail(){
 
 export async function addCourse(values){
     try {
-        console.log(values)
+  
         const { data : { msg }, status } = await axios.post(`/api/addcourse`, values);
         // let { username, email } = credentials;
         /** send email */
@@ -73,7 +73,7 @@ export async function allCourses(){
 
 export async function addTopic(values){
     try {
-        console.log(values)
+       
         const { data : { msg }} = await axios.post(`/api/addtopic`, values);
         // let { username, email } = credentials;
         /** send email */
@@ -96,7 +96,7 @@ export async function myUploads(values){
 }
 export async function myCourses(values){
     try{
-        console.log("helll")
+      
         const { data } = await axios.post('/api/mycourses',{values})
         return data;
     }
@@ -106,19 +106,20 @@ export async function myCourses(values){
 }
 
 export async function viewCourse(values){
-    console.log(values)
-    const title = values.title
+
+    const Id = values.Id
     try{
-        const { data } = await axios.post('/api/course',{title})
+        const { data } = await axios.post('/api/course',{Id})
         return data;
     }
     catch(error){
         return error;
     }
 }
-export async function deleteCourse(title){
+export async function deleteCourse(Id){
     try{
-        const { data : { msg }} =await axios.delete(`/api/deletecourse/${encodeURIComponent(title)}`);
+  
+        const { data : { msg }} =await axios.delete(`/api/deletecourse/${encodeURIComponent(Id)}`);
         return msg;
     }
     catch(error){
