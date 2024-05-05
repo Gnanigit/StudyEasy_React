@@ -9,7 +9,7 @@ const app=express();
 const port=8080
 
 
-const allowedOrigin = 'https://study-easy-roan.vercel.app';
+const allowedOrigin = 'https://study-easy-react.vercel.app';
 // uses
 app.use(express.json({ limit: '100mb' }));
 app.use(cors({
