@@ -27,7 +27,7 @@ function Login(){
         localStorage.setItem('token', token);
         setEmail(values.email);
         setTimeout(() => {
-          navigate('/login');
+          navigate('/dashboard');
       }, 3000); 
       } catch (error) {
         toast.error("Password Not Match");
