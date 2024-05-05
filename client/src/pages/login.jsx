@@ -26,6 +26,7 @@ function Login(){
         let { token } = response.data;
         localStorage.setItem('token', token);
         setEmail(values.email);
+        console.log("hello")
         setTimeout(() => {
           navigate('/dashboard');
       }, 3000); 
