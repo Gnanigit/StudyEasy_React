@@ -169,3 +169,50 @@ export async function changePassword(values){
         return Promise.reject({ error : "Couldn't Update Profile...!"})
     }
 }
+
+/** generate OTP */
+export async function generateOTP(email){
+    try {
+        const {data : { code }, status } = await axios.post('/api/generateOTP', {email});
+        if(status === 201){
+
+            const { data} = await getUser({ email });
+            const firstName=data.firstName;
+            let text = `Your Password Recovery OTP is ${code}. Verify and recover your password.`;
+            await axios.post('/api/registerMail', { email: email,firstName:firstName, text, subject : "Password Recovery OTP"})
+        }
+        return Promise.resolve(code);
+    } catch (error) {
+        return Promise.reject({ error });
+    }
+}
+
+
+/** verify OTP */
+export async function verifyOTP({ email, code }){
+    try {
+       const { data, status } = await axios.get('/api/verifyOTP', { params : { email, code }})
+       return { data, status }
+    } catch (error) {
+        return Promise.reject(error);
+    }
+}
+
+
+export async function getUser({ email }){
+    try {
+        const { data } = await axios.get(`/api/user/${email}`);
+        return { data };
+    } catch (error) {
+        return { error : "Password doesn't Match...!"}
+    }
+}
+
+export async function updatePassword(values){
+    try {
+        const data = await axios.put('/api/updatepassword', values);
+        return Promise.resolve({ data })
+    } catch (error) {
+        return Promise.reject({ error : "Couldn't Update Profile...!"})
+    }
+}

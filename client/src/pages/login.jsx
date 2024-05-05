@@ -26,14 +26,13 @@ function Login(){
         let { token } = response.data;
         localStorage.setItem('token', token);
         setEmail(values.email);
-        navigate('/dashboard');
+        setTimeout(() => {
+          navigate('/login');
+      }, 3000); 
       } catch (error) {
         toast.error("Password Not Match");
       }
     }
-    
-    
-    
   })
 
     return(
@@ -50,7 +49,7 @@ function Login(){
                 <i className="bx bx-hide eye-icon"></i> 
               </div>
               <div className="loginForm-link">
-                <a href="#" className="loginForgot-pass">Forgot password?</a>
+              <Link to="/recovery" className="loginForgot-pass">Forgot password?</Link>
               </div>
               <div className="loginField loginButton-field">
                 <button type="submit">Login</button>

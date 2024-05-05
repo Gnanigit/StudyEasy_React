@@ -3,7 +3,7 @@ const router = Router();
 
 
 import * as controller from '../controllers/appController.js'
-
+import {registerMail} from '../controllers/mailer.js'
 
 import Auth , {localVariavles} from '../middleware/auth.js'
 
@@ -36,5 +36,14 @@ router.route('/updateuser').put(Auth,controller.updateUser)
 router.route('/updatetopic').put(controller.updateTopic)
 
 router.route('/changepassword').put(controller.changePassword)
+
+router.route('/generateOTP').post(controller.verifyUser,localVariavles,controller.generateOTP)
+
+
+router.route('/VerifyOTP').get(controller.verifyUser,controller.verifyOTP)  
+
+router.route('/registerMail').post((registerMail));
+
+router.route('/updatepassword').put(controller.updatePassword)
 
 export default router;

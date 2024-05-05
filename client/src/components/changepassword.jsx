@@ -37,11 +37,11 @@ function ChangePassword() {
       <form className="change-password-form" onSubmit={formik.handleSubmit}>
         <div className="form-group">
           <label htmlFor="oldPassword">Old Password:</label>
-          <input {...formik.getFieldProps('oldPassword')} type="password" id="oldPassword" name="oldPassword" />
+          <input {...formik.getFieldProps('oldPassword')} className="changePasswordInput" type="password" id="oldPassword" name="oldPassword" />
         </div>
         <div className="form-group">
           <label htmlFor="newPassword">New Password:</label>
-          <input {...formik.getFieldProps('newPassword')} type="password" id="newPassword" name="newPassword" />
+          <input {...formik.getFieldProps('newPassword')} className="changePasswordInput" type="password" id="newPassword" name="newPassword" />
         </div>
         <button type="submit" className="change-password-button">Submit</button>
       </form>

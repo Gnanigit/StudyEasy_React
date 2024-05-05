@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt'
 import UserModel from '../models/User.js'
 import jwt from "jsonwebtoken"
 import ENV from "../config.js"
+import otpGenerator from "otp-generator"
 import allCoursesModel from '../models/allCourses.js'
 import addTopicsModel from '../models/addtopic.js'
 import myCoursesModel from '../models/mycourses.js'
@@ -115,33 +116,7 @@ export async function login(req,res){
 }
 
 
-export async function getEmail(req,res){
-    const {email}=req.params;
-    try{
-        if(!email){
-            return res.status(501).send({error:"Invalid email"})
-        }
-        UserModel.findOne({email}).
-        exec()
-        .then(user=>{
-            if(!user){
-                return res.status(501).send({error:"Couldn't find the user"})
-            }
-            else{
-                // remove password from user
-                // mongoose return unnecesaary data with object to convert it into json
-                const {password,...rest}=Object.assign({},user.toJSON())
-                return res.status(201).send(rest)
-            }
-        })
-        .catch(err=>{
-            res.status(500).send({err});
-        })
-    }
-    catch(error){
-        return res.status(404).send({error:"cannot find user data"})
-    }
-}
+
 
 
 
@@ -355,6 +330,75 @@ export async function changePassword(req, res) {
         await user.save();
         return res.status(200).send({ message: "Password Updated Successfully" });
 
+    } catch (error) {
+        return res.status(401).send({ error: error.message });
+    }
+}
+
+
+/** GET: http://localhost:8080/api/generateOTP */
+export async function generateOTP(req,res){
+    req.app.locals.OTP= await otpGenerator.generate(6,{lowerCaseAlphabets:false,upperCaseAlphabets:false,specialChars:false})
+    console.log(req.app.locals.OTP)
+    res.status(201).send({code:req.app.locals.OTP})
+}
+
+/** GET: http://localhost:8080/api/verifyOTP */
+export async function verifyOTP(req,res){
+    const {code}=req.query;
+    if(parseInt(req.app.locals.OTP) === parseInt(code)){
+        req.app.locals.OTP=null;
+        req.app.locals.resetSession=true; // start session for to reset password
+        return res.status(201).send({msg:"verified successfully"})
+    }
+    else{
+        return res.status(401).send("Invalid OTP")
+    }
+}
+export async function getEmail(req,res){
+    const {email}=req.params;
+
+    try{
+        if(!email){
+            return res.status(501).send({error:"Invalid email"})
+        }
+        UserModel.findOne({email}).
+        exec()
+        .then(user=>{
+            if(!user){
+                return res.status(501).send({error:"Couldn't find the user"})
+            }
+            else{
+            
+                // remove password from user
+                // mongoose return unnecesaary data with object to convert it into json
+                const {password,...rest}=Object.assign({},user.toJSON())
+                return res.status(201).send(rest)
+            }
+        })
+        .catch(err=>{
+            res.status(500).send({err});
+        })
+    }
+    catch(error){
+        return res.status(404).send({error:"cannot find user data"})
+    }
+}
+
+
+export async function updatePassword(req, res) {
+    try {
+        const { email, password } = req.body;
+
+        const user = await UserModel.findOne({ email });
+
+        if (!user) {
+            throw new Error('User not found');
+        }
+        user.password = password;
+        await user.save();
+
+        return res.status(200).send({ message: 'Password updated successfully' });
     } catch (error) {
         return res.status(401).send({ error: error.message });
     }
