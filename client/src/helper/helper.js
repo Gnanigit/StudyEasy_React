@@ -96,7 +96,6 @@ export async function myUploads(values){
 }
 export async function myCourses(values){
     try{
-      
         const { data } = await axios.post('/api/mycourses',{values})
         return data;
     }

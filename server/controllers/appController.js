@@ -160,7 +160,7 @@ export async function myCourses(req,res){
         const courses = await myCoursesModel.find({email:email});
         const data = await Promise.all(
             courses.map(async course => {
-                const courseData = await allCoursesModel.findOne({ courseTitle: course.courseTitle });
+                const courseData = await allCoursesModel.findOne({ _id: course.courseId });
                 return courseData;
             })
         );
