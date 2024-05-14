@@ -4,7 +4,7 @@ import Banner from "../components/banner";
 import Content from "../components/content";
 import AddCourse from "../components/addcourse";
 import Profile from "../components/profile";
-import Allcourses from "../components/allcouorses";
+import Allcourses from "../components/allcourses";
 import About from "../components/about";
 import AddTopic from "../components/addtopic";
 import ViewCourse from "../components/viewcourse";

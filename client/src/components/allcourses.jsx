@@ -21,7 +21,7 @@ function Allcourses({ loc }) {
           response = await myUploads({ email: apiData?.email });
         } else if (loc === "mycourses") {
           response = await myCourses({ email: apiData?.email });
-          console.log(response+"  hello")
+          console.log(response+"hello")
         }
         setCourses(response);
       } catch (error) {
