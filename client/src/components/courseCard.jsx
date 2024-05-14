@@ -102,7 +102,7 @@ function CourseCard({ role, loc, course }) {
 
         {loc === "mycourses" && (
           <div className="button-container course-button">
-            <Link to={`/viewcourse?courseTitle=${encodeURIComponent(course.courseTitle)}`}>
+            <Link to={`/viewcourse?courseId=${encodeURIComponent(course._id)}&role=0`}>
               <button className="view-course course-button" type="submit">View Course</button>
             </Link>
           </div>
