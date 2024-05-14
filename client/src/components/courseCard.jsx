@@ -31,7 +31,6 @@ function CourseCard({ role, loc, course }) {
   const handleDeleteCourse = async (courseId) => {
     try {
       const Id = courseId;
-      console.log(Id)
       const response=await deleteCourse(Id);
       if(response){
         toast.success(response);
