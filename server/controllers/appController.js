@@ -395,7 +395,8 @@ export async function updatePassword(req, res) {
         if (!user) {
             throw new Error('User not found');
         }
-        user.password = password;
+        const hashedPassword=await bcrypt.hash(password, 10)
+        user.password = hashedPassword;
         await user.save();
 
         return res.status(200).send({ message: 'Password updated successfully' });
