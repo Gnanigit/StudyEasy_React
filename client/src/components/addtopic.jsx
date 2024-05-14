@@ -41,7 +41,7 @@ function AddTopic(){
           {
             loading: "Updating....",
             success: (response) => {
-              navigate('/addtopic');
+              navigate(`/addTopic?courseTitle=${encodeURIComponent(values.courseTitle)}&courseId=${encodeURIComponent(values.courseId)}`);
               formik.resetForm();
               return "Topic added Successful!"; 
             },
