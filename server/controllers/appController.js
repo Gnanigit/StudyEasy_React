@@ -235,13 +235,13 @@ export async function deleteCourse(req,res){
 export async function enrollCourse(req, res) {
     try {
         
-        const { title, email} = req.body;
-        const enrollExists = await myCoursesModel.findOne({ courseTitle:title, email:email }).exec();
+        const { Id, email} = req.body;
+        const enrollExists = await myCoursesModel.findOne({ courseId:Id, email:email }).exec();
         if (enrollExists) {
             return res.status(201).send({ error: "Course already Enrolled" });
         }
         const newTopic = new myCoursesModel({
-            courseTitle: title,
+            courseId: Id,
             email:email
         });
 

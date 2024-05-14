@@ -11,10 +11,10 @@ function CourseCard({ role, loc, course }) {
   const [isDeleted, setIsDeleted] = useState(false); 
   const { email } = useAuthStore(state => state.auth)
  
-  const handleEnrollCourse = async () => {
+  const handleEnrollCourse = async (courseId) => {
     try {
-        const title = course.courseTitle;
-        const response = await enrollCourse({ title, email });
+        const Id = courseId;
+        const response = await enrollCourse({ Id, email });
       if(response){
         toast.success("Course Enrolled Successfully");
       }
@@ -28,9 +28,9 @@ function CourseCard({ role, loc, course }) {
     }
 };
 
-  const handleDeleteCourse = async () => {
+  const handleDeleteCourse = async (courseId) => {
     try {
-      const Id = course._id;
+      const Id = courseId;
       const response=await deleteCourse(Id);
       if(response){
         toast.success(response);
@@ -68,7 +68,7 @@ function CourseCard({ role, loc, course }) {
           <div className="button-container">
 
             {role === 0 && (
-              <button className="enroll-course" onClick={handleEnrollCourse}>Enroll Course</button>
+              <button className="enroll-course" onClick={() =>handleEnrollCourse(course._id)}>Enroll Course</button>
             )}
             <Link to={`/viewcourse?courseId=${encodeURIComponent(course._id)}&role=0`}>
 
@@ -81,7 +81,7 @@ function CourseCard({ role, loc, course }) {
         {loc=== "myuploads" && (
           <>
             <div className="button-container">
-              <button className="delete-course" onClick={handleDeleteCourse}>Delete Course</button>
+              <button className="delete-course" onClick={() => handleDeleteCourse(course._id)}>Delete Course</button>
 
               <Link to={`/viewcourse?courseId=${encodeURIComponent(course._id)}&role=0`}>
                 <button className="view-course">View Course</button>

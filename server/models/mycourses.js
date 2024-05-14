@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 export const myCoursesSchema = new mongoose.Schema({
-    courseTitle: {
+    courseId: {
         type: String,
         required : [true, "Please provide a unique email"],
         unique: false,
