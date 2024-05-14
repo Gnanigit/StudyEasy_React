@@ -220,7 +220,7 @@ export async function deleteCourse(req,res){
     try{
         const Id=req.params.Id;
         await addTopicsModel.deleteMany({courseId:Id})
-        const result = await allCoursesModel.deleteOne({ courseId:Id});
+        const result = await allCoursesModel.deleteOne({ _id:Id});
         if (result.deletedCount === 1) {
             res.status(201).json({ msg: 'Course deleted successfully' });
           } else {
