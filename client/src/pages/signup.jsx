@@ -19,10 +19,9 @@ function Signup() {
     },
     onSubmit: async (values) => {
       try {
-        values = await Object.assign({}, values); // Ensure values is an object
-        console.log(values);
-
-        let registerPromise = registerUser(values, 0); // Pass flag to registerUser
+        values = await Object.assign({}, values); 
+      
+        let registerPromise = registerUser(values, 0); 
 
         // Loading toast
         toast.promise(registerPromise, {

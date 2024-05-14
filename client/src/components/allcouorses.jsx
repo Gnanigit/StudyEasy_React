@@ -21,6 +21,7 @@ function Allcourses({ loc }) {
           response = await myUploads({ email: apiData?.email });
         } else if (loc === "mycourses") {
           response = await myCourses({ email: apiData?.email });
+          console.log(response+"  hello")
         }
         setCourses(response);
       } catch (error) {
@@ -46,7 +47,6 @@ function Allcourses({ loc }) {
           {Array.isArray(courses) && courses.length > 0 ? (
             <ul className="course-list">
               {courses.map(course => (
-            
                 <Coursecard role={apiData?.role} loc={loc} key={course._id} course={course} />
               ))}
             </ul>
