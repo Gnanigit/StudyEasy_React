@@ -15,9 +15,7 @@ function Navbar() {
 
   useEffect(() => {
     const handleResize = () => {
-      console.log(window.innerWidth)
-      console.log(window.innerHeight)
-      if (window.innerWidth <= 500 ) {
+      if (window.innerWidth <= 700 ) {
         setShowMenu(true);
       } else {
         setShowMenu(false);
@@ -65,7 +63,7 @@ function Navbar() {
           <>
 
           <ul className={`navbarShow ${!showMenu ? 'visible' : ''}`}>
-          {window.innerWidth<=400 && !showMenu &&
+          {window.innerWidth<=700 && !showMenu &&
             <div className="checkbtn" onClick={() => setShowMenu(!showMenu)}>
               <FontAwesomeIcon icon={faBars} />
             </div>
