@@ -80,7 +80,6 @@ nav {
     display: flex;
     align-items: center; 
     text-decoration: none; 
- 
     color: white;
     font-size: 17px;
     padding: 7px 13px;
@@ -166,52 +165,166 @@ nav {
     cursor: pointer;
   }
   
-  
-  /* Media Queries */
-  
-  @media (max-width: 952px) {
-    .navbarLogo {
-      font-size: 30px;
-      padding-left: 50px;
-    }
-  
-    .navbarUl li a {
-      font-size: 16px;
-    }
+ 
+ /* Add these styles to navbar.css */
+/* Show navbarShow on small screens */
+.checkbtn {
+  font-size: 30px;
+  color: white;
+  padding-top: 47px;
+  margin-right: 20px;
+  cursor: pointer;
+  display: block; 
+  border-radius: 10px;
+}
+
+@media screen and (max-width: 500px) and (max-height: 1000px) {
+  .navbarShow {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    background:  #df78f9; 
+    width: 0; 
+    transition: width 1s ease-in-out;
+  }
+  .checkbtn {
+    font-size: 30px;
+    color: white;
+    line-height: 13px;
+    margin-left: 50px;
+    margin-top: 10px;
+    cursor: pointer;
+    display: block; 
+    border-radius: 10px;
   }
   
-  @media (max-width: 858px) {
-    .checkbtn {
-      display: block;
-    }
-  
-    .navbarUl {
-      position: fixed;
-      width: 100%;
-      height: 100vh;
-      background: #2c3e50;
-      top: 80px;
-      left: -100%;
-      text-align: center;
-      transition: all 0.5s;
-    }
-  
-    .navbarUl li {
-      display: block;
-      margin: 50px 0;
-      line-height: 30px;
-    }
-  
-  
-  
-    .navbarAnc:hover,
-    .navbarAnc.active {
-      background: none;
-      color:  #d644fb
-    }
-  
-    #check:checked ~ .navbarUl {
-      left: 0;
-    }
+
+  .visible {
+    width: 100px; 
+    transform: translateX(+10px); 
+  }
+  .navbarLink {
+
+    display: block;
+    line-height: 40px;
+    margin: 0; /* Remove the margin */
+  }
+  .navbarAnc {
+    text-decoration: none;
+    color: white;
+    font-size: 12px;
+    padding: 2px 7px;
+    border-radius: 2px;
+    text-transform: uppercase;
+  }
+
+  .navbarLogos {
+    padding-top: 5px;
+    padding-left: 6px; 
+    display: flex;
+    align-items: center;
+    text-decoration: none;
   }
   
+  .navbarLogo {
+    color: white;
+    font-size: 20px; 
+    line-height: 90px;
+    font-weight: bold;
+    padding-left: 5px; 
+  }
+  
+  .navbarLogoImg {
+    width: 65px; 
+    border-radius: 50%;
+  }
+  .navbarProfile {
+    position: relative;
+    cursor: pointer;
+    border-radius: 8px; 
+    display: inline-block;
+    line-height: 30px; 
+    padding: 0px 5px;
+    margin-right: 17px;
+    margin-top: 10px; 
+    margin-left: 0px; 
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+  
+  .profileInfo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbarProLink {
+    color: aliceblue;
+    font-weight: bold;
+    font-size: 15px; 
+  }
+  
+  .dropdownMenuItem button {
+    background-color: transparent; 
+    border: none; 
+    cursor: pointer;
+    padding: 0; 
+    font-size: inherit; 
+  }
+
+  .dropdownMenuItem button:hover {
+    text-decoration: underline; 
+    color: #ff0000; 
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  #check {
+    display: none;
+  }
+
+  .active {
+    font-weight: bold;
+    color: #7eeacd; 
+    background: rgba(255, 255, 255, 0.4); 
+  }
+  
+  .dropdownMenu {
+    position: absolute;
+    top: calc(100% + 0px);
+    left: -6px;
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 0.3);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    border-top: none;
+    padding: 5px 0;
+    width: calc(100% + 10px); 
+  }
+  
+  .dropdownMenuItem {
+    padding: 8px 10px;
+    list-style: none;
+    font-size: 13px;
+  }
+  
+  .dropdownMenuItem a {
+    text-decoration: none;
+    color: black;
+
+
+  }
+  
+  .dropdownMenuItem a:hover {
+    color: blue;
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+  
+}
+.fa-user {
+  font-size: 1.5em;
+  color: white;
+}
+
+
+}

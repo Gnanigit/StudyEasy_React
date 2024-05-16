@@ -143,3 +143,35 @@
 
 
 
+@media screen and (max-width: 500px) and (max-height: 1000px) {
+  .profile-form {
+    width: 80%; /* Adjust width as needed */
+  }
+
+  .name-fields,
+  .contact-fields {
+    flex-direction: column;
+  }
+
+  .profile-input {
+    width: 100%; /* Make input fields full width */
+    margin-bottom: 10px; /* Add some space between input fields */
+    
+  }
+
+  .logout-section {
+    flex-direction: column;
+    align-items: flex-start; /* Align buttons to the start of the container */
+    margin-top: 20px; /* Add some space between input fields and buttons */
+  }
+
+  .changePassword-button,
+  .logout-button {
+    width: 100%; /* Make buttons full width */
+    margin-bottom: 10px; /* Add some space between buttons */
+  }
+  .profile-container {
+    height: 100vh;
+  }
+
+}

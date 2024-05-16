@@ -36,12 +36,12 @@
   }
   
   .bannerDots {
-    position: relative; /* Positions dots container on top of the slides */
-    bottom: 20px; /* Adjust spacing between dots and bottom */
-    left: 50%; /* Centers dots horizontally */
-    transform: translateX(-50%); /* Aligns dots with the center of the slides */
-    display: flex; /* Arranges dots in a horizontal line */
-    justify-content: center; /* Centers dots within the container */
+    position: relative; 
+    bottom: 20px;
+    left: 50%; 
+    transform: translateX(-50%); 
+    display: flex; 
+    justify-content: center; 
   }
   
   
@@ -61,6 +61,7 @@
     border-radius: 0 3px 3px 0; 
     user-select: none;
   }
+  
   
   .bannerNext {
     right: 5px;
@@ -114,5 +115,59 @@
   .bannerActive + .bannerDot,
   .bannerDot:hover {
     background-color: #fff;
+  }
+  
+
+  @media screen and (max-width: 500px) and (max-height: 1000px) {
+    .bannerPrev,.bannerNext {
+      font-size: 12px;
+      padding: 8px;
+      height: 20px;
+      position: absolute;
+      bottom: 200px;
+      cursor: pointer;
+      width: auto;
+      margin-top: -60px;
+      color: black;
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+    .bannerPrev{
+      top:39%;
+      position: absolute;
+      margin-left: 20px;
+    }
+    .bannerNext {
+      top:39%;
+      margin-right: 20px;
+    }
+    .bannerDots {
+      bottom: 18px;
+      font-size: 8px;
+    }
+    
+    .bannerNumbertext {
+      font-size: 12px;
+      padding: 8px;
+      top: 180px;
+      left: 30px;
+    }
+      
+  .bannerText {
+    right:0px;
+    bottom: 280px;
+    font-size: 15px;
+  }
+  .bannerSlideshow-container {
+    max-width: 90%; 
+    height: 220px; 
+    position: static;
+    margin: 0 auto; 
+    border-radius: 20px;
+  }
+  .bannerAllSlides img {
+    height: 220px; 
+    vertical-align: middle;
+    border-radius: 20px;
+  }
   }
   

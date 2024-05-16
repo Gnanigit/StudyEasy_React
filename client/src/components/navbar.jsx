@@ -1,15 +1,35 @@
-import {React,useState} from 'react';
-import { NavLink ,useNavigate} from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
 import "../styles/navbar.css"
 import useFetch from '../hooks/fetch.hook';
 import img1 from "../assets/logo.avif"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-regular-svg-icons';
+import { faUser} from '@fortawesome/free-regular-svg-icons';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 function Navbar() {
   const [{ isLoading, apiData, serverError }] = useFetch()
   const navigate =useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [showMenu, setShowMenu] = useState(false); 
+
+  useEffect(() => {
+    const handleResize = () => {
+      console.log(window.innerWidth)
+      console.log(window.innerHeight)
+      if (window.innerWidth <= 500 ) {
+        setShowMenu(true);
+      } else {
+        setShowMenu(false);
+      }
+    };
+
+    handleResize(); // Call once to set initial state
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   function userLogout(){
     localStorage.removeItem('token');
     navigate('/');
@@ -31,12 +51,25 @@ function Navbar() {
     <div>
       <nav>
         <div className="navbarLogos">
-          <NavLink to="/" className="navBarTitle">
+          <div to="" className="navBarTitle">
             <img className="navbarLogoImg" src={img1} alt="StudyEasy Logo" />
             <label className="navbarLogo">StudyEasy</label>
-          </NavLink>
+          </div>
         </div>
-        <ul className='navbarShow'>
+        {showMenu ? (
+          // Show menu icon if screen is small enough
+          <div className="checkbtn" onClick={() => setShowMenu(!showMenu)}>
+            <FontAwesomeIcon icon={faBars} />
+          </div>
+        ) : (
+          <>
+
+          <ul className={`navbarShow ${!showMenu ? 'visible' : ''}`}>
+          {window.innerWidth<=400 && !showMenu &&
+            <div className="checkbtn" onClick={() => setShowMenu(!showMenu)}>
+              <FontAwesomeIcon icon={faBars} />
+            </div>
+          }   
           <li className="navbarLink">
             <NavLink className="navbarAnc" activeclassname="active" to="/dashboard">
               Home
@@ -90,6 +123,7 @@ function Navbar() {
             )}
           </li>
         </ul>
+        </>)}
       </nav>
     </div>
   );
