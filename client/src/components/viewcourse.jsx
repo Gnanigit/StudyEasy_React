@@ -89,7 +89,6 @@ function ViewCourse() {
                                 <div className="links">
                                     {updatingTopicId === topic._id ? (
                                         <>
-                  
                                             <p className="link">
                                               <div className="icon-link">
                                                 <span className="link-icon"><img src={img1} alt="GeeksForGeeks" /></span>

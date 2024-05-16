@@ -154,3 +154,33 @@
     background-position: left bottom;
     color: #fff; /* Darker blue on hover */
   }
+
+
+  @media screen and (max-width: 700px) and (max-height: 1000px) {
+    .links {
+      flex-direction: column; /* Change flex direction to column */
+      align-items: center; /* Align items to center */
+    }
+  
+    .link {
+      margin-left: 0; /* Remove margin left */
+      margin-top: 10px; /* Add some margin top for spacing */
+      text-align: center; /* Align text to center */
+    }
+  
+    .icon-link {
+      margin-left: 0; /* Remove margin left */
+      margin-bottom: 10px; /* Add some margin bottom for spacing */
+    }
+  
+    .link-icon img {
+      width: 15px; /* Decrease icon size */
+    }
+  
+    .updateButton,
+    .saveButton {
+      font-size: 14px; /* Decrease button font size */
+      margin-left: 0; /* Remove margin left */
+    }
+  }
+  
