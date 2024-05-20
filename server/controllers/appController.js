@@ -133,7 +133,8 @@ export async function addCourse(req, res) {
             email: email,
             courseImg: courseImage,
             courseTitle: courseTitle,
-            content: content
+            content: content,
+            likes:0
         });
         // Save the new course
         const savedCourse = await newCourse.save();
@@ -232,23 +233,28 @@ export async function deleteCourse(req,res){
         }
 }
 
+// backend (appController.js)
 export async function enrollCourse(req, res) {
+    const { Id, email } = req.body;
     try {
-        const { Id, email} = req.body;
-        const enrollExists = await myCoursesModel.findOne({ courseId:Id, email:email }).exec();
+    
+        const enrollExists = await myCoursesModel.findOne({ courseId: Id, email: email });
+    
         if (enrollExists) {
-            return res.status(201).send({ error: "Course already Enrolled" });
+            return res.status(201).send({ success: false, message: "Course already Enrolled" });
         }
-        const newTopic = new myCoursesModel({
+
+        const newEnroll = new myCoursesModel({
             courseId: Id,
-            email:email
+            email: email,
+            like: 0
         });
 
-        const savedTopic = await newTopic.save();
-        return res.status(201).send({ msg: "Course enrolled successfully" });
+        const savedEnroll = await newEnroll.save();
+        return res.status(201).send({ success: true, message: "Course enrolled successfully" });
+
     } catch (error) {
-        console.error(error);
-        return res.status(500).send({ error: "Server error" });
+        return res.status(500).send({ success: false, message: "Server error" });
     }
 }
 
@@ -368,9 +374,6 @@ export async function getEmail(req,res){
                 return res.status(501).send({error:"Couldn't find the user"})
             }
             else{
-            
-                // remove password from user
-                // mongoose return unnecesaary data with object to convert it into json
                 const {password,...rest}=Object.assign({},user.toJSON())
                 return res.status(201).send(rest)
             }
@@ -401,5 +404,54 @@ export async function updatePassword(req, res) {
         return res.status(200).send({ message: 'Password updated successfully' });
     } catch (error) {
         return res.status(401).send({ error: error.message });
+    }
+}
+
+
+
+export async function updateLike(req, res) {
+    try {
+        const { courseId,email,likeStatus} = req.body;
+
+        const existEnroll = await myCoursesModel.findOne({ email:email ,courseId:courseId});
+        const course = await allCoursesModel.findOne({_id:courseId})
+     
+        if (!existEnroll) {
+            return res.status(401).send({ success:false,error: "Enrollment Not Found...!" });
+        }   
+        existEnroll.like = likeStatus;
+        if(likeStatus===1){
+            course.likes+=1;
+        }
+        else{
+            course.likes-=1;
+        }
+
+        await course.save();
+        const x = await allCoursesModel.findOne({_id:courseId})
+        const count=x.likes;
+        await existEnroll.save();
+        return res.status(200).send({ success:true,message: "You Liked a Course",likes:count });
+
+    } catch (error) {
+        return res.status(401).send({ success:false,error: error.message });
+    }
+}
+
+// appController.js
+export async function getLikeStatus(req, res) {
+
+    const { courseId, email } = req.query; // Extract courseId and email from req.query
+    try {
+      const course = await myCoursesModel.findOne({ courseId, email });
+
+      if (course) {
+        return res.status(200).send({ success: true, isLiked: course.like === 1 });
+      } else {
+        return res.status(404).send({ success: false, message: "Course not found" });
+      }
+    } catch (error) {
+      console.error("Error fetching like status:", error);
+      return res.status(500).send({ success: false, message: "Server error" });
     }
 }

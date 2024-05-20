@@ -46,4 +46,9 @@ router.route('/registerMail').post((registerMail));
 
 router.route('/updatepassword').put(controller.updatePassword)
 
+router.route('/updatelikestatus').put(controller.updateLike)
+
+
+router.route('/likeStatus').get(controller.getLikeStatus);
+
 export default router;

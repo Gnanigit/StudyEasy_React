@@ -128,13 +128,16 @@ export async function deleteCourse(Id){
 
 export async function enrollCourse(values){
     try{
-        const { data : { msg }, status } =await axios.post('/api/enrollcourse',values);
-        return msg;
+        console.log(values)
+        const response =await axios.post('/api/enrollcourse',values);
+        return response.data;
     }
     catch(error){
         return error;
     }
 }
+
+
 
 
 export async function updateUser(values){
@@ -215,3 +218,30 @@ export async function updatePassword(values){
         return Promise.reject({ error : "Couldn't Update Profile...!"})
     }
 }
+
+
+//likes
+export const updateLikeStatus = async ({ courseId, email, likeStatus }) => {
+    try {
+      const response = await axios.put('/api/updatelikestatus', { courseId, email, likeStatus });
+      return response.data;
+    } catch (error) {
+      console.error('Error updating like status:', error);
+      throw error;
+    }
+  };
+  
+
+  export async function getLikeStatus(values) { 
+    const {email}=values
+    const {courseId}=values
+    try {
+      const response = await axios.get('/api/likeStatus', { params : { email, courseId}}); 
+
+      return response.data;
+    } catch (error) {
+ 
+      return { success: false, message: 'An error occurred while fetching like status' };
+    }
+  }
+

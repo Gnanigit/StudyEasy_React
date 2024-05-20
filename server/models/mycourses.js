@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import _default from "otp-generator";
 
 export const myCoursesSchema = new mongoose.Schema({
     courseId: {
@@ -8,7 +9,11 @@ export const myCoursesSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        required : [true, "Please provide a unique email"]
+        required : [true, "Please provide a unique email"],
+        unique: false,
+    },
+    like:{
+        type: Number,
     }
 });
 

@@ -98,3 +98,7 @@
   margin-top: 10px; 
 }
 
+.course-title-likes{
+  display: flex;
+  justify-content: space-between;
+}

@@ -14,27 +14,24 @@ let transporter = nodemailer.createTransport(nodeConfig);
 
 let MailGenerator = new Mailgen({
     theme: {
-        // Define custom styles for various elements
         body: {
             backgroundColor: '#f4f4f4',
             fontFamily: 'Arial, sans-serif',
         },
-        // Customize text styles
+ 
         text: {
             color: '#333333',
         },
-        // Customize button styles
         button: {
             color: '#ffffff',
             backgroundColor: '#007bff',
         },
-        // Customize link styles
         link: {
             color: '#007bff',
         },
     },
     product: {
-        name: "Gnani",
+        name: "STUDYEASY",
         link: 'https://mailgen.js/'
     }
 });

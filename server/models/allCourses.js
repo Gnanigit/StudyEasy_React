@@ -15,7 +15,8 @@ export const allCoursesSchema = new mongoose.Schema({
         required : [true, "Please provide a unique email"],
         unique: true,
     },
-    content: { type: String}
+    content: { type: String},
+    likes:Number
 });
 
 export default mongoose.model.allCourses || mongoose.model('allCourse', allCoursesSchema);
