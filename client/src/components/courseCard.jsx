@@ -14,10 +14,10 @@ function CourseCard({ role, loc, course }) {
   const [{ isLoading, apiData, serverError }] = useFetch()
   const email=apiData?.email;
   useEffect(() => {
-    if (loc==="mycourses") {
+    if (loc==="mycourses" && email) {
       const fetchLikeStatus = async () => {
         try {
-          const response = await getLikeStatus({ courseId: course._id, email });
+          const response = await getLikeStatus({ courseId: course._id,email: email });
           if (response.success) {
             setIsLiked(response.isLiked);
           } else {
@@ -75,7 +75,6 @@ const handleEnrollCourse = async (courseId) => {
   const handleLikeClick = async () => {
     try {
       const newLikeStatus = !isLiked;
-      console.log(newLikeStatus)
       const likeStatus = newLikeStatus ? 1 : 0;
       const response = await updateLikeStatus({ courseId: course._id, email, likeStatus });
       if (response.success) {
