@@ -51,4 +51,5 @@ router.route('/updatelikestatus').put(controller.updateLike)
 
 router.route('/likeStatus').get(controller.getLikeStatus);
 
+router.route('/unregisterCourse').delete(controller.unRegisterCourse);
 export default router;

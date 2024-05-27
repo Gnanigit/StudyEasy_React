@@ -11,15 +11,15 @@ const port=8080
 // uses
 app.use(express.json({ limit: '100mb' }));
 
-const allowedOrigin = 'https://study-easy-react.vercel.app';
+// const allowedOrigin = 'https://study-easy-react.vercel.app';
 
-app.use(cors({
-    origin: allowedOrigin
-  }));
-// app.use(cors())
+// app.use(cors({
+//     origin: allowedOrigin
+//   }));
+app.use(cors())
 
 app.use(morgan('tiny'))
-app.disable('x-powered-by')    // less hackers know about our stack
+app.disable('x-powered-by')  
 
 
 app.use('/api',router)
@@ -28,8 +28,6 @@ app.get('/',(req,res)=>{
     res.status(201).json("Home GET Request");
 })
 
-// // api routes - middleware
-// app.use('/api',router)
 
 
 

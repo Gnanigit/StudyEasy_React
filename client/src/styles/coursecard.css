@@ -1,3 +1,11 @@
+*{
+  -ms-high-contrast-adjust: none;
+}
+
+/* New */
+*{
+  forced-color-adjust: none;
+}
 .course-item {
     background-color: #f0f0f0;
     border-radius: 5px;
@@ -36,7 +44,8 @@
 .add-topic,
 .delete-course,
 .update-course,
-.view-course, .enroll-course{
+.view-course, .enroll-course,
+.UnRegiter-course{
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -51,7 +60,8 @@
   background-size: 200% 100%;
   background-position: right bottom;
 }
-.delete-course{
+.delete-course,
+.UnRegiter-course{
   background: linear-gradient(to left, #df78f9 0%, #df78f9 50%, #f04a4a 50%,#853a96 100%);
   transition: background-position 0.5s ease, color 0.3s ease; 
   background-size: 200% 100%;
@@ -74,10 +84,13 @@
 .add-topic:hover,
 .update-course:hover,
 .delete-course:hover,
-.view-course:hover ,.enroll-course:hover{
+.view-course:hover ,
+.enroll-course:hover,
+.UnRegiter-course:hover{
   background-position: left bottom;
-  color: #fff; /* Change the color on hover */
+  color: #fff;
 }
+
 
 
 .delete-course {
@@ -101,4 +114,8 @@
 .course-title-likes{
   display: flex;
   justify-content: space-between;
+}
+.UnRegiter-course{
+  margin-top:7px;
+  padding: 8px 18px;
 }

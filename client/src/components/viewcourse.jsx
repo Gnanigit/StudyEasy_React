@@ -14,7 +14,6 @@ function ViewCourse() {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const courseId = queryParams.get('courseId');
-    console.log(courseId)
     const role = queryParams.get('role');
     const [courseData, setCourseData] = useState(null);
     const [updatedLinks, setUpdatedLinks] = useState({});
@@ -34,7 +33,6 @@ function ViewCourse() {
     };
 
     const handleLinkChange = (e, linkName, topicId) => {
-      console.log(updatedLinks)
       const { value } = e.target;
       setUpdatedLinks(prevState => ({
           ...prevState,
@@ -49,7 +47,6 @@ function ViewCourse() {
     const handleUpdateLinks = async (topicId)=> {
       try {
         const updatedData = updatedLinks[topicId];
-        console.log(updatedData)
         if (updatedData) {
             const response = await updateTopicLinks({topicId, updatedData});
             if(response){
@@ -84,7 +81,7 @@ function ViewCourse() {
                     <h1 className="viewCourse">{courseData[0].courseTitle}</h1>
                     <ul className='courseTopics'>
                         {courseData.map(topic => (
-                            <li key={topic.id} className="topics">
+                            <li key={topic._id} className="topics">
                                 <h2 className="topic">{topic.topicTitle}</h2>
                                 <div className="links">
                                     {updatingTopicId === topic._id ? (

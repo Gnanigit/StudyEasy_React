@@ -1,3 +1,12 @@
+*{
+  -ms-high-contrast-adjust: none;
+}
+
+/* New */
+*{
+  forced-color-adjust: none;
+}
+
 .course-section {
     margin: 30px;
   }

@@ -118,17 +118,27 @@ export async function viewCourse(values){
 export async function deleteCourse(Id){
     try{
         
-        const { data : { msg }} =await axios.delete(`/api/deletecourse/${encodeURIComponent(Id)}`);
-        return msg;
+        const { data} =await axios.delete(`/api/deletecourse/${encodeURIComponent(Id)}`);
+        return data;
     }
     catch(error){
         return error;
     }
 }
 
+export async function unRegisterCourse(values){
+    try{
+        const Id = values.Id;
+        const email = values.email;
+        const {data} = await axios.delete('/api/unregisterCourse', { params: { Id, email } })
+        return data;
+    }
+    catch(error){
+        return error;
+    }
+}
 export async function enrollCourse(values){
     try{
-        console.log(values)
         const response =await axios.post('/api/enrollcourse',values);
         return response.data;
     }

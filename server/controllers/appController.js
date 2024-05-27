@@ -233,6 +233,23 @@ export async function deleteCourse(req,res){
         }
 }
 
+
+export async function unRegisterCourse(req,res){
+    try{
+        const { Id, email } = req.query;
+        const result = await myCoursesModel.deleteOne({courseId:Id,email:email});
+        if (result.deletedCount === 1) {
+            res.status(201).json({ msg: 'Course Un-Registered successfully' });
+          } else {
+            res.status(201).json({ error: 'Course not found' });
+          }
+        } catch (error) {
+          console.error('Error Un-Registering course:', error);
+          res.status(500).json({ error: 'Internal server error' });
+        }
+}
+
+
 // backend (appController.js)
 export async function enrollCourse(req, res) {
     const { Id, email } = req.body;
