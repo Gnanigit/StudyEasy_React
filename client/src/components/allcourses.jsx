@@ -36,7 +36,7 @@ function Allcourses({ loc }) {
   }, [apiData, loc]);
 
 
-  const handleCourseUnregistered = (courseId) => {
+  const handleCoursesUpdatedList = (courseId) => {
     setCourses(prevCourses => prevCourses.filter(course => course._id !== courseId));
   };
 
@@ -53,7 +53,7 @@ function Allcourses({ loc }) {
           {Array.isArray(courses) && courses.length > 0 ? (
             <ul className="course-list">
               {courses.map(course => (
-                <Coursecard role={apiData?.role} loc={loc} key={course._id} course={course}  onCourseUnregistered={handleCourseUnregistered} />
+                <Coursecard role={apiData?.role} loc={loc} key={course._id} course={course}  onCoursesUpdatedList={handleCoursesUpdatedList} />
               ))}
             </ul>
           ) : (

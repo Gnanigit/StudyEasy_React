@@ -118,7 +118,7 @@ export async function viewCourse(values){
 export async function deleteCourse(Id){
     try{
         
-        const { data} =await axios.delete(`/api/deletecourse/${encodeURIComponent(Id)}`);
+        const {data} =await axios.delete(`/api/deletecourse/${encodeURIComponent(Id)}`);
         return data;
     }
     catch(error){

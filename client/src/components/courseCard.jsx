@@ -6,9 +6,8 @@ import useFetch from '../hooks/fetch.hook';
 import { deleteCourse, enrollCourse, updateLikeStatus , getLikeStatus ,unRegisterCourse} from '../helper/helper';
 // import { useAuthStore } from '../store/store';
 
-function CourseCard({ role, loc, course ,onCourseUnregistered}) {
+function CourseCard({ role, loc, course ,onCoursesUpdatedList}) {
   const navigate = useNavigate();
-  const [isDeleted, setIsDeleted] = useState(false); 
   const [likes, setLikes] = useState(course.likes);
   const [isLiked, setIsLiked] = useState(false);
   const [{ isLoading, apiData, serverError }] = useFetch()
@@ -55,8 +54,8 @@ const handleEnrollCourse = async (courseId) => {
       const Id = courseId;
       const response = await deleteCourse(Id);
       if (response) {
-        toast.success(response);
-        setIsDeleted(true);
+        toast.success(response.msg);
+        onCoursesUpdatedList(Id);
       } else {
         toast.error("Course Deletion Failed!");
       }
@@ -70,11 +69,10 @@ const handleEnrollCourse = async (courseId) => {
     if (loc==="mycourses" && email) {
       try {
         const Id = courseId;
-        console.log(Id,email)
         const response = await unRegisterCourse({Id, email});
         if (response.msg) {
           toast.success(response.msg);
-          onCourseUnregistered(courseId);
+          onCoursesUpdatedList(courseId);
         } else {
           toast.error("Course Un-Registration Failed!");
         }
@@ -85,12 +83,12 @@ const handleEnrollCourse = async (courseId) => {
     }
   };
 
-  useEffect(() => {
-    if ((isDeleted && loc === "myuploads")) {
-      navigate("/myuploads", { replace: true });
-    }
+  // useEffect(() => {
+  //   if ((isDeleted && loc === "myuploads")) {
+  //     navigate("/myuploads");
+  //   }
 
-  }, [isDeleted, loc, navigate]);
+  // }, [isDeleted, loc, navigate]);
 
 
   const handleLikeClick = async () => {
@@ -112,9 +110,6 @@ const handleEnrollCourse = async (courseId) => {
     }
   };
 
-  if (isDeleted) {
-    return null;
-  }
 
   return (
     <li className="course-item">
