@@ -1,79 +1,72 @@
-import React from 'react';
-import "../styles/addcourse.css"
-import { useNavigate } from 'react-router-dom';
-import toast ,{ Toaster } from 'react-hot-toast';
+import React, { useEffect } from "react";
+import "../styles/addcourse.css";
+import { useNavigate } from "react-router-dom";
 import { addCourse } from "../helper/helper";
-import { useFormik } from 'formik';
-import useFetch from '../hooks/fetch.hook';
+import { useFormik } from "formik";
+import useFetch from "../hooks/fetch.hook";
 
 function AddCourse() {
-  const navigate = useNavigate()
-  const [{apiData}] = useFetch()
+  const navigate = useNavigate();
+  const [{ apiData }] = useFetch();
+
   const formik = useFormik({
-    initialValues : {
-      courseImage:'',
-      courseTitle:'',
-      content : ''
+    initialValues: {
+      courseImage: "",
+      courseTitle: "",
+      content: "",
     },
-
-    onSubmit: async values => {
+    onSubmit: async (values) => {
       try {
-        let addCoursePromise = addCourse({email:apiData?.email, courseImage:values.courseImage, courseTitle: values.courseTitle,content:values.content });
-        
-        toast.promise(
-          addCoursePromise,
-          {
-            loading:"Updating....",
-            success: (response) => {
-              navigate('/addcourse');
-              formik.resetForm();
-              return "Course added Successful!"; 
-            },
-            error: (error) => {
-              return "Course not added"; 
-            }
-
-          }
-        );
+        const addCoursePromise = addCourse({
+          email: apiData?.email,
+          courseImage: values.courseImage,
+          courseTitle: values.courseTitle,
+          content: values.content,
+        });
+        console.log(addCoursePromise);
+        if (addCoursePromise) {
+          formik.resetForm();
+          navigate("/addcourse");
+        } else {
+          console.error("Failed to add course. Please try again.");
+        }
       } catch (error) {
-        toast.error("Invalid Input"); 
+        console.error("Invalid input", error);
       }
-    }
-    
-    
-  })
+    },
+  });
 
   return (
     <section className="addcourseSectionCourse" aria-label="recent post">
-      <Toaster position='top-center' reverseOrder={false}></Toaster>
-      <div className="addcourseContainer">  
-        <div className="addcourseTitleWrapper">  
-          <h2 className="addcourseH2 addcourseSectionTitle">  
+      <div className="addcourseContainer">
+        <div className="addcourseTitleWrapper">
+          <h2 className="addcourseH2 addcourseSectionTitle">
             Add a <strong className="Strong">COURSE</strong>
           </h2>
         </div>
-        <ul className="addcourseGridList">  
+        <ul className="addcourseGridList">
           <form onSubmit={formik.handleSubmit}>
-            <input {...formik.getFieldProps('courseImage')}
+            <input
+              {...formik.getFieldProps("courseImage")}
               type="text"
-              className='addcourseInput'
+              className="addcourseInput"
               name="courseImage"
               placeholder="Course Image URL"
             />
             <input
-            {...formik.getFieldProps('courseTitle')}
+              {...formik.getFieldProps("courseTitle")}
               type="text"
-              className='addcourseInput'
+              className="addcourseInput"
               name="courseTitle"
               placeholder="Course Title"
             />
             <textarea
-            {...formik.getFieldProps('content')}
+              {...formik.getFieldProps("content")}
               name="content"
               placeholder="Course Description"
               minLength="10"
             />
-            <div className="addcourseCardContent">  
+            <div className="addcourseCardContent">
               <input type="submit" value="ADD COURSE" />
             </div>
           </form>

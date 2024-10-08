@@ -43,10 +43,7 @@ const About = () => {
           <i className="fa fa-instagram"></i>
           <i className="fa fa-linkedin"></i>
         </div>
-        <p>
-          {/* <i className="fa fa-heart-o"></i> */}© 2024 Gnani. All rights
-          reserved.
-        </p>
+        <p>© 2024 Gnani. All rights reserved.</p>
       </section>
     </div>
   );

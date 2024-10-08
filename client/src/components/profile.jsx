@@ -1,25 +1,25 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useFormik } from 'formik';
-import useFetch from '../hooks/fetch.hook';
-import { updateUser } from '../helper/helper';
-import toast, { Toaster } from 'react-hot-toast';
-import "../styles/profile.css"
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
+import useFetch from "../hooks/fetch.hook";
+import { updateUser } from "../helper/helper";
+import toast, { Toaster } from "react-hot-toast";
+import "../styles/profile.css";
 
 function Profile() {
   const [{ isLoading, apiData, serverError }] = useFetch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [file, setFile] = useState();
   const handleClick = () => {
-    navigate('/changepassword');
+    navigate("/changepassword");
   };
   const formik = useFormik({
     initialValues: {
-      firstName: apiData?.firstName || '',
-      lastName: apiData?.lastName || '',
-      email: apiData?.email || '',
-      mobile: apiData?.mobile || '',
-      address: apiData?.address || '',
+      firstName: apiData?.firstName || "",
+      lastName: apiData?.lastName || "",
+      email: apiData?.email || "",
+      mobile: apiData?.mobile || "",
+      address: apiData?.address || "",
     },
     enableReinitialize: true,
     onSubmit: async (values) => {
@@ -36,14 +36,14 @@ function Profile() {
   });
 
   function userLogout() {
-    localStorage.removeItem('token');
-    navigate('/');
+    localStorage.removeItem("token");
+    navigate("/");
   }
-  if(isLoading){
-    return <h1 className='text-2xl fornt-bold'>isLoading</h1>
+  if (isLoading) {
+    return <h1 className="text-2xl fornt-bold">isLoading</h1>;
   }
-  if(serverError){
-    return <h1 className='text-xl text-red-500'>{serverError.message}</h1>
+  if (serverError) {
+    return <h1 className="text-xl text-red-500">{serverError.message}</h1>;
   }
   return (
     <div className="profile-container">
@@ -56,14 +56,14 @@ function Profile() {
         <div className="profile-fields">
           <div className="name-fields">
             <input
-              {...formik.getFieldProps('firstName')}
+              {...formik.getFieldProps("firstName")}
               name="firstName"
               className="profile-input"
               type="text"
               placeholder="First Name"
             />
             <input
-              {...formik.getFieldProps('lastName')}
+              {...formik.getFieldProps("lastName")}
               className="profile-input"
               type="text"
               placeholder="Last Name"
@@ -71,20 +71,20 @@ function Profile() {
           </div>
           <div className="contact-fields">
             <input
-              {...formik.getFieldProps('mobile')}
+              {...formik.getFieldProps("mobile")}
               className="profile-input"
               type="text"
               placeholder="Mobile No."
             />
             <input
-              {...formik.getFieldProps('email')}
+              {...formik.getFieldProps("email")}
               className="profile-input"
               type="text"
               placeholder="Email"
             />
           </div>
           <input
-            {...formik.getFieldProps('address')}
+            {...formik.getFieldProps("address")}
             className="profile-input address"
             type="text"
             placeholder="Address"
@@ -95,9 +95,16 @@ function Profile() {
         </div>
         <div className="logout-section">
           <span className="logout-text">Come back later?</span>
-          <button onClick={userLogout} className="logout-button" to="/">Logout
+          <button onClick={userLogout} className="logout-button" to="/">
+            Logout
           </button>
-          <button className="changePassword-button" type='button' onClick={handleClick}>Change Password</button>
+          <button
+            className="changePassword-button"
+            type="button"
+            onClick={handleClick}
+          >
+            Change Password
+          </button>
         </div>
       </form>
     </div>

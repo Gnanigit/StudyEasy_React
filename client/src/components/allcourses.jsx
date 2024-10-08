@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import useFetch from '../hooks/fetch.hook';
+import useFetch from "../hooks/fetch.hook";
 import Coursecard from "./courseCard";
 import { allCourses } from "../helper/helper";
 import { myUploads } from "../helper/helper";
@@ -21,11 +21,10 @@ function Allcourses({ loc }) {
           response = await myUploads({ email: apiData?.email });
         } else if (loc === "mycourses") {
           response = await myCourses({ email: apiData?.email });
-          
         }
         setCourses(response);
       } catch (error) {
-        console.error('Error fetching courses:', error);
+        console.error("Error fetching courses:", error);
       } finally {
         setLoadingCourses(false);
       }
@@ -35,11 +34,11 @@ function Allcourses({ loc }) {
     }
   }, [apiData, loc]);
 
-
   const handleCoursesUpdatedList = (courseId) => {
-    setCourses(prevCourses => prevCourses.filter(course => course._id !== courseId));
+    setCourses((prevCourses) =>
+      prevCourses.filter((course) => course._id !== courseId)
+    );
   };
-
 
   return (
     <section className="course-section">
@@ -52,8 +51,14 @@ function Allcourses({ loc }) {
         <>
           {Array.isArray(courses) && courses.length > 0 ? (
             <ul className="course-list">
-              {courses.map(course => (
-                <Coursecard role={apiData?.role} loc={loc} key={course._id} course={course}  onCoursesUpdatedList={handleCoursesUpdatedList} />
+              {courses.map((course) => (
+                <Coursecard
+                  role={apiData?.role}
+                  loc={loc}
+                  key={course._id}
+                  course={course}
+                  onCoursesUpdatedList={handleCoursesUpdatedList}
+                />
               ))}
             </ul>
           ) : (

@@ -1,133 +1,140 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import toast, { Toaster } from 'react-hot-toast';
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/coursecard.css";
-import useFetch from '../hooks/fetch.hook';
-import { deleteCourse, enrollCourse, updateLikeStatus , getLikeStatus ,unRegisterCourse} from '../helper/helper';
-// import { useAuthStore } from '../store/store';
+import useFetch from "../hooks/fetch.hook";
+import { useLocation } from "react-router-dom";
+import {
+  deleteCourse,
+  enrollCourse,
+  updateLikeStatus,
+  getLikeStatus,
+  unRegisterCourse,
+} from "../helper/helper";
 
-function CourseCard({ role, loc, course ,onCoursesUpdatedList}) {
+function CourseCard({ role, loc, course, onCoursesUpdatedList }) {
   const navigate = useNavigate();
+
   const [likes, setLikes] = useState(course.likes);
   const [isLiked, setIsLiked] = useState(false);
-  const [{ isLoading, apiData, serverError }] = useFetch()
-  const email=apiData?.email;
+  const [{ isLoading, apiData, serverError }] = useFetch();
+  const email = apiData?.email;
+
+  const location = useLocation();
+
   useEffect(() => {
-    if (loc==="mycourses" && email) {
+    // Reset when route changes
+  }, [location]);
+
+  useEffect(() => {
+    if (loc === "mycourses" && email) {
       const fetchLikeStatus = async () => {
         try {
-          const response = await getLikeStatus({ courseId: course._id,email: email });
+          const response = await getLikeStatus({
+            courseId: course._id,
+            email: email,
+          });
           if (response.success) {
             setIsLiked(response.isLiked);
-          } else {
-            toast.error(response.message);
           }
         } catch (error) {
-          console.error('Error fetching like status:', error);
-          toast.error('An error occurred while fetching the like status.');
+          console.error("Error fetching like status:", error);
         }
       };
-      
+
       fetchLikeStatus();
     }
-  }, [course._id, email]);
-  
+  }, [course._id, email, loc]);
 
-const handleEnrollCourse = async (courseId) => {
-
-  try {
-    const Id = courseId;
-    const response = await enrollCourse({ Id, email });
-    if (response.success) {
-      toast.success(response.message);
-    } else {
-      toast.error(response.message);
-    }
-  } catch (error) {
-    toast.error("An error occurred while enrolling in the course.");
-  }
-};
-
-  
-  const handleDeleteCourse = async (courseId) => {
+  const handleEnrollCourse = async (courseId) => {
     try {
-      const Id = courseId;
-      const response = await deleteCourse(Id);
-      if (response) {
-        toast.success(response.msg);
-        onCoursesUpdatedList(Id);
+      const response = await enrollCourse({ Id: courseId, email });
+      if (response.success) {
+        console.log(response.message);
       } else {
-        toast.error("Course Deletion Failed!");
+        console.error(response.message);
       }
     } catch (error) {
-      console.error("Error deleting course:", error);
-      toast.error("An error occurred while deleting the course.");
+      console.error("Failed to enroll in course", error);
+    }
+  };
+
+  const handleDeleteCourse = async (courseId) => {
+    try {
+      const response = await deleteCourse(courseId);
+      if (response) {
+        console.log(response.msg);
+        onCoursesUpdatedList(courseId);
+      }
+    } catch (error) {
+      console.error("Failed to delete course", error);
     }
   };
 
   const handleUnRegisterCourse = async (courseId) => {
-    if (loc==="mycourses" && email) {
+    if (loc === "mycourses" && email) {
       try {
-        const Id = courseId;
-        const response = await unRegisterCourse({Id, email});
+        const response = await unRegisterCourse({ Id: courseId, email });
         if (response.msg) {
-          toast.success(response.msg);
+          console.log(response.msg);
           onCoursesUpdatedList(courseId);
-        } else {
-          toast.error("Course Un-Registration Failed!");
         }
       } catch (error) {
-        console.error("Error Un-Registering course:", error);
-        toast.error("An error occurred while Un-Registering the course.");
+        console.error("Failed to unregister from course", error);
       }
     }
   };
-
-  // useEffect(() => {
-  //   if ((isDeleted && loc === "myuploads")) {
-  //     navigate("/myuploads");
-  //   }
-
-  // }, [isDeleted, loc, navigate]);
-
 
   const handleLikeClick = async () => {
     try {
       const newLikeStatus = !isLiked;
-      const likeStatus = newLikeStatus ? 1 : 0;
-      const response = await updateLikeStatus({ courseId: course._id, email, likeStatus });
+      const response = await updateLikeStatus({
+        courseId: course._id,
+        email,
+        likeStatus: newLikeStatus ? 1 : 0,
+      });
       if (response.success) {
         setLikes(response.likes);
         setIsLiked(newLikeStatus);
-        if(newLikeStatus)
-          toast.success('Liked the course!') ;
-      } else {
-        toast.error('Failed to update like status.');
+        if (newLikeStatus) {
+          console.log("Liked the course!");
+        }
       }
     } catch (error) {
-      console.error('Error updating like status:', error);
-      toast.error('An error occurred while updating the like status.');
+      console.error("Failed to update like status", error);
     }
   };
 
-
   return (
     <li className="course-item">
-      <Toaster position='top-center' reverseOrder={false}></Toaster>
-      <div className='course-block'>
-        <img src={course.courseImg} alt="Course Image" className="course-image" />
+      <div className="course-block">
+        <img
+          src={course.courseImg}
+          alt="Course Image"
+          className="course-image"
+        />
         <div className="course-title-likes">
-        <h2 className="course-title">{course.courseTitle}</h2>
-        <p><strong>Likes :</strong> {likes}</p>
+          <h2 className="course-title">{course.courseTitle}</h2>
+          <p>
+            <strong>Likes :</strong> {likes}
+          </p>
         </div>
         <p className="course-content">{course.content}</p>
-        
+
         {loc === "allcourses" && (
           <div className="button-container">
             {role === 0 && (
-              <button className="enroll-course" onClick={() => handleEnrollCourse(course._id)}>Enroll Course</button>
+              <button
+                className="enroll-course"
+                onClick={() => handleEnrollCourse(course._id)}
+              >
+                Enroll Course
+              </button>
             )}
-            <Link to={`/viewcourse?courseId=${encodeURIComponent(course._id)}&role=0`}>
+            <Link
+              to={`/viewcourse?courseId=${encodeURIComponent(
+                course._id
+              )}&role=0`}
+            >
               <button className="view-course">View Course</button>
             </Link>
           </div>
@@ -136,19 +143,38 @@ const handleEnrollCourse = async (courseId) => {
         {loc === "myuploads" && (
           <>
             <div className="button-container">
-              <button className="delete-course" onClick={() => handleDeleteCourse(course._id)}>Delete Course</button>
-              <Link to={`/viewcourse?courseId=${encodeURIComponent(course._id)}&role=0`}>
+              <button
+                className="delete-course"
+                onClick={() => handleDeleteCourse(course._id)}
+              >
+                Delete Course
+              </button>
+              <Link
+                to={`/viewcourse?courseId=${encodeURIComponent(
+                  course._id
+                )}&role=0`}
+              >
                 <button className="view-course">View Course</button>
               </Link>
             </div>
-            <div className='down-button'>
+            <div className="down-button">
               {role === 1 && (
-                <Link to={`/addTopic?courseTitle=${encodeURIComponent(course.courseTitle)}&courseId=${encodeURIComponent(course._id)}`}>
+                <Link
+                  to={`/addTopic?courseTitle=${encodeURIComponent(
+                    course.courseTitle
+                  )}&courseId=${encodeURIComponent(course._id)}`}
+                >
                   <button className="add-topic">Add Topic</button>
                 </Link>
               )}
-              <Link to={`/viewcourse?courseId=${encodeURIComponent(course._id)}&role=1`}>
-                <button className="update-course course-button">Update Course</button>
+              <Link
+                to={`/viewcourse?courseId=${encodeURIComponent(
+                  course._id
+                )}&role=1`}
+              >
+                <button className="update-course course-button">
+                  Update Course
+                </button>
               </Link>
             </div>
           </>
@@ -156,18 +182,29 @@ const handleEnrollCourse = async (courseId) => {
 
         {loc === "mycourses" && (
           <>
-          <div className="button-container course-button">
-            <Link to={`/viewcourse?courseId=${encodeURIComponent(course._id)}&role=0`}>
-              <button className="view-course course-button" type="submit">View Course</button>
-            </Link>
-            <button 
-              className={`like-course ${isLiked ? 'liked' : ''}`} 
-              onClick={handleLikeClick}
+            <div className="button-container course-button">
+              <Link
+                to={`/viewcourse?courseId=${encodeURIComponent(
+                  course._id
+                )}&role=0`}
+              >
+                <button className="view-course course-button" type="submit">
+                  View Course
+                </button>
+              </Link>
+              <button
+                className={`like-course ${isLiked ? "liked" : ""}`}
+                onClick={handleLikeClick}
+              >
+                {isLiked ? "❤️" : "🤍"}
+              </button>
+            </div>
+            <button
+              className="UnRegiter-course course-button"
+              onClick={() => handleUnRegisterCourse(course._id)}
             >
-              {isLiked ? '❤️' : '🤍'}
+              Un-Register
             </button>
-          </div>
-          <button className="UnRegiter-course course-button" onClick={() => handleUnRegisterCourse(course._id)}>Un-Register</button>
           </>
         )}
       </div>
