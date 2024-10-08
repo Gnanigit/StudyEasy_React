@@ -1,31 +1,30 @@
-*{
+* {
   -ms-high-contrast-adjust: none;
 }
 
 /* New */
-*{
+* {
   forced-color-adjust: none;
 }
 
 .course-section {
-    margin: 30px;
-  }
-  
-  .course-list {
-    list-style-type: none;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-  }
-  .error-message {
-    color: #ff6347; /* Tomato */
-    font-style: italic;
-    font-size: 1.2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100px; /* Set a fixed height if needed */
-  }
-  
-  
+  margin: 30px;
+}
+
+.course-list {
+  list-style-type: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+  gap: 20px;
+}
+
+.error-message {
+  color: #ff6347;
+  font-style: italic;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}

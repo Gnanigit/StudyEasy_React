@@ -11,22 +11,20 @@ const ChatBot = () => {
   const handleChatToggle = () => setIsChatOpen(!isChatOpen);
 
   const handleSendMessage = async (e) => {
-    e.preventDefault(); // Prevent form submission from reloading the page
+    e.preventDefault();
 
     if (input.trim()) {
-      const newMessage = { text: "Input: " + input, isUser: true };
+      const newMessage = { text: input, isUser: true };
       setMessages([...messages, newMessage]);
       setInput("");
 
       try {
-        // Await the response from inputChatBot
         const response = await inputChatBot({ prompt: input });
 
-        // Access the response data directly from response.data (axios)
         const data = response.data;
 
         const responseMessage = {
-          text: data.result, // Make sure this matches your backend response structure
+          text: data.result,
           isUser: false,
         };
         setMessages((prevMessages) => [...prevMessages, responseMessage]);
@@ -52,7 +50,7 @@ const ChatBot = () => {
       {isChatOpen && (
         <div className="chat-overlay">
           <div className="chat-header">
-            <h2>ChatBot</h2>
+            <h2>StudyEasy ChatBot</h2>
             <button onClick={handleChatToggle} className="close-button">
               <X size={24} />
             </button>

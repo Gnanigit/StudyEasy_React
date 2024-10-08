@@ -10,44 +10,26 @@ import AddTopic from "../components/addtopic";
 import ViewCourse from "../components/viewcourse";
 import ChangePassword from "../components/changepassword";
 
-function Dashboard({loc}){
-    return(
-        <div>
-            <Navbar></Navbar>
-            {loc === "" && ( 
-            <>
-                <Banner />
-                <Content />
-            </>
-            )}
-            {loc === "addcourse" && (
-                <AddCourse></AddCourse>
-            )}
-            {loc === "allcourses" && (
-                <Allcourses loc="allcourses"></Allcourses>
-            )}
-            {loc === "about" && (
-                <About></About>
-            )}
-            {loc === "addtopic" && (
-                <AddTopic></AddTopic>
-            )}
-            {loc === "myuploads" && (
-                <Allcourses loc="myuploads"></Allcourses>
-            )}
-            {loc === "viewcourse" && (
-                <ViewCourse></ViewCourse>
-            )}
-            {loc === "mycourses" && (
-                <Allcourses loc="mycourses"></Allcourses>
-            )}
-            {loc === "profile" && (
-                <Profile></Profile>
-            )}
-            {loc === "changepassword" && (
-                <ChangePassword></ChangePassword>
-            )}
-        </div>
-    )
+function Dashboard({ loc }) {
+  return (
+    <div>
+      <Navbar></Navbar>
+      {loc === "" && (
+        <>
+          <Banner />
+          <Content />
+        </>
+      )}
+      {loc === "addcourse" && <AddCourse></AddCourse>}
+      {loc === "allcourses" && <Allcourses loc="allcourses"></Allcourses>}
+      {loc === "about" && <About></About>}
+      {loc === "addtopic" && <AddTopic></AddTopic>}
+      {loc === "myuploads" && <Allcourses loc="myuploads"></Allcourses>}
+      {loc === "viewcourse" && <ViewCourse></ViewCourse>}
+      {loc === "mycourses" && <Allcourses loc="mycourses"></Allcourses>}
+      {loc === "profile" && <Profile></Profile>}
+      {loc === "changepassword" && <ChangePassword></ChangePassword>}
+    </div>
+  );
 }
 export default Dashboard;
