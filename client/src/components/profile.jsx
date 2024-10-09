@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import useFetch from "../hooks/fetch.hook";
 import { updateUser } from "../helper/helper";
-import toast, { Toaster } from "react-hot-toast";
 import "../styles/profile.css";
 
 function Profile() {
@@ -27,11 +26,13 @@ function Profile() {
         // profile: file || apiData?.profile || '',
       });
       let updatePromise = updateUser(values);
-      toast.promise(updatePromise, {
-        loading: "Updating...",
-        success: <b>Updated Successfully</b>,
-        error: <b>Could not update</b>,
-      });
+      updatePromise
+        .then(() => {
+          // Success message or action here
+        })
+        .catch((error) => {
+          // Error handling here
+        });
     },
   });
 
@@ -39,15 +40,17 @@ function Profile() {
     localStorage.removeItem("token");
     navigate("/");
   }
+
   if (isLoading) {
     return <h1 className="text-2xl fornt-bold">isLoading</h1>;
   }
+
   if (serverError) {
     return <h1 className="text-xl text-red-500">{serverError.message}</h1>;
   }
+
   return (
     <div className="profile-container">
-      <Toaster position="top-center" />
       <div className="profile-header">
         <h4 className="profile-title">Profile</h4>
         <span className="profile-description">You can update the details.</span>

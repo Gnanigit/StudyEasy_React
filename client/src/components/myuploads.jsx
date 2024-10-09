@@ -21,7 +21,6 @@ function MyUploads() {
 
   return (
     <section className="course-section">
-      <h1>All Courses</h1>
       <ul className="course-list">
         {courses.map((course) => (
           <Coursecard key={course._id} course={course} />

@@ -1,102 +1,177 @@
 .addtopicSectionCourse {
-    padding: 2rem;
-    background-color: #f8f9fa;
-    border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background: #f0f0f0;
+}
+
+.addtopicContainer {
+  width: 100%;
+  max-width: 700px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.addtopicTitleWrapper {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.addtopicH2.SectionTitle {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.addtopicStrong {
+  color: #e16bff;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(225, 107, 255, 0.1);
+}
+
+.addtopicGridList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.addtopicGridList form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.addtopicInput {
+  width: 100%;
+  height: 50px;
+  padding: 0 1.25rem;
+  font-size: 1rem;
+  border: 2px solid #d8d8d8;
+  border-radius: 8px;
+  background: #f8f9fa;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+.addtopicInput:focus {
+  border-color: #e16bff;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(225, 107, 255, 0.1);
+  outline: none;
+}
+
+.addtopicInput::placeholder {
+  color: #aaa;
+}
+
+.addtopicCardContent {
+  margin-top: 1rem;
+}
+
+.addtopicCardbutton {
+  width: 100%;
+  height: 50px;
+  background: linear-gradient(45deg, #e16bff, #ff6b6b);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(225, 107, 255, 0.2);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.addtopicCardbutton:hover {
+  background: linear-gradient(45deg, #ff6b6b, #e16bff);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(225, 107, 255, 0.3);
+}
+
+.addtopicCardbutton:active {
+  transform: translateY(1px);
+}
+
+/* Toast Notification Styles */
+.Toastify__toast {
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.Toastify__toast--success {
+  background: #2bcbba;
+}
+
+.Toastify__toast--error {
+  background: #ff6b6b;
+}
+
+/* Loading State */
+.addtopicCardbutton:disabled {
+  background: linear-gradient(45deg, #ccc, #999);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .addtopicSectionCourse {
+    padding: 1.5rem;
   }
-  
+
   .addtopicContainer {
-    max-width: 600px;
-    margin: 0 auto;
-    padding-left: 20px;
-    padding-right: 50px;
-    padding-top: 30px;
-    padding-bottom: 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
   }
-  
-  .addtopicTitleWrapper {
-    text-align: center;
-    margin-bottom: 1.5rem;
+
+  .addtopicH2.SectionTitle {
+    font-size: 1.75rem;
   }
-  
-  .addtopicH2 {
-    font-size: 1.8rem;
-    color: #333;
+}
+
+@media screen and (max-width: 480px) {
+  .addtopicSectionCourse {
+    padding: 1rem;
   }
-  
-  .addtopicStrong {
-    color: #e16bff;
-    font-weight: bold;
+
+  .addtopicContainer {
+    padding: 1.5rem;
   }
-  
-  .addtopicGridList {
-    list-style: none;
-    padding: 0;
+
+  .addtopicH2.SectionTitle {
+    font-size: 1.5rem;
   }
-  
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+
+  .addtopicInput {
+    font-size: 0.95rem;
   }
-  
-.addtopicInput,
-  textarea {
-    width: 100%;
-    padding: 0.8rem;
-    border: 2px solid #ced4da;
-    border-radius: 8px;
-    font-size: 1rem;
-    color: #495057;
-    outline: none;
-    background-color: #f8f9fa;
-    transition: border-color 0.3s ease;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
-  }
-  
-  .addtopicInput:focus,
-  textarea:focus {
-    border-color: #e16bff;
-  }
-  
-.addtopicInput::placeholder,
-  textarea::placeholder {
-    color: #6c757d;
-    font-style: italic;
-  }
-  
-  textarea {
-    resize: vertical;
-    min-height: 120px;
-  }
-  
-.addtopicInput{
-    background-color: linear-gradient(135deg, #4e80f7, #396afc);
-    color: black;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-  }
+
   .addtopicCardbutton {
-    background-color: #e16bff; /* Button background color */
-    color: #fff; /* Text color */
-    border: none;
-    padding: 0.75rem 1.5rem; /* Padding for the button */
-    border-radius: 4px; /* Rounded corners */
-    cursor: pointer; /* Cursor style on hover */
-    font-size: 1rem; /* Font size */
-    font-weight: bold; /* Bold text */
-    transition: background-color 0.3s ease; /* Smooth transition on hover */
-    outline: none; /* Remove default outline */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+    font-size: 0.95rem;
   }
-  
-  .addtopicCardbutton:hover {
-    background-color: #d842e1; /* Darker background color on hover */
+}
+
+/* Animation for form submission */
+@keyframes submitPulse {
+  0% {
+    transform: scale(1);
   }
-  
+  50% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.addtopicCardbutton:active {
+  animation: submitPulse 0.3s ease;
+}

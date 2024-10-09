@@ -1,191 +1,257 @@
-/* coursecard.css */
-
-* {
-  -ms-high-contrast-adjust: none;
-  forced-color-adjust: none;
-}
-
-.course-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 30px;
-  padding: 20px;
-}
-
 .course-item {
-  background-color: #ffffff;
-  border-radius: 12px;
-  padding: 25px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  list-style: none;
+  margin: 1.5rem;
+  transition: transform 0.3s ease;
+}
+.course-image-container {
+  position: relative;
+}
+.like-course {
+  position: absolute;
+  top: 1px;
+  right: -5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: white;
+  transition: transform 0.3s ease;
+}
+
+.like-course:hover {
+  transform: scale(1.1);
+}
+
+.like-course.liked {
+  animation: likeAnimation 0.5s ease;
+}
+
+@keyframes likeAnimation {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+.course-block {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  max-width: 500px;
+  height: 640px;
   display: flex;
   flex-direction: column;
-  min-height: 450px;
+  justify-content: space-between;
 }
 
-.course-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+.course-block:hover {
+  box-shadow: 0 12px 40px rgba(225, 107, 255, 0.15);
 }
 
 .course-image {
   width: 100%;
-  height: 220px;
-  border-radius: 8px;
-  margin-bottom: 20px;
-  object-fit: cover;
+  height: 200px;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .course-title-likes {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: 1rem;
 }
 
 .course-title {
-  font-size: 1.5em;
-  font-weight: bold;
+  font-size: 1.5rem;
+  font-weight: 700;
   color: #333;
   margin: 0;
+  overflow: hidden;
+  flex: 1;
+  margin-right: 1rem;
+}
+
+.course-title-likes p {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .course-content {
-  margin-bottom: 20px;
-  overflow-wrap: break-word;
   color: #666;
+
   line-height: 1.6;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
   flex-grow: 1;
 }
 
 .button-container {
   display: flex;
-  justify-content: space-between;
-  margin-top: auto;
-  gap: 10px;
-}
-
-.add-topic,
-.delete-course,
-.update-course,
-.view-course,
-.enroll-course,
-.UnRegiter-course {
-  color: #fff;
-  border: none;
-  border-radius: 25px;
-  padding: 12px 20px;
-  font-size: 0.9em;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  flex: 1;
-  min-width: 120px;
-}
-
-.update-course {
-  background: linear-gradient(
-    to left,
-    #df78f9 0%,
-    #df78f9 50%,
-    #36923b 50%,
-    #853a96 100%
-  );
-  background-size: 200% 100%;
-  background-position: right bottom;
-}
-
-.delete-course,
-.UnRegiter-course {
-  background: linear-gradient(
-    to left,
-    #df78f9 0%,
-    #df78f9 50%,
-    #f04a4a 50%,
-    #853a96 100%
-  );
-  background-size: 200% 100%;
-  background-position: right bottom;
-}
-
-.view-course {
-  background: linear-gradient(
-    to left,
-    #df78f9 0%,
-    #df78f9 50%,
-    #d3ba3b 50%,
-    #853a96 100%
-  );
-  background-size: 200% 100%;
-  background-position: right bottom;
-}
-
-.add-topic,
-.enroll-course {
-  background: linear-gradient(
-    to left,
-    #df78f9 0%,
-    #df78f9 50%,
-    #3a7196 50%,
-    #853a96 100%
-  );
-  background-size: 200% 100%;
-  background-position: right bottom;
-}
-
-.add-topic:hover,
-.update-course:hover,
-.delete-course:hover,
-.view-course:hover,
-.enroll-course:hover,
-.UnRegiter-course:hover {
-  background-position: left bottom;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  gap: 1rem;
+  margin-top: auto; /* Push buttons to the bottom */
 }
 
 .down-button {
   display: flex;
-  justify-content: space-between;
-  margin-top: 15px;
-  gap: 10px;
+  gap: 1rem;
+  margin-top: 1rem; /* Add margin to separate from other elements */
 }
 
+.course-button,
+.enroll-course,
+.view-course,
+.delete-course,
+.add-topic,
+.update-course,
 .UnRegiter-course {
-  margin-top: 10px;
-  width: 100%;
-}
-
-.like-button {
-  background: none;
+  padding: 0.5rem 0;
   border: none;
-  font-size: 1.5em;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
   cursor: pointer;
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
+  min-height: 50px;
 }
 
-.like-button:hover {
-  transform: scale(1.2);
+/* Primary Action Buttons */
+.enroll-course,
+.add-topic {
+  background: linear-gradient(45deg, #e16bff, #ff6b6b);
+  color: white;
+  box-shadow: 0 4px 15px rgba(225, 107, 255, 0.2);
 }
 
-@media (max-width: 768px) {
-  .course-list {
-    grid-template-columns: 1fr;
+.enroll-course:hover,
+.add-topic:hover {
+  background: linear-gradient(45deg, #ff6b6b, #e16bff);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(225, 107, 255, 0.3);
+}
+
+/* Secondary Action Buttons */
+.view-course {
+  background: linear-gradient(45deg, #e16bff, #ff6b6b);
+  color: white;
+  box-shadow: 0 4px 15px rgba(225, 107, 255, 0.2);
+}
+
+.view-course:hover {
+  background: linear-gradient(45deg, #ff6b6b, #e16bff);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(225, 107, 255, 0.3);
+}
+
+/* Destructive Action Buttons */
+.delete-course,
+.UnRegiter-course {
+  background: linear-gradient(45deg, #e16bff, #ff6b6b);
+  color: white;
+  box-shadow: 0 4px 15px rgba(225, 107, 255, 0.2);
+}
+
+.delete-course:hover,
+.UnRegiter-course:hover {
+  background: linear-gradient(45deg, #ff6b6b, #e16bff);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(225, 107, 255, 0.3);
+}
+
+.like-course {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+.like-course:hover {
+  transform: scale(1.1);
+}
+
+.like-course.liked {
+  animation: likeAnimation 0.5s ease;
+}
+
+@keyframes likeAnimation {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+/* Update Course Button */
+.update-course {
+  background: linear-gradient(45deg, #e16bff, #ff6b6b);
+  color: white;
+  box-shadow: 0 4px 15px rgba(225, 107, 255, 0.2);
+}
+
+.update-course:hover {
+  background: linear-gradient(45deg, #ff6b6b, #e16bff);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(225, 107, 255, 0.3);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .course-item {
+    margin: 1rem;
+  }
+
+  .course-block {
+    padding: 1rem;
   }
 
   .button-container,
   .down-button {
     flex-direction: column;
+    gap: 0.75rem;
   }
 
-  .add-topic,
-  .delete-course,
-  .update-course,
-  .view-course,
+  .course-button,
   .enroll-course,
+  .view-course,
+  .delete-course,
+  .add-topic,
+  .update-course,
   .UnRegiter-course {
     width: 100%;
-    margin: 5px 0;
+    min-width: unset;
   }
+}
+
+.course-button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.course-item:hover .course-image {
+  transform: scale(1.02);
+  transition: transform 0.3s ease;
 }

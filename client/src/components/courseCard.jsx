@@ -106,12 +106,26 @@ function CourseCard({ role, loc, course, onCoursesUpdatedList }) {
 
   return (
     <li className="course-item">
-      <div className="course-block">
-        <img
-          src={course.courseImg}
-          alt="Course Image"
-          className="course-image"
-        />
+      <div
+        className="course-block"
+        style={{ height: loc === "mycourses" ? "500px" : "640px" }}
+      >
+        <div className="course-image-container">
+          <img
+            src={course.courseImg}
+            alt="Course Image"
+            className="course-image"
+          />
+          {loc === "mycourses" && (
+            <button
+              className={`like-course ${isLiked ? "liked" : ""}`}
+              onClick={handleLikeClick}
+            >
+              {isLiked ? "❤️" : "🤍"}
+            </button>
+          )}
+        </div>
+
         <div className="course-title-likes">
           <h2 className="course-title">{course.courseTitle}</h2>
           <p>
@@ -192,19 +206,14 @@ function CourseCard({ role, loc, course, onCoursesUpdatedList }) {
                   View Course
                 </button>
               </Link>
+
               <button
-                className={`like-course ${isLiked ? "liked" : ""}`}
-                onClick={handleLikeClick}
+                className="UnRegiter-course course-button"
+                onClick={() => handleUnRegisterCourse(course._id)}
               >
-                {isLiked ? "❤️" : "🤍"}
+                Un-Register
               </button>
             </div>
-            <button
-              className="UnRegiter-course course-button"
-              onClick={() => handleUnRegisterCourse(course._id)}
-            >
-              Un-Register
-            </button>
           </>
         )}
       </div>
