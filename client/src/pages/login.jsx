@@ -16,6 +16,7 @@ function Login() {
 
     onSubmit: async (values) => {
       try {
+        console.log(values);
         let loginPromise = verifyPassword({
           email: values.email,
           password: values.password,
@@ -23,7 +24,7 @@ function Login() {
 
         const response = await loginPromise;
 
-        console.log("Login Successful!"); // Log success message
+        console.log("Login Successful!");
 
         let { token } = response.data;
         localStorage.setItem("token", token);
@@ -32,7 +33,7 @@ function Login() {
           navigate("/dashboard");
         }, 3000);
       } catch (error) {
-        console.error("Password Not Match"); // Log error message
+        console.error("Password Not Match");
       }
     },
   });

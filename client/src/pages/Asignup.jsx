@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import "../styles/signup.css";
-import { registerUser } from "../helper/helper"; // Assuming this is a separate helper function
+import { registerUser } from "../helper/helper";
 
 function Signup() {
   const navigate = useNavigate();
@@ -18,16 +18,14 @@ function Signup() {
     onSubmit: async (values) => {
       console.log(values);
       try {
-        values = await Object.assign({}, values); // Ensure values is an object
+        values = await Object.assign({}, values);
         console.log(values);
 
-        let registerPromise = registerUser(values, 1); // Pass flag to registerUser
+        let registerPromise = registerUser(values, 1);
 
-        // Navigate to home after success
         registerPromise.then(() => navigate("/"));
         console.log("Register Successfully!");
       } catch (error) {
-        // Handle error if registration fails
         console.error("Could not Register.");
       }
     },

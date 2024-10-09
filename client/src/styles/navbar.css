@@ -1,13 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
 nav {
-  background-color: #df78f9;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(90deg, #e16bff, #ff6b6b);
+  box-shadow: 0 4px 20px rgba(225, 107, 255, 0.15);
   padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-family: "Poppins", sans-serif;
+  position: relative;
+  z-index: 1000;
 }
 
 .navbarLogos {
@@ -19,7 +21,12 @@ nav {
   display: flex;
   align-items: center;
   text-decoration: none;
-  color: #444444;
+  color: #fff;
+  transition: transform 0.3s ease;
+}
+
+.navBarTitle:hover {
+  transform: translateY(-2px);
 }
 
 .navbarLogoImg {
@@ -27,12 +34,20 @@ nav {
   height: 70px;
   margin-right: 10px;
   border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.navbarLogoImg:hover {
+  transform: scale(1.05);
+  border-color: rgba(255, 255, 255, 0.5);
 }
 
 .navbarLogo {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #333;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .navbarShow {
@@ -43,27 +58,31 @@ nav {
   padding: 0;
 }
 
-.navbarLink {
-  margin-left: 1.5rem;
-}
-
 .navbarAnc {
   text-decoration: none;
-  color: #616061;
-
+  color: rgba(255, 255, 255, 0.9);
   font-weight: 500;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
   display: flex;
   align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
 }
 
 .navbarAnc:hover,
 .navbarAnc.active {
-  color: #710b88;
+  color: #d4d4d4;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
 }
 
 .navbarAnc svg {
   margin-right: 0.5rem;
+  transition: transform 0.3s ease;
+}
+
+.navbarAnc:hover svg {
+  transform: scale(1.1);
 }
 
 .navbarProfile {
@@ -75,16 +94,23 @@ nav {
   display: flex;
   align-items: center;
   cursor: pointer;
+  padding: 0.5rem 0;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.profileInfo:hover {
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .profileInfo svg {
   margin-right: 0.5rem;
-  color: #616061;
+  color: rgba(255, 255, 255, 0.9);
   font-size: 1.2rem;
 }
 
 .navbarProLink {
-  color: #616061;
+  color: rgba(255, 255, 255, 0.9);
   font-weight: 500;
   margin-left: 0.5rem;
 }
@@ -93,12 +119,27 @@ nav {
   position: absolute;
   top: 100%;
   right: 0;
-  background-color: #fff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
   padding: 0.5rem 0;
   min-width: 150px;
   z-index: 1000;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transform-origin: top right;
+  animation: dropdownFade 0.2s ease;
+}
+
+@keyframes dropdownFade {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .dropdownMenuItem {
@@ -117,26 +158,41 @@ nav {
   cursor: pointer;
   width: 100%;
   text-align: left;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
   display: flex;
   align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
 }
 
 .dropdownMenuItem a svg,
 .dropdownMenuItem button svg {
   margin-right: 0.5rem;
+  transition: transform 0.3s ease;
 }
 
-.dropdownMenuItem a:hover,
 .dropdownMenuItem button:hover {
-  color: #710b88;
+  color: #e16bff;
+  background: rgba(225, 107, 255, 0.1);
+}
+
+.dropdownMenuItem a:hover svg,
+.dropdownMenuItem button:hover svg {
+  transform: scale(1.1);
 }
 
 .checkbtn {
   font-size: 1.5rem;
-  color: #333;
+  color: #fff;
   cursor: pointer;
   display: none;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.checkbtn:hover {
+  background: rgba(255, 255, 255, 0.1);
 }
 
 @media screen and (max-width: 700px) {
@@ -150,11 +206,13 @@ nav {
     left: -100%;
     width: 100%;
     height: calc(100vh - 60px);
-    background-color: #fff;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
     flex-direction: column;
     align-items: center;
     transition: left 0.3s ease;
     z-index: 999;
+    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
   }
 
   .navbarShow.visible {
@@ -177,5 +235,18 @@ nav {
     position: static;
     box-shadow: none;
     margin-top: 0.5rem;
+    background: transparent;
+    backdrop-filter: none;
+    border: none;
+  }
+
+  .navbarAnc {
+    color: #333;
+  }
+
+  .navbarAnc:hover,
+  .navbarAnc.active {
+    color: #e16bff;
+    background: rgba(225, 107, 255, 0.1);
   }
 }

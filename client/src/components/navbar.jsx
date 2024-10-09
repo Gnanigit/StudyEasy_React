@@ -21,6 +21,9 @@ function Navbar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
 
+  const handleNavigation = () => {
+    navigate("/profile");
+  };
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 700) {
@@ -30,7 +33,7 @@ function Navbar() {
       }
     };
 
-    handleResize(); // Call once to set initial state
+    handleResize();
     window.addEventListener("resize", handleResize);
 
     return () => window.removeEventListener("resize", handleResize);
@@ -136,9 +139,9 @@ function Navbar() {
             {isDropdownOpen && (
               <ul className="dropdownMenu">
                 <li className="dropdownMenuItem">
-                  <NavLink to="/profile">
+                  <button onClick={handleNavigation}>
                     <FontAwesomeIcon icon={faUser} /> Profile
-                  </NavLink>
+                  </button>
                 </li>
                 <li className="dropdownMenuItem">
                   <button onClick={userLogout}>

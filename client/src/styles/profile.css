@@ -1,177 +1,205 @@
-/* Original CSS styles */
-
 .profile-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #f5f5f5;
-
-  height: 70vh;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  justify-content: center;
+  padding: 2rem;
+  background: #f0f0f0;
 }
 
 .profile-header {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 2rem;
 }
 
 .profile-title {
   font-size: 2.5rem;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 10px;
+  font-weight: 600;
+  color: #e16bff;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 4px rgba(225, 107, 255, 0.1);
 }
 
 .profile-description {
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: #666;
 }
 
 .profile-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 50%;
-  padding: 30px;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 750px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease;
 }
 
 .profile-fields {
-  width: 100%;
   display: flex;
   flex-direction: column;
+  gap: 1.5rem;
 }
 
 .name-fields,
 .contact-fields {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
 }
 
-
-
 .profile-input {
-  width: 45%; 
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  width: 100%;
+  height: 45px;
+  padding: 0 1rem;
   font-size: 1rem;
-  background-color: #f5f5f5;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1); 
-  transition: all 0.3s ease-in-out;
+  border: 2px solid #eee;
+  border-radius: 8px;
+  background: #f8f9fa;
+  color: #333;
+  transition: all 0.3s ease;
 }
 
 .profile-input:focus {
+  border-color: #e16bff;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(225, 107, 255, 0.1);
   outline: none;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
-  border-color: #c230e7;
+}
+
+.profile-input::placeholder {
+  color: #aaa;
+}
+
+.profile-input.address {
+  grid-column: 1 / -1;
 }
 
 .profile-button {
-  width: 150px;
-  padding: 10px;
-  background-color: #df78f9;
+  width: 100%;
+  height: 50px;
+  background: linear-gradient(45deg, #e16bff, #ff6b6b);
   color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
   font-size: 1rem;
-  margin-top: 20px;
-  transition: all 0.3s ease-in-out;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  box-shadow: 0 4px 15px rgba(225, 107, 255, 0.2);
 }
 
+.profile-button:hover {
+  background: linear-gradient(45deg, #ff6b6b, #e16bff);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(225, 107, 255, 0.3);
+}
 
-.address {
-  width: 97.5%; 
+.profile-button:active {
+  transform: translateY(1px);
 }
 
 .logout-section {
+  margin-top: 1rem;
+  padding-top: 2rem;
+  border-top: 2px solid rgba(225, 107, 255, 0.1);
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  margin-top: 30px;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .logout-text {
-  font-size: 1.1rem;
   color: #666;
+  font-size: 0.95rem;
+}
+
+.logout-button,
+.changePassword-button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .logout-button {
-  padding: 10px 20px;
-  background-color: #f44336;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: all 0.3s ease-in-out;
+  background: #ff6b6b;
+  color: white;
 }
 
 .changePassword-button {
-  padding: 10px 20px;
-  background-color: #1b8b2a;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: all 0.3s ease-in-out;
+  background: #e16bff;
+  color: white;
 }
 
+.logout-button:hover,
 .changePassword-button:hover {
-  background-color: #0f6a1d;
   transform: translateY(-2px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.logout-button:hover {
-  background-color: #da190b;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-.profile-button:hover {
-  background-color: #c230e7;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.logout-button:active,
+.changePassword-button:active {
+  transform: translateY(1px);
 }
 
+.text-2xl {
+  font-size: 1.5rem;
+  color: #e16bff;
+  text-align: center;
+  margin-top: 1.5rem;
+}
 
+.text-xl.text-red-500 {
+  font-size: 1.25rem;
+  color: #ff6b6b;
+  text-align: center;
+  margin-top: 2rem;
+}
 
-@media screen and (max-width: 500px) and (max-height: 1000px) {
+@media screen and (max-width: 768px) {
   .profile-form {
-    width: 80%; /* Adjust width as needed */
+    padding: 2rem;
   }
 
   .name-fields,
   .contact-fields {
-    flex-direction: column;
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
 
-  .profile-input {
-    width: 100%; /* Make input fields full width */
-    margin-bottom: 10px; /* Add some space between input fields */
-    
+  .profile-title {
+    font-size: 2rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .profile-container {
+    padding: 1rem;
+  }
+
+  .profile-form {
+    padding: 1.5rem;
+  }
+
+  .profile-title {
+    font-size: 1.75rem;
   }
 
   .logout-section {
     flex-direction: column;
-    align-items: flex-start; /* Align buttons to the start of the container */
-    margin-top: 20px; /* Add some space between input fields and buttons */
+    gap: 0.75rem;
   }
 
-  .changePassword-button,
-  .logout-button {
-    width: 100%; /* Make buttons full width */
-    margin-bottom: 10px; /* Add some space between buttons */
+  .logout-button,
+  .changePassword-button {
+    width: 100%;
   }
-  .profile-container {
-    height: 100vh;
-  }
-
 }
