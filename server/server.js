@@ -12,15 +12,15 @@ app.use(express.json({ limit: "100mb" }));
 
 // const allowedOrigin = "https://localhost:3000";
 
-// const allowedOrigin = "https://study-easy-react.vercel.app";
+const allowedOrigin = "https://study-easy-react.vercel.app";
 
-// app.use(
-//   cors({
-//     origin: allowedOrigin,
-//   })
-// );
+app.use(
+  cors({
+    origin: allowedOrigin,
+  })
+);
 
-app.use(cors());
+// app.use(cors());
 
 app.use(morgan("tiny"));
 app.disable("x-powered-by");
