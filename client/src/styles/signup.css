@@ -3,7 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+
   background: #f0f0f0;
   animation: gradientAnimation 15s ease infinite;
 }
@@ -56,19 +56,18 @@
   font-weight: 700;
   color: #e16bff;
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   letter-spacing: 0.5px;
   text-shadow: 0 2px 4px rgba(225, 107, 255, 0.1);
 }
 
 .signupField {
   position: relative;
-  margin-bottom: 1.25rem;
 }
 
 .signupInput-field input {
   width: 95%;
-  height: 40px;
+  height: 45px;
   padding-left: 1rem;
   font-size: 1rem;
   border: 2px solid #eee;

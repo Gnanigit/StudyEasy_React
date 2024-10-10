@@ -7,15 +7,13 @@ function First() {
     <div className="firstMain">
       <div className="firstContainer">
         <div className="firstSplit firstLeft">
-          <p>For Admin Login</p>
-          <button className="firstBtn">
-            <Link
-              to={{ pathname: "/login", state: { role: 1 } }}
-              className="firstAa"
-            >
+          <p>For Admins Login</p>
+          <button className="firstRbtn">
+            <Link to="/login" state={{ role: "1" }} className="firstAa">
               LOGIN
             </Link>
           </button>
+
           <h2>
             Don't have an account?
             <Link to="/Asignup">Admin Signup</Link> now!
@@ -23,18 +21,16 @@ function First() {
         </div>
         <div className="firstSeparator"></div>
         <div className="firstSplit firstRight">
-          <p>For Users Login</p>
+          <p>For Learners Login</p>
           <button className="firstRbtn">
-            <Link
-              to={{ pathname: "/login", state: { role: 0 } }}
-              className="firstAa"
-            >
+            <Link to="/login" state={{ role: "0" }} className="firstAa">
               LOGIN
             </Link>
           </button>
+
           <h2>
             Don't have an account?
-            <Link to="/signup">User Signup</Link> now!
+            <Link to="/signup">Learner Signup</Link> now!
           </h2>
         </div>
       </div>

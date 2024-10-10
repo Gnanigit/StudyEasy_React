@@ -9,6 +9,7 @@ import { useLocation } from "react-router-dom";
 function Login() {
   const location = useLocation();
   const { role } = location.state || {};
+
   const setEmail = useAuthStore((state) => state.setEmail);
   const navigate = useNavigate();
   const formik = useFormik({
@@ -77,7 +78,7 @@ function Login() {
         <div className="loginForm-link">
           <span>
             Don't have an account?{" "}
-            {role === 1 ? (
+            {role === "1" ? (
               <Link to="/Asignup" className="loginLink loginSignup-link">
                 Signup
               </Link>

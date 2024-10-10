@@ -19,11 +19,10 @@ function Signup() {
       console.log(values);
       try {
         values = await Object.assign({}, values);
-        console.log(values);
 
         let registerPromise = registerUser(values, 1);
 
-        registerPromise.then(() => navigate("/"));
+        registerPromise.then(() => navigate("/login"));
         console.log("Register Successfully!");
       } catch (error) {
         console.error("Could not Register.");
