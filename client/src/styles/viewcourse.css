@@ -1,186 +1,233 @@
+.viewCoursecontainer {
+  width: 87%;
+  margin: 30px auto;
+  border: none;
+  border-radius: 16px;
+  padding: 1rem 2rem;
+  background-color: #fff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
 
-  
- .viewCoursecontainer {
-    width: 87%;
-    margin: 20px auto;
-    border: none;
-    border-radius: 10px;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+.viewCourse {
+  border-radius: 12px;
+  background: linear-gradient(135deg, #e16bff, #ff6b6b);
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  animation: gradientAnimation 15s ease infinite;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background: linear-gradient(
+      135deg,
+      #ff6b6b,
+      #ffa5b3,
+      #ffd3b6,
+      #64b5f6,
+      #2bcbba
+    );
+    background-size: 300% 300%;
+    background-position: 0% 50%;
   }
-  
-  .viewCourse {
-    border-radius: 10px;
-    animation: gradientAnimation 10s linear infinite alternate;
-    color: #a94bc1;
-    text-align: center;
-    padding: 20px;
+  50% {
+    background-position: 100% 50%;
   }
-  @keyframes gradientAnimation {
-    0% {
-      background: linear-gradient(45deg, #ff6b6b, #ffa5b3, #ffd3b6, #64b5f6, #2bcbba);
-      background-size: 400% 400%;
-      background-position: 0 50%;
-    }
-    100% {
-      background: linear-gradient(45deg, #2bcbba, #64b5f6, #ffd3b6, #ffa5b3, #ff6b6b);
-      background-size: 400% 400%;
-      background-position: 100% 50%;
-    }
+  100% {
+    background: linear-gradient(
+      135deg,
+      #2bcbba,
+      #64b5f6,
+      #ffd3b6,
+      #ffa5b3,
+      #ff6b6b
+    );
+    background-size: 300% 300%;
+    background-position: 0% 50%;
   }
+}
 
 .courseTopics {
-    list-style: none;
-    padding: 0;
-  }
-  
- .topics {
-    border: 1px solid #ddd;
-    margin: 10px;
-    padding: 10px;
-    background-color: #f9f9f9;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 
+.topics {
+  border: 1px solid rgba(225, 107, 255, 0.1);
+  margin: 1.2rem 0;
+  padding: 1.5rem;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.topics:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+}
+
+.topic {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #e16bff;
+  font-family: "Inter", sans-serif;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  padding: 0.5rem;
+}
+
+.link {
+  margin: 0;
+  flex: 1;
+  min-width: 200px;
+}
+
+.icon-link {
+  display: flex;
+  align-items: center;
+  padding: 0.8rem 1.2rem;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: #666;
+  font-weight: 500;
+}
+
+.icon-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  color: #e16bff;
+}
+
+.icon-link input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.icon-link input:focus {
+  outline: none;
+  border-color: #e16bff;
+  box-shadow: 0 0 0 3px rgba(225, 107, 255, 0.1);
+}
+
+.link-icon {
+  margin-right: 0.8rem;
+  display: flex;
+  align-items: center;
+}
+
+.link-icon img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.updateButton,
+.saveButton {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.updateButton {
+  background: linear-gradient(45deg, #e16bff, #ff6b6b);
+  box-shadow: 0 4px 15px rgba(225, 107, 255, 0.2);
+}
+
+.saveButton {
+  background: linear-gradient(45deg, #64b5f6, #2bcbba);
+  box-shadow: 0 4px 15px rgba(100, 181, 246, 0.2);
+}
+
+.updateButton:hover,
+.saveButton:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+.updateButton:active,
+.saveButton:active {
+  transform: translateY(1px);
+}
+
+@media screen and (max-width: 768px) {
+  .viewCoursecontainer {
+    width: 95%;
+    padding: 1.5rem;
   }
 
-  
-  .topic {
-    margin: 0;
-    font-size: 1.2em;
+  .viewCourse {
+    font-size: 1.75rem;
+    padding: 1.2rem;
   }
-  
-  .icon-link {
-    text-decoration: none;
-    color: #007BFF; /* Link color */
-    font-weight: bold;
-    display: inline-block;
-    margin-top: 10px;
-    cursor: pointer;
-  }
-  
-  .link-icon {
-    font-size: 0.3em; /* Adjust the icon size as needed */
-    margin-right: 7px;
-  }
-  
-  .icon-link:hover {
-    color: #0056b3; /* Change link color on hover */
-  }
-  
-  .topics {
-    border-radius: 10px;
-  }
-  
-  .topic {
-    margin-left: 15px;
-    font-family: sans-serif;
-    color: #0056b3;
-  }
-  
+
   .links {
-    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
 
-    border-radius: 10px;
-  }
-  
   .link {
-    margin-left: 40px;
+    min-width: unset;
+    width: 100%;
+    margin: 0;
   }
-  
+
   .icon-link {
-    display: flex;
-    border: none;
-    background-color: #fff;
-    border-radius: 15px;
-    padding: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 0.7rem 1rem;
   }
-  
-  .icon-link:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+  .topic {
+    font-size: 1.2rem;
   }
-  
+
+  .updateButton,
+  .saveButton {
+    width: 100%;
+    margin: 1rem 0 0 0;
+    padding: 0.7rem 1rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .viewCoursecontainer {
+    padding: 1rem;
+  }
+
+  .viewCourse {
+    font-size: 1.5rem;
+    padding: 1rem;
+  }
+
+  .topics {
+    padding: 1rem;
+  }
+
   .icon-link img {
     width: 20px;
+    height: 20px;
   }
-  
-
-  /* Styles for the update topic and save links buttons */
-  .updateButton {
-    background: linear-gradient(to left, #df78f9 0%, #df78f9 50%,#36923b 50%,#b548c8 100%);
-    transition: background-position 0.5s ease, color 0.3s ease; 
-    background-size: 200% 100%;
-    background-position: right bottom;
-    border: none;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 14px;
-    margin-bottom: 11px;
-    margin-top: 18px;
-    cursor: pointer;
-    margin-left: 40px;
-    font-weight: bold;
-    border-radius: 8px;
-  }
-  
-  .updateButton:hover {
-    background-position: left bottom;
-    color: #fff; 
-  }
-  
-  .saveButton {
-    background: linear-gradient(to left, #df78f9 0%, #df78f9 50%, #d3ba3b 50%, #853a96 100%);
-    transition: background-position 0.5s ease, color 0.3s ease;   
-    background-size: 200% 100%;
-    background-position: right bottom;
-    border: none;
-    color: white;
-    text-align: center;
-    font-weight: bold;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin-bottom: 11px;
-    margin-top: 18px;
-    cursor: pointer;
-    border-radius: 8px;
-    margin-left: 40px;
-  }
-  
-  .saveButton:hover {
-    background-position: left bottom;
-    color: #fff; /* Darker blue on hover */
-  }
-
-
-  @media screen and (max-width: 700px) and (max-height: 1000px) {
-    .links {
-      flex-direction: column; /* Change flex direction to column */
-      align-items: center; /* Align items to center */
-    }
-  
-    .link {
-      margin-left: 0; /* Remove margin left */
-      margin-top: 10px; /* Add some margin top for spacing */
-      text-align: center; /* Align text to center */
-    }
-  
-    .icon-link {
-      margin-left: 0; /* Remove margin left */
-      margin-bottom: 10px; /* Add some margin bottom for spacing */
-    }
-  
-    .link-icon img {
-      width: 15px; /* Decrease icon size */
-    }
-  
-    .updateButton,
-    .saveButton {
-      font-size: 14px; /* Decrease button font size */
-      margin-left: 0; /* Remove margin left */
-    }
-  }
-  
+}

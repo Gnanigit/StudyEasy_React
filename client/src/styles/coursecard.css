@@ -1,6 +1,6 @@
 .course-item {
   list-style: none;
-  margin: 1.5rem;
+  margin: 1rem;
   transition: transform 0.3s ease;
 }
 .course-image-container {
@@ -91,7 +91,6 @@
 
 .course-content {
   color: #666;
-
   line-height: 1.6;
   margin-bottom: 1.5rem;
   font-size: 0.95rem;

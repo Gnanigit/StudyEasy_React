@@ -39,9 +39,9 @@ export default function Recovery() {
   async function resendOTP() {
     try {
       await generateOTP(email);
-      console.log("OTP resent successfully!"); // Log success message
+      console.log("OTP resent successfully!");
     } catch (error) {
-      console.error("Could not resend OTP:", error.message); // Log error message
+      console.error("Could not resend OTP:", error.message);
     }
   }
 

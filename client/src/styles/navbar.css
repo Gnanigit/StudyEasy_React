@@ -227,11 +227,8 @@ nav {
     display: block;
   }
 
-  .navbarProfile {
-    margin: 1rem 0;
-  }
-
   .dropdownMenu {
+    display: block !important;
     position: static;
     box-shadow: none;
     margin-top: 0.5rem;
@@ -248,5 +245,40 @@ nav {
   .navbarAnc.active {
     color: #e16bff;
     background: rgba(225, 107, 255, 0.1);
+  }
+  .navbarProfile {
+    margin: 1rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+  }
+
+  .profileInfo {
+    display: flex;
+    align-items: center;
+  }
+
+  .profileInfo svg {
+    margin-right: 0.5rem;
+    color: #333;
+  }
+
+  .navbarProLink {
+    color: #333;
+    font-weight: 500;
+  }
+
+  .dropdownMenu {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0.5rem 0;
+  }
+
+  .dropdownMenuItem button {
+    color: #333;
   }
 }
