@@ -4,8 +4,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { verifyPassword } from "../helper/helper";
 import { useAuthStore } from "../store/store";
+import { useLocation } from "react-router-dom";
 
 function Login() {
+  const location = useLocation();
+  const { role } = location.state || {};
   const setEmail = useAuthStore((state) => state.setEmail);
   const navigate = useNavigate();
   const formik = useFormik({
@@ -74,9 +77,15 @@ function Login() {
         <div className="loginForm-link">
           <span>
             Don't have an account?{" "}
-            <Link to="/signup" className="loginLink loginSignup-link">
-              Signup
-            </Link>
+            {role === 1 ? (
+              <Link to="/Asignup" className="loginLink loginSignup-link">
+                Signup
+              </Link>
+            ) : (
+              <Link to="/signup" className="loginLink loginSignup-link">
+                Signup
+              </Link>
+            )}
           </span>
         </div>
       </div>
