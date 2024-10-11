@@ -202,7 +202,7 @@ nav {
 
   .navbarShow {
     position: fixed;
-    top: 60px;
+    top: 5.7rem;
     left: -100%;
     width: 100%;
     height: calc(100vh - 60px);

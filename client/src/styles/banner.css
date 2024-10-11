@@ -32,14 +32,14 @@ h1 {
 }
 
 .bannerAllSlides img {
-  height: 100%;
   width: 100%;
-  object-fit: cover;
+  height: 100%;
+  object-fit: contain; /* Ensures the image is not cropped */
   border-radius: 20px;
 }
 
 .bannerDots {
-  position: absolute;
+  position: relative;
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
@@ -104,19 +104,19 @@ h1 {
   cursor: pointer;
   width: 12px;
   height: 12px;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(56, 56, 56, 0.5);
   border-radius: 50%;
   display: inline-block;
   transition: background-color 0.3s ease;
 }
 
 .bannerDot.bannerActive {
-  background-color: #fff;
+  background-color: #ffffff;
 }
 
 @media (max-width: 768px) {
   .bannerSlideshow-container {
-    height: 350px;
+    height: 300px;
   }
   .bannerText {
     font-size: 18px;
@@ -125,7 +125,7 @@ h1 {
 
 @media (max-width: 480px) {
   .bannerSlideshow-container {
-    height: 250px;
+    height: 220px;
   }
   .bannerText {
     font-size: 16px;
