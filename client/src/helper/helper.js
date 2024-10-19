@@ -34,6 +34,7 @@ export async function verifyPassword({ email, password }) {
     return Promise.reject({ error: "Password doesn't Match...!" });
   }
 }
+
 /** authenticate function */
 export async function authenticate(email) {
   try {
@@ -59,11 +60,7 @@ export async function addCourse(values) {
       data: { msg },
       status,
     } = await axios.post(`/api/addcourse`, values);
-    // let { username, email } = credentials;
-    /** send email */
-    // if(status === 201){
-    //     await axios.post('/api/registerMail', { username, userEmail : email, text : msg})
-    // }
+
     return Promise.resolve(msg);
   } catch (error) {
     return Promise.reject({ error });

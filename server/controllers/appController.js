@@ -124,12 +124,12 @@ export async function login(req, res) {
 export async function addCourse(req, res) {
   try {
     const { email, courseImage, courseTitle, content } = req.body;
-    // Check if the course already exists
+
     const courseExists = await allCoursesModel.findOne({ courseTitle }).exec();
     if (courseExists) {
       return res.status(201).send({ error: "Course already exists" });
     }
-    // Create a new course
+
     const newCourse = new allCoursesModel({
       email: email,
       courseImg: courseImage,
@@ -137,7 +137,7 @@ export async function addCourse(req, res) {
       content: content,
       likes: 0,
     });
-    // Save the new course
+
     const savedCourse = await newCourse.save();
     return res.status(201).send({ msg: "Course added successfully" });
   } catch (error) {
@@ -188,7 +188,7 @@ export async function addTopic(req, res) {
   try {
     const { courseId, courseTitle, topicTitle, link1, link2, link3, link4 } =
       req.body;
-    // Create a new course
+
     const newTopic = new addTopicsModel({
       courseId: courseId,
       courseTitle: courseTitle,
@@ -198,7 +198,7 @@ export async function addTopic(req, res) {
       link3: link3,
       link4: link4,
     });
-    // Save the new course
+
     const savedTopic = await newTopic.save();
     return res.status(201).send({ msg: "Course added successfully" });
   } catch (error) {

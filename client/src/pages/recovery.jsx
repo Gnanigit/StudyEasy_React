@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { generateOTP, verifyOTP, updatePassword } from "../helper/helper";
 import { useNavigate } from "react-router-dom";
 import "../styles/recovery.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Recovery() {
   const [OTP, setOTP] = useState("");
@@ -17,9 +19,11 @@ export default function Recovery() {
       const { status } = await verifyOTP({ email, code: OTP });
       if (status === 201) {
         setRecoveryMode(true);
+        toast.success("OTP verified successfully!");
       }
     } catch (error) {
       console.error(error);
+      toast.error("OTP verification failed. Please try again.");
     }
   }
 
@@ -30,18 +34,21 @@ export default function Recovery() {
       const generatedOTP = await generateOTP(userEnteredEmail);
       if (generatedOTP) {
         setOtpGenerated(true);
+        toast.success("OTP sent successfully!");
       }
     } catch (error) {
       console.log("Error while generating OTP");
+      toast.error("Failed to send OTP. Please try again.");
     }
   }
 
   async function resendOTP() {
     try {
       await generateOTP(email);
-      console.log("OTP resent successfully!");
+      toast.info("OTP resent successfully!");
     } catch (error) {
       console.error("Could not resend OTP:", error.message);
+      toast.error("Failed to resend OTP. Please try again.");
     }
   }
 
@@ -50,16 +57,19 @@ export default function Recovery() {
     const password = newPassword;
     try {
       await updatePassword({ email, password });
+      toast.success("Password updated successfully! Redirecting to login...");
       setTimeout(() => {
         navigate("/login");
       }, 3000);
     } catch (error) {
       console.error("Error updating password");
+      toast.error("Failed to update password. Please try again.");
     }
   }
 
   return (
     <div className="recovery-container">
+      <ToastContainer position="top-right" autoClose={3000} />
       <div className="recovery-form">
         <h2 className="form-title">Account Recovery</h2>
         {!otpGenerated && !recoveryMode && (

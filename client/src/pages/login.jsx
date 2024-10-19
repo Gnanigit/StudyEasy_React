@@ -5,6 +5,8 @@ import { useFormik } from "formik";
 import { verifyPassword } from "../helper/helper";
 import { useAuthStore } from "../store/store";
 import { useLocation } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Login() {
   const location = useLocation();
@@ -29,6 +31,7 @@ function Login() {
         const response = await loginPromise;
 
         console.log("Login Successful!");
+        toast.success("Login Successful!");
 
         let { token } = response.data;
         localStorage.setItem("token", token);
@@ -38,59 +41,63 @@ function Login() {
         }, 3000);
       } catch (error) {
         console.error("Password Not Match");
+        toast.error("Login failed. Please check your credentials.");
       }
     },
   });
 
   return (
-    <div className="loginContainer">
-      <div className="loginForm loginLogin">
-        <header>Login</header>
-        <form onSubmit={formik.handleSubmit}>
-          <div className="loginField loginInput-field">
-            <input
-              {...formik.getFieldProps("email")}
-              type="email"
-              placeholder="Email"
-              name="email"
-              className="loginInput"
-            />
-          </div>
-          <div className="loginField loginInput-field">
-            <input
-              {...formik.getFieldProps("password")}
-              type="password"
-              placeholder="Password"
-              name="password"
-              className="loginPassword"
-            />
-            <i className="bx bx-hide eye-icon"></i>
-          </div>
+    <>
+      <ToastContainer position="top-right" autoClose={3000} />
+      <div className="loginContainer">
+        <div className="loginForm loginLogin">
+          <header>Login</header>
+          <form onSubmit={formik.handleSubmit}>
+            <div className="loginField loginInput-field">
+              <input
+                {...formik.getFieldProps("email")}
+                type="email"
+                placeholder="Email"
+                name="email"
+                className="loginInput"
+              />
+            </div>
+            <div className="loginField loginInput-field">
+              <input
+                {...formik.getFieldProps("password")}
+                type="password"
+                placeholder="Password"
+                name="password"
+                className="loginPassword"
+              />
+              <i className="bx bx-hide eye-icon"></i>
+            </div>
+            <div className="loginForm-link">
+              <Link to="/recovery" className="loginForgot-pass">
+                Forgot password?
+              </Link>
+            </div>
+            <div className="loginField loginButton-field">
+              <button type="submit">Login</button>
+            </div>
+          </form>
           <div className="loginForm-link">
-            <Link to="/recovery" className="loginForgot-pass">
-              Forgot password?
-            </Link>
+            <span>
+              Don't have an account?{" "}
+              {role === "1" ? (
+                <Link to="/Asignup" className="loginLink loginSignup-link">
+                  Signup
+                </Link>
+              ) : (
+                <Link to="/signup" className="loginLink loginSignup-link">
+                  Signup
+                </Link>
+              )}
+            </span>
           </div>
-          <div className="loginField loginButton-field">
-            <button type="submit">Login</button>
-          </div>
-        </form>
-        <div className="loginForm-link">
-          <span>
-            Don't have an account?{" "}
-            {role === "1" ? (
-              <Link to="/Asignup" className="loginLink loginSignup-link">
-                Signup
-              </Link>
-            ) : (
-              <Link to="/signup" className="loginLink loginSignup-link">
-                Signup
-              </Link>
-            )}
-          </span>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

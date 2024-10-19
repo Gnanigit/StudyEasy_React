@@ -8,10 +8,10 @@ import Signup from "./pages/signup";
 import Dashboard from "./pages/dashboard";
 import Asignup from "./pages/Asignup.jsx";
 import Recovery from "./pages/recovery.jsx";
-import Reset from "./pages/reset.jsx";
+
 // Root routes
 import ChatBot from "./components/chatbot.jsx";
-import { AuthorizeUser, ProtectRoute } from "./middleware/auth";
+import { ProtectRoute } from "./middleware/auth";
 
 export default function App() {
   return (
@@ -22,7 +22,7 @@ export default function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/Asignup" element={<Asignup />} />
         <Route path="/recovery" element={<Recovery />} />
-        <Route path="/reset" element={<Reset />} />
+
         <Route
           path="/dashboard"
           element={

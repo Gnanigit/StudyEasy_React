@@ -1,10 +1,18 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
-import toast, { Toaster } from "react-hot-toast";
 import "../styles/signup.css";
 import { registerUser } from "../helper/helper";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
+const toastContainerStyle = {
+  zIndex: 9999,
+};
+const toastStyle = {
+  background: "#fff",
+  color: "#333",
+};
 function Signup() {
   const navigate = useNavigate();
 
@@ -18,31 +26,31 @@ function Signup() {
     },
     onSubmit: async (values) => {
       try {
-        values = await Object.assign({}, values);
+        await registerUser(values, 0);
 
-        let registerPromise = registerUser(values, 0);
-
-        // Loading toast
-        toast.promise(registerPromise, {
-          loading: "Creating...",
-          success: (response) => {
-            registerPromise.then(() => navigate("/")); // Navigate to home after success
-            return "Register Successfully!";
+        toast.success("Registration successful! Redirecting to login...", {
+          onClose: () => {
+            navigate("/login");
           },
-          error: (error) => {
-            return "Could not Register.";
-          },
+          style: toastStyle,
         });
       } catch (error) {
-        // Error toast if registration fails
-        toast.error("Could not Register.");
+        console.error("Could not Register.", error);
+        toast.error("Registration failed. Please try again.", {
+          style: toastStyle,
+        });
       }
     },
   });
 
   return (
     <div className="signupContainer">
-      <Toaster position="top-center" reverseOrder={false} />
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        style={toastContainerStyle}
+        toastStyle={toastStyle}
+      />
       <div className="signupForm signupSignup">
         <header>Student Signup</header>
         <form onSubmit={formik.handleSubmit}>
@@ -97,7 +105,7 @@ function Signup() {
         </form>
         <div className="signupForm-link">
           <span>
-            Do have an account?
+            Already have an account?
             <Link to="/login" className="signupLink signupSignup-link">
               Login
             </Link>
