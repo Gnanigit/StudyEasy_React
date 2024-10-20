@@ -10,6 +10,16 @@ import {
   getLikeStatus,
   unRegisterCourse,
 } from "../helper/helper";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+const toastContainerStyle = {
+  zIndex: 9999,
+};
+const toastStyle = {
+  background: "#fff",
+  color: "#333",
+};
 
 function CourseCard({ role, loc, course, onCoursesUpdatedList }) {
   const navigate = useNavigate();
@@ -21,9 +31,7 @@ function CourseCard({ role, loc, course, onCoursesUpdatedList }) {
 
   const location = useLocation();
 
-  useEffect(() => {
-    // Reset when route changes
-  }, [location]);
+  useEffect(() => {}, [location]);
 
   useEffect(() => {
     if (loc === "mycourses" && email) {
@@ -38,6 +46,9 @@ function CourseCard({ role, loc, course, onCoursesUpdatedList }) {
           }
         } catch (error) {
           console.error("Error fetching like status:", error);
+          toast.error("Failed to fetch like status", {
+            style: toastStyle,
+          });
         }
       };
 
@@ -50,11 +61,20 @@ function CourseCard({ role, loc, course, onCoursesUpdatedList }) {
       const response = await enrollCourse({ Id: courseId, email });
       if (response.success) {
         console.log(response.message);
+        toast.success("Successfully enrolled in the course!", {
+          style: toastStyle,
+        });
       } else {
         console.error(response.message);
+        toast.error("Failed to enroll in the course", {
+          style: toastStyle,
+        });
       }
     } catch (error) {
       console.error("Failed to enroll in course", error);
+      toast.error("An error occurred while enrolling in the course", {
+        style: toastStyle,
+      });
     }
   };
 
@@ -64,9 +84,15 @@ function CourseCard({ role, loc, course, onCoursesUpdatedList }) {
       if (response) {
         console.log(response.msg);
         onCoursesUpdatedList(courseId);
+        toast.success("Course deleted successfully", {
+          style: toastStyle,
+        });
       }
     } catch (error) {
       console.error("Failed to delete course", error);
+      toast.error("Failed to delete the course", {
+        style: toastStyle,
+      });
     }
   };
 
@@ -76,10 +102,16 @@ function CourseCard({ role, loc, course, onCoursesUpdatedList }) {
         const response = await unRegisterCourse({ Id: courseId, email });
         if (response.msg) {
           console.log(response.msg);
+          toast.success("Successfully unregistered from the course", {
+            style: toastStyle,
+          });
           onCoursesUpdatedList(courseId);
         }
       } catch (error) {
         console.error("Failed to unregister from course", error);
+        toast.error("Failed to unregister from the course", {
+          style: toastStyle,
+        });
       }
     }
   };
@@ -103,9 +135,14 @@ function CourseCard({ role, loc, course, onCoursesUpdatedList }) {
       console.error("Failed to update like status", error);
     }
   };
-
   return (
     <li className="course-item">
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        style={toastContainerStyle}
+        toastStyle={toastStyle}
+      />
       <div
         className="course-block"
         style={{ height: loc === "mycourses" ? "500px" : "640px" }}
@@ -195,26 +232,24 @@ function CourseCard({ role, loc, course, onCoursesUpdatedList }) {
         )}
 
         {loc === "mycourses" && (
-          <>
-            <div className="button-container course-button">
-              <Link
-                to={`/viewcourse?courseId=${encodeURIComponent(
-                  course._id
-                )}&role=0`}
-              >
-                <button className="view-course course-button" type="submit">
-                  View Course
-                </button>
-              </Link>
-
-              <button
-                className="UnRegiter-course course-button"
-                onClick={() => handleUnRegisterCourse(course._id)}
-              >
-                Un-Register
+          <div className="button-container">
+            <Link
+              to={`/viewcourse?courseId=${encodeURIComponent(
+                course._id
+              )}&role=0`}
+            >
+              <button className="view-course course-button" type="submit">
+                View Course
               </button>
-            </div>
-          </>
+            </Link>
+
+            <button
+              className="UnRegiter-course course-button"
+              onClick={() => handleUnRegisterCourse(course._id)}
+            >
+              Un-Register
+            </button>
+          </div>
         )}
       </div>
     </li>

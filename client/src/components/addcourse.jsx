@@ -4,7 +4,16 @@ import { useNavigate } from "react-router-dom";
 import { addCourse } from "../helper/helper";
 import { useFormik } from "formik";
 import useFetch from "../hooks/fetch.hook";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
+const toastContainerStyle = {
+  zIndex: 9999,
+};
+const toastStyle = {
+  background: "#fff",
+  color: "#333",
+};
 function AddCourse() {
   const navigate = useNavigate();
   const [{ apiData }] = useFetch();
@@ -26,18 +35,39 @@ function AddCourse() {
         console.log(addCoursePromise);
         if (addCoursePromise) {
           formik.resetForm();
-          navigate("/addcourse");
+          toast.success("Course added successfully!", {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          });
+          setTimeout(() => {
+            navigate("/addcourse");
+          }, 3000);
         } else {
-          console.error("Failed to add course. Please try again.");
+          toast.error("Failed to add course. Please try again.", {
+            style: toastStyle,
+          });
         }
       } catch (error) {
         console.error("Invalid input", error);
+        toast.error("Invalid input. Please check your data and try again.", {
+          style: toastStyle,
+        });
       }
     },
   });
 
   return (
     <section className="addcourseSectionCourse" aria-label="recent post">
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        style={toastContainerStyle}
+        toastStyle={toastStyle}
+      />
       <div className="addcourseContainer">
         <div className="addcourseTitleWrapper">
           <h2 className="addcourseH2 addcourseSectionTitle">
