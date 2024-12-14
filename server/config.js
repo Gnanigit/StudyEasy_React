@@ -4,5 +4,5 @@ export default {
   PASSWORD: "xrpt qwsm ajjy kdcr",
   ATLAS_URI:
     "mongodb+srv://gnani4412:1234@cluster0.jv0vidy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
-  GOOGLE_API_KEY: "AIzaSyB9fXJj4S6f6VlFI4eRlBDlPbPmvoxYda0",
+  GOOGLE_API_KEY: "AIzaSyDCKpeDcbSkusNBknkhcmYQ2qfdfOS_iOk",
 };

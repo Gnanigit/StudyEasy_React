@@ -29,7 +29,6 @@ function Login() {
 
     onSubmit: async (values) => {
       try {
-        console.log(values);
         let loginPromise = verifyPassword({
           email: values.email,
           password: values.password,
